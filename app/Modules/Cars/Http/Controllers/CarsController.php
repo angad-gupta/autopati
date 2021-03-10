@@ -10,18 +10,21 @@ use Illuminate\Support\Facades\DB;
 use App\Modules\Cars\Repositories\CarInterface;
 use App\Modules\Brand\Repositories\BrandInterface;
 use App\Modules\VehicleModel\Repositories\VehicleModelInterface;
+use App\Modules\Spec\Repositories\SpecInterface;
 
 class CarsController extends Controller
 {
     protected $cars;
     protected $brand;
     protected $vehiclemodel;
+    protected $spec;
     
-    public function __construct(CarInterface $cars, BrandInterface $brand, VehicleModelInterface $vehiclemodel)
+    public function __construct(CarInterface $cars, BrandInterface $brand, VehicleModelInterface $vehiclemodel,SpecInterface $spec)
     {
         $this->cars = $cars;
         $this->brand = $brand;
         $this->vehiclemodel = $vehiclemodel;
+        $this->spec = $spec;
     }
 
     /**
@@ -109,6 +112,7 @@ class CarsController extends Controller
         
         $data['photo_feature'] = $this->cars->getPhotoFeatures($car_id);
         $data['photo_gallery'] = $this->cars->getPhotoGallery($car_id);
+        $data['car_spec'] = $this->spec->getAllCarSpec();
 
         return view('cars::cars.profile', $data);
     }

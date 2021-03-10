@@ -244,7 +244,7 @@
     </div>
 
     <div class="card-body">
-        <ul class="nav nav-tabs nav-tabs-bottom nav-justified">
+        <ul class="nav nav-tabs nav-tabs-highlight ">
             <li class="nav-item"><a href="#bottom-justified-tab1" class="nav-link active" data-toggle="tab"><i class="icon-image2 mr-2"></i>Photo Features</a></li>
             <li class="nav-item"><a href="#bottom-justified-tab2" class="nav-link" data-toggle="tab"><i class="icon-gallery mr-2"></i>Specifications</a></li>
             <li class="nav-item"><a href="#bottom-justified-tab3" class="nav-link" data-toggle="tab"><i class="icon-images3 mr-2"></i>Photo Gallery</a></li>
@@ -291,7 +291,103 @@
             </div>
 
             <div class="tab-pane fade" id="bottom-justified-tab2">
-                 DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork. Williamsburg whatever.
+
+                <span class="mb-4 font-weight-bold text-pink">Most Important part in Vehicle, Specification. Please Set Value Accurately</span>
+
+                <div class="card mt-3">
+                            <div class="card-header bg-teal header-elements-inline">
+                                <h6 class="card-title">Specifications</h6>
+                            </div>
+
+                            <div class="card-body">
+                                <div class="d-md-flex">
+                                    <ul class="nav nav-tabs nav-tabs-vertical flex-column mr-md-3 wmin-md-200 mb-md-0 border-bottom-0" style="min-width: 220px !important;">
+                                        @if($car_spec->total() != 0) 
+                                        @foreach($car_spec as $key => $spec_val)
+                                            <li class="nav-item"><a href="#vertical-left-tab{{$key+1}}" class="nav-link @if($key =='0') active show @endif" data-toggle="tab"><i class="icon-grid5 mr-2"></i> {{$spec_val->spec_title}}</a></li>
+                                        @endforeach
+                                        @endif
+                                    </ul>
+
+                                    <div class="tab-content" style="width: 100%">
+                                        @inject('configuration', '\App\Modules\Configuration\Repositories\ConfigurationRepository')
+                                        @if($car_spec->total() != 0) 
+                                        @foreach($car_spec as $key => $spec_val)
+                                        @php
+                                        $features = $configuration->findAllBySpecId($spec_val->id);
+                                        @endphp
+
+                                        <div class="tab-pane fade @if($key =='0') active show @endif" id="vertical-left-tab{{$key+1}}">
+                                        
+                                            <div class="row">
+
+                                                @if($features->total() != 0) 
+                                                @inject('carSpecification', '\App\Modules\Cars\Repositories\CarRepository')
+                                                @foreach($features as $key => $spec_val)
+                                                @php
+                                                $carFeatures = $carSpecification->getFeaturesByCarId($car_info->id,$spec_val->id,$spec_val->id);
+                                                @endphp
+                                                <div class="col-lg-3">
+                                                    <div class="card">
+                                                        <div class="card-header bg-pink header-elements-inline">
+                                                            <h6 class="card-title">{{$spec_val->title}}</h6>
+                                                        </div>
+
+                                                        <div class="card-body">
+                                                            <ul class="media-list mb-3">
+                                                                 @if(sizeof($carFeatures) >0) 
+                                                                 @foreach($carFeatures as $key => $car_feat_val)
+                                                                <li class="media">
+                                                                    <div class="mr-3">
+                                                                        <div class="uniform-checker" id="uniform-task1"><span class="checked"><input type="checkbox" class="form-check-input-styled-success" id="task1" disabled checked="" data-fouc=""></span></div>
+                                                                    </div>
+
+                                                                    <div class="media-body">
+                                                                        <h6 class="media-title">
+                                                                            <label for="task1" class="font-weight-semibold cursor-pointer mb-0">{{optional($car_feat_val->confFeatureInfo)->config_value}}</label>
+                                                                        </h6>
+                                                                    </div>
+                                                                </li>
+                                                                @endforeach
+                                                                @else
+                                                                <li class="media">
+                                                                    <div class="media-body">
+                                                                        <h6 class="media-title">
+                                                                            <label for="task1" class="font-weight-semibold cursor-pointer mb-0">No Configuration Set</label>
+                                                                        </h6>
+                                                                    </div>
+                                                                </li>
+                                                                @endif
+                                                            </ul>
+
+                                                            <div class="d-flex align-items-center" style="float: right;">
+
+                                                                <a class="btn btn-warning btn-labeled btn-labeled-left btn-sm bg-warning add_car_features" spec_id="{{$spec_val->id}}" config_id="{{$spec_val->id}}" title="Add Features"><b><i class="icon-add-to-list"></i></b>Add Features</a> 
+                                                            </div>
+
+                                                        </div> 
+                                                    </div> 
+                                                </div>
+                                                @endforeach
+                                                @else
+                                                <div c-lass="col-lg-3">
+                                                    <div class="card">
+                                                        <div class="card-header bg-pink header-elements-inline">
+                                                            <h6 class="card-title">No Features Added</h6>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                @endif
+                                            </div>
+                                           
+                                        </div>
+                                        @endforeach
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
             </div>
 
             <div class="tab-pane fade" id="bottom-justified-tab3">
@@ -354,7 +450,7 @@
                                             </table>
                                         </div>
                                         <div class="text-right mt-2">
-                                             <a data-toggle="modal" data-target="#modal_gallery_add_images" model_name="{{ $value->model_name }}" var_model_id= "{{ $value->id }}" class="ml-2 btn bg-pink-600 btn-labeled btn-labeled-left add_more_variant_val" data-popup="tooltip" data-original-title="Add More" data-placement="bottom"><b><i class="icon-add-to-list "></i></b> Add More</a>
+                                             <a data-toggle="modal" data-target="#modal_gallery_add_images" gallery_name="{{ $value->gallery_title }}" gallery_id= "{{ $value->id }}" class="ml-2 btn bg-pink-600 btn-labeled btn-labeled-left add_more_gallery" data-popup="tooltip" data-original-title="Add More" data-placement="bottom"><b><i class="icon-add-to-list "></i></b> Add More</a>
                                         </div>
                                     </div>
                                 </div>
@@ -477,14 +573,15 @@ aria-hidden="true" data-direction='right'>
         <div class="modal-dialog modal-full">
             <div class="modal-content">
                 <div class="modal-header bg-pink-400">
-                    <h5 class="modal-title">Additional Gallery Images</h5>
+                    <h5 class="modal-title gallery-title">Additional Gallery Images</h5>
                     <button type="button" class="close" data-dismiss="modal">×</button>
                 </div>
                 <div class="modal-body">
 
-                {!! Form::open(['route'=>'feature.storePhotoGallery','method'=>'POST','id'=>'vehiclemodel_submit','class'=>'form-horizontal','role'=>'form','files' => true]) !!}
+                {!! Form::open(['route'=>'feature.storePhotoGalleryImages','method'=>'POST','id'=>'vehiclemodel_submit','class'=>'form-horizontal','role'=>'form','files' => true]) !!}
             
                {{ Form::hidden('car_id',  $car_info->id) }}
+               {!! Form::hidden('gallery_id','', array('id' => 'add_gallery_id')) !!}
 
                 <div class="card card-body" style="border: dashed;border-radius: 25px;border-width: thin;">
                     <fieldset class="mb-1">
@@ -505,8 +602,63 @@ aria-hidden="true" data-direction='right'>
                     </fieldset>
                 </div>
 
-                <div class="text-right">
-                    <button type="submit" class="ml-2 btn bg-pink-600 btn-labeled btn-labeled-left"><b><i class="icon-database-insert"></i></b> Insert</button>
+                {!! Form::close() !!}
+
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- /warning modal -->
+
+ <!-- Warning modal -->
+    <div id="fullHeightCarFeatures" class="modal fade" tabindex="-1">
+        <div class="modal-dialog modal-full">
+            <div class="modal-content">
+                <div class="modal-header bg-pink-400">
+                    <h5 class="modal-title gallery-title">Set Car Features</h5>
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                </div>
+                <div class="modal-body">
+
+                {!! Form::open(['route'=>'feature.storeCarFeatures','name'=>'features_form','method'=>'POST','id'=>'vehiclemodel_submit','class'=>'form-horizontal','role'=>'form','files' => true]) !!}
+            
+               {{ Form::hidden('car_id',  $car_info->id) }}
+               {!! Form::hidden('spec_id','', array('id' => 'car_spec_id')) !!}
+               {!! Form::hidden('confid_id','', array('id' => 'car_config_id')) !!}
+
+                <div class="card card-body" style="border: dashed;border-radius: 25px;border-width: thin;">
+                    <fieldset class="mb-1">
+                        <legend class="text-uppercase font-size-sm text-danger font-weight-black"></legend>
+
+
+                        <div class="row">
+                                <div class="col-md-12">
+                                    <h5>Select Select To Send Mail</h5>
+                                    <div class="card card-body">
+
+                                        <div class="panel-footer">
+                                            <a href="javascript:void(0)" onclick="selectAllCheckBoxes('features_form', 'config_feature_id[]', true);" class="btn bg-success-400"><i class="icon-checkmark-circle2"></i> Select All</a>
+
+                                            <a href="javascript:void(0)" onclick="selectAllCheckBoxes('features_form', 'config_feature_id[]', false);" class="btn bg-danger-400"><i class="icon-eraser2"></i> Clear All </a>
+
+                                        </div>
+                                        <hr>
+
+                                        <div class="table-responsive listed_features">
+
+                                        </div>
+                                        <!-- table-responsive -->
+                                    </div>
+                                    <!-- col-md-6 -->
+                                </div>
+                                
+                            </div>
+                                
+                    </fieldset>
+
+                    <div class="text-right">
+                        <button type="submit" class="ml-2 btn bg-pink-600 btn-labeled btn-labeled-left"><b><i class="icon-paperplane"></i></b> Add Features</button>
+                    </div>
                 </div>
 
                 {!! Form::close() !!}
@@ -516,6 +668,7 @@ aria-hidden="true" data-direction='right'>
         </div>
     </div>
 <!-- /warning modal -->
+
 
 
  <!-- Warning modal -->
@@ -541,6 +694,36 @@ aria-hidden="true" data-direction='right'>
 <script type="text/javascript">
 
     $('document').ready(function() {
+
+    $('.add_car_features').on('click',function(){
+            var spec_id = $(this).attr('spec_id'); 
+            var confid_id = $(this).attr('config_id'); 
+
+            $('#car_spec_id').val(spec_id);
+            $('#car_config_id').val(confid_id);
+
+            var token = $("input[name='_token']").val();
+          
+              $.ajax({
+                  url: "<?php echo route('append-feature-ajax') ?>",
+                  method: 'POST',
+                  data: {confid_id:confid_id, _token:token},
+                  success: function(data) {
+                    $('#fullHeightCarFeatures').modal('show');
+                     $(".listed_features").html('');
+                     $(".listed_features").html(data.options);
+                  }
+              });
+        });
+
+        
+        $('.add_more_gallery').on('click', function() {
+            var gallery_id = $(this).attr('gallery_id'); 
+            var gallery_name = $(this).attr('gallery_name'); 
+           
+           $('#add_gallery_id').val(gallery_id);
+           $('.gallery-title').html('Gallery Images on Gallery Title <b>'+gallery_name+'</b>');
+        });
 
          $('.delete_feature').on('click', function() {
             var link = $(this).attr('link');
@@ -595,6 +778,23 @@ aria-hidden="true" data-direction='right'>
 
         });
     });
+
+
+function selectAllCheckBoxes(FormName, FieldName, CheckValue) { 
+    if (!document.forms[FormName])
+        return;
+    var objCheckBoxes = document.forms[FormName].elements[FieldName];
+    if (!objCheckBoxes)
+        return;
+    var countCheckBoxes = objCheckBoxes.length;
+    if (!countCheckBoxes)
+        objCheckBoxes.checked = CheckValue;
+    else
+// set the check value for all check boxes
+for (var i = 0; i < countCheckBoxes; i++)
+    objCheckBoxes[i].checked = CheckValue;
+}
+
 
 </script>
 

@@ -15,5 +15,7 @@ interface SpecInterface
     public function update($id,$data);
 
     public function delete($id);
+
+    public function getAllCarSpec($limit=null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1]);
  
 }

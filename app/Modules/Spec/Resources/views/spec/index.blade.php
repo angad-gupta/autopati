@@ -12,7 +12,7 @@
 
  <div class="card">
         <div class="card-header bg-purple-400 header-elements-inline">
-            <a href="{{ route('spec.create') }}" class="btn bg-success-600 btn-labeled btn-labeled-left" style="float: left"><b><i class="icon-pen-plus"></i></b> Add Specs</a>
+            <a href="{{ route('spec.create') }}" class="btn bg-success-600 btn-labeled btn-labeled-left" style="float: left"><b><i class="icon-add-to-list"></i></b> Add Specs</a>
         </div>
     </div>
 

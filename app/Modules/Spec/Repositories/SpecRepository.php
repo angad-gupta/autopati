@@ -38,4 +38,11 @@ class SpecRepository implements SpecInterface
         return $result->delete();
     }
 
+    public function getAllCarSpec($limit=null, $filter = [], $sort = ['by' => 'id', 'sort' => 'ASC'], $status = [0, 1]){
+        $result =Spec::when(array_keys($filter, true), function ($query) use ($filter) {
+           
+        })->where('automobile','!=','Bike')->orderBy($sort['by'], $sort['sort'])->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
+        return $result; 
+    }
+
 }

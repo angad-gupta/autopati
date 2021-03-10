@@ -122,4 +122,22 @@ class CarRepository implements CarInterface
     |                    End of Car Photo Gallery               |
     ------------------------------------------------------------*/
 
+    /* ----------------------------------------------------------
+    |                    Car Specification                       |
+    ------------------------------------------------------------*/
+    public function getFeaturesByCarId($car_id,$spec_id,$config_id){
+        return CarSpecification::where('car_id','=',$car_id)->where('spec_id','=',$spec_id)->where('config_id','=',$config_id)->get();
+    }
+
+    public function saveCarFeatures($data){
+        return CarSpecification::create($data);
+    }
+
+    public function clearFeaturesById($car_id,$spec_id,$config_id){
+        $result = CarSpecification::where('car_id','=',$car_id)->where('spec_id','=',$spec_id)->where('config_id','=',$config_id)->delete();
+    }
+
+    /* ----------------------------------------------------------
+    |                    End of Car Specification                |
+    ------------------------------------------------------------*/
 }

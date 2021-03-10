@@ -43,4 +43,15 @@ interface CarInterface
     /* ----------------------------------------------------------
     |                    End of Car Photo Gallery               |
     ------------------------------------------------------------*/
+
+    /* ----------------------------------------------------------
+    |                    Car Specification                       |
+    ------------------------------------------------------------*/
+    public function getFeaturesByCarId($car_id,$spec_id,$config_id);
+    public function saveCarFeatures($data);
+    public function clearFeaturesById($car_id,$spec_id,$confid_id);
+    /* ----------------------------------------------------------
+    |                    End of Car Specification                |
+    ------------------------------------------------------------*/
+    
 }

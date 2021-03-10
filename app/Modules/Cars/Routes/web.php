@@ -34,8 +34,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','permission']], funct
 
 	Route::post('feature/storePhotoFeature', ['as' => 'feature.storePhotoFeature', 'uses' => 'PhotoFeatureController@store']);   
     Route::post('feature/storePhotoGallery', ['as' => 'feature.storePhotoGallery', 'uses' => 'PhotoFeatureController@storeGallery']);   
+    Route::post('feature/storePhotoGalleryImages', ['as' => 'feature.storePhotoGalleryImages', 'uses' => 'PhotoFeatureController@storePhotoGalleryImages']);   
     Route::get('feature/delete/{id}', ['as' => 'feature.delete', 'uses' => 'PhotoFeatureController@destroy'])->where('id','[0-9]+');
 
     Route::get('gallery/deleteImages', ['as' => 'gallery.deleteImages', 'uses' => 'PhotoFeatureController@deleteGalleryImage']);
          
+    Route::post('append-feature-ajax', ['as' => 'append-feature-ajax', 'uses' => 'PhotoFeatureController@appendFeature']);
+
+    Route::post('feature/storeCarFeatures', ['as' => 'feature.storeCarFeatures', 'uses' => 'PhotoFeatureController@storeCarFeatures']);   
+
 });
