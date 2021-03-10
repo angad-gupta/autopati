@@ -1,0 +1,13 @@
+{
+    "name": "VehicleModel",
+    "alias": "vehiclemodel",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "App\\Modules\\VehicleModel\\Providers\\VehicleModelServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

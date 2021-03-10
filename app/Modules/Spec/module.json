@@ -1,0 +1,13 @@
+{
+    "name": "Spec",
+    "alias": "spec",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "App\\Modules\\Spec\\Providers\\SpecServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

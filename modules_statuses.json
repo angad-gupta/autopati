@@ -1,0 +1,20 @@
+{
+    "Brand": true,
+    "Admin": true,
+    "Dropdown": true,
+    "Employee": true,
+    "Employment": true,
+    "Login": true,
+    "Notification": true,
+    "ReminderNotify": true,
+    "Setting": true,
+    "User": true,
+    "UserLog": true,
+    "News": true,
+    "Banner": true,
+    "Spec": true,
+    "Configuration": true,
+    "Model": true,
+    "VehicleModel": true,
+    "Cars": true
+}
