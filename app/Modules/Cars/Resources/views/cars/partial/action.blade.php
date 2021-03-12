@@ -24,7 +24,13 @@
                <label class="col-form-label col-lg-3">Model:<span class="text-danger">*</span></label>
                <div class="col-lg-9 form-group-feedback form-group-feedback-right">
                 <div class="input-group">
-                    {!! Form::select('model_id', [''=>'-- Select Model --'],null,['id'=>'model_id','class'=>'form-control select-search']) !!}
+                    
+                     @if($is_edit)
+                        {!! Form::select('model_id',$model, $value = $car_info->model_id, ['id'=>'model_id','placeholder'=>'Select Model','class'=>'form-control select-search']) !!}
+                     @else
+                        {!! Form::select('model_id', [''=>'-- Select Model --'],null,['id'=>'model_id','class'=>'form-control select-search']) !!}
+                     @endif
+                    
                 </div>
                </div>
             </div>
@@ -35,7 +41,13 @@
                <label class="col-form-label col-lg-3">Variant:<span class="text-danger">*</span></label>
                <div class="col-lg-9 form-group-feedback form-group-feedback-right">
                 <div class="input-group">
-                    {!! Form::select('variant_id', [''=>'-- Select Variant --'],null,['id'=>'variant_id','class'=>'form-control select-search']) !!}
+
+                     @if($is_edit)
+                       {!! Form::select('variant_id',$variant, $value = $car_info->variant_id, ['id'=>'variant_id','placeholder'=>'Select Variant','class'=>' form-control select-search']) !!}
+                     @else
+                        {!! Form::select('variant_id', [''=>'-- Select Variant --'],null,['id'=>'variant_id','class'=>'form-control select-search']) !!}
+                     @endif
+
                 </div>
                </div>
             </div>
@@ -65,7 +77,7 @@
             <div class="col-lg-9 form-group-feedback form-group-feedback-right">
                 @if($is_edit)
                     @php
-                         $image = ($brand_info->car_image) ? asset($brand_info->file_full_path).'/'.$brand_info->car_image : asset('admin/image.png');
+                         $image = ($car_info->car_image) ? asset($car_info->file_full_path).'/'.$car_info->car_image : asset('admin/image.png');
                     @endphp
 
                     <img id="car_image" src="{{$image}}" alt="your image" class="preview-image" style="height: 100px;width: auto;" />
@@ -156,7 +168,7 @@
     </div>
 
      @php
-        $clauch = (($is_edit) AND $blockVal->is_launch == '1') ? 'style=display:block;' : 'style=display:none;';
+        $clauch = (($is_edit) AND $car_info->is_launch == '1') ? 'style=display:block;' : 'style=display:none;';
     @endphp
 
     <div class="form-group row">
@@ -207,7 +219,7 @@
 
 
  @php
-        $discount = (($is_edit) AND $blockVal->is_offer_available == '1') ? 'style=display:block;' : 'style=display:none;';
+        $discount = (($is_edit) AND $car_info->is_offer_available == '1') ? 'style=display:block;' : 'style=display:none;';
 @endphp
 
     <div class="form-group row">

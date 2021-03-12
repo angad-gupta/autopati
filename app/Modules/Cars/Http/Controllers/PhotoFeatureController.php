@@ -194,4 +194,62 @@ class PhotoFeatureController extends Controller
         
         return redirect()->back();
     }
+
+    public function storeColorCar(Request $request){
+        $data = $request->all();
+
+         try{
+
+            if ($request->hasFile('car_image')) {
+                $data['car_image'] = $this->cars->uploadColorCar($data['car_image']);
+            }
+
+            $this->cars->saveAvailableColor($data);
+            toastr()->success('Car Color Created Successfully');
+        }catch(\Throwable $e){
+            toastr()->error($e->getMessage());
+        }
+        
+        
+        return redirect()->back();
+    }
+
+    public function updateColorCar(Request $request){
+        $data = $request->all();
+
+        $id = $data['car_color_id'];
+
+         try{
+
+            if ($request->hasFile('car_image')) {
+                $data['car_image'] = $this->cars->uploadColorCar($data['car_image']);
+            }
+
+            $this->cars->updateAvailableColor($id, $data);
+            toastr()->success('Car Color Image Updated Successfully');
+        }catch(\Throwable $e){
+            toastr()->error($e->getMessage());
+        }
+        
+        return redirect()->back();
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     * @param int $id
+     * @return Renderable
+     */
+    public function deleteColorCar($id)
+    {
+        try{
+            $this->cars->deleteColorCar($id);
+             toastr()->success('Available Color Car Deleted Successfully');
+        }catch(\Throwable $e){
+            toastr($e->getMessage())->error();
+        }
+        return redirect()->back();
+    }
+
+    
+
 }

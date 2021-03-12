@@ -65,10 +65,10 @@
 
          <ul class="list-inline list-inline-condensed mt-1 mb-0" style="width: 294px;margin-left: 46px;">
             <li class="list-inline-item">
-               <a class="btn bg-teal-400 btn-icon rounded-round" href="{{route('news.edit',$car_info->id)}}" data-popup="tooltip" data-original-title="Edit" data-placement="bottom"><i class="icon-pencil6"></i></a>
+               <a class="btn bg-teal-400 btn-icon rounded-round" href="{{route('cars.edit',$car_info->id)}}" data-popup="tooltip" data-original-title="Edit" data-placement="bottom"><i class="icon-pencil6"></i></a>
            </li>
            <li class="list-inline-item">
-            <a data-toggle="modal" data-target="#modal_theme_warning" link="{{route('vehiclemodel.delete',$car_info->id)}}" class="btn bg-danger-400 rounded-round btn-icon delete_model" data-popup="tooltip" data-original-title="Delete" data-placement="bottom"><i class="icon-trash"></i></a>
+            <a data-toggle="modal" data-target="#modal_theme_warning" link="{{route('cars.delete',$car_info->id)}}" class="btn bg-danger-400 rounded-round btn-icon delete_car" data-popup="tooltip" data-original-title="Delete" data-placement="bottom"><i class="icon-trash"></i></a>
         </li>
     </ul>
 
@@ -84,9 +84,9 @@
 
         <h6 class="font-weight-semibold mt-2"><i class="text-teal icon-folder6 mr-2"></i><a href="#" class="text-teal">About This Car<i class="ml-2 text-primary icon-question3" data-popup="tooltip" data-placement="bottom" data-original-title="Please point Icon for more Details." style="margin-top: -18px;"></i></a>
 
-         <button id="spinner-light-4"  type="submit" class="btn bg-success border-success text-success-800 btn-icon ml-2 enabled_editLead" style="float:right;display: none;" data-popup="tooltip" data-placement="top" data-original-title="Update Lead"><i class="icon-pen-plus"></i></button>
+         <button id="spinner-light-4"  type="submit" class="btn bg-success border-success text-success-800 btn-icon ml-2 enabled_editLead" style="float:right;display: none;" data-popup="tooltip" data-placement="top" data-original-title="Update"><i class="icon-pen-plus"></i></button>
 
-         <button type="button" class="btn bg-warning border-warning text-warning-800 btn-icon ml-2 editContact" style="float:right;" data-popup="tooltip" data-placement="top" data-original-title="Edit Lead"><i class="icon-pencil"></i></button>
+         <button type="button" class="btn bg-warning border-warning text-warning-800 btn-icon ml-2 editContact" style="float:right;" data-popup="tooltip" data-placement="top" data-original-title="Edit"><i class="icon-pencil"></i></button>
 
          <div class="dropdown-divider mb-2"></div></h6>
 
@@ -248,6 +248,7 @@
             <li class="nav-item"><a href="#bottom-justified-tab1" class="nav-link active" data-toggle="tab"><i class="icon-image2 mr-2"></i>Photo Features</a></li>
             <li class="nav-item"><a href="#bottom-justified-tab2" class="nav-link" data-toggle="tab"><i class="icon-gallery mr-2"></i>Specifications</a></li>
             <li class="nav-item"><a href="#bottom-justified-tab3" class="nav-link" data-toggle="tab"><i class="icon-images3 mr-2"></i>Photo Gallery</a></li>
+            <li class="nav-item"><a href="#bottom-justified-tab4" class="nav-link" data-toggle="tab"><i class="icon-droplet2 mr-2"></i>Available Car Color</a></li>
     
         </ul>
 
@@ -464,11 +465,95 @@
 
             </div>
 
+            
+            <div class="tab-pane fade" id="bottom-justified-tab4">
+               
+                <div style="float: right;margin-top: -14px;" class="card mb-1">
+                       <a data-toggle="modal" data-target="#fullHeightModalCarColor" class="btn btn-success-700 btn-labeled btn-labeled-left btn-sm bg-success-700" title="Create Task">
+                        <b>
+                            <i class="text-success-700-400 icon-car2"></i>
+                        </b>Create Available Color Car
+                    </a> 
+                </div>
+                <span class="mb-3 font-weight-bold text-success-700">Variety Color Of Car Attract More Customer. Do we have More color Car Available ?</span>
+
+                @if(sizeof($car_color)>0)
+                <div class="row mt-3">
+                     @foreach($car_color as $key => $color_val)
+                     @php
+                        $colorimage = ($color_val->car_image) ? asset($color_val->file_full_path).'/'.$color_val->car_image : asset('admin/image.png');
+                     @endphp
+                    <div class="col-lg-2 col-md-6">
+                        <div class="card">
+                            <div class="card-img-actions">
+                                <img class="card-img-top img-fluid" src="{{$colorimage}}" alt="">
+                                <div class="card-img-actions-overlay card-img-top">
+
+                                    <a data-toggle="modal" data-target="#modal_color_car_update" class="mr-2 btn btn-outline btn-icon bg-white text-white border-white border-2 rounded-round update_car_image" car_color_id ="{{$color_val->id}}" data-popup="tooltip" data-original-title="Update Car Image" data-placement="bottom"><i class="icon-pencil7"></i></a>
+
+                                     <a data-toggle="modal" data-target="#modal_theme_warning" class="btn btn-outline btn-icon bg-white text-white border-white border-2 rounded-round delete_feature" link="{{route('feature.deleteColorCar',$color_val->id)}}" data-popup="tooltip" data-original-title="Delete" data-placement="bottom"><i class="icon-bin"></i></a>
+                                </div>
+                            </div>
+
+                            <div class="card-footer bg-transparent d-flex justify-content-between">
+                                <span class="text-dark">{{$color_val->color_title}}</span>
+                                <a href="#" class="btn rounded-round btn-icon btn-sm" style="margin-top: -8px;margin-bottom: -5px;background-color:{{$color_val->color_code}}">
+                                    <span class="letter-icon"></span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+                @endif
+
+
+            </div>
+
         </div>
     </div>
 </div>
 
 
+
+
+<!-- Full Height Modal Right -->
+<div class="modal modal_slide right" id="modal_color_car_update" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+aria-hidden="true" data-direction='right'>
+    <div class="modal-dialog modal-full-height modal-right" role="document">
+
+        <div class="modal-content">
+            <div class="modal-header bg-slate">
+                <h6 class="modal-title"><i class="icon-image2 mr-2"></i>Upload Car Images</h6>
+                <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+            <div class="modal-body" style="height: 371px;overflow-y: scroll;">
+
+                {!! Form::open(['route'=>'feature.updateColorCar','method'=>'POST','id'=>'features_submit','class'=>'form-horizontal','role'=>'form','files' => true]) !!} 
+
+                {{ Form::hidden('car_id',  $car_info->id) }}
+                {!! Form::hidden('car_color_id','', array('id' => 'car_color_id')) !!}
+
+                    <fieldset class="mb-1">
+                        <div class="form-group">
+                           {!! Form::file('car_image', ['id'=>'car_image','class'=>'form-control']) !!}
+                        </div>
+
+                        <div class="form-group">
+                            <img id="car_image" src="{{ asset('admin/car.png') }}" alt="your image" class="preview-image" style="height: 60px; width: auto;" />
+                        </div>
+                    </fieldset>
+
+                <div class="text-right">
+                     <button type="button" data-dismiss="modal"  class="close-btn ml-2 btn bg-pink-600 btn-labeled btn-labeled-left"><b><i class="icon-cross2"></i></b>Close</button>
+                      <button type="submit" id="spinner-light-4" onclick="submitForm(this);" class="ml-2 btn bg-success-600 btn-labeled btn-labeled-left"><b><i class="icon-database-insert"></i></b> Update </button>
+                </div>
+                {!! Form::close() !!}
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Full Height Modal Right -->
 
 <!-- Full Height Modal Right -->
 <script src="{{asset('admin/validation/feature.js')}}"></script>
@@ -517,7 +602,62 @@ aria-hidden="true" data-direction='right'>
     </div>
 </div>
 <!-- Full Height Modal Right -->
-<!--End of Side Popup For Task -->
+
+<!-- Full Height Modal Right -->
+<script src="{{asset('admin/validation/carcolor.js')}}"></script>
+<div class="modal modal_slide right" id="fullHeightModalCarColor" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+aria-hidden="true" data-direction='right'>
+    <div class="modal-dialog modal-full-height modal-right" role="document">
+
+        <div class="modal-content">
+            <div class="modal-header bg-slate">
+                <h6 class="modal-title"><i class="icon-image2 mr-2"></i>Available Car</h6>
+                <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+            <div class="modal-body" style="height: 371px;overflow-y: scroll;">
+
+                {!! Form::open(['route'=>'feature.storeColorCar','method'=>'POST','id'=>'color_submit','class'=>'form-horizontal','role'=>'form','files' => true]) !!} 
+
+                {{ Form::hidden('car_id',  $car_info->id) }}
+
+                    <fieldset class="mb-1">
+                        <div class="form-group">
+                            <div class="input-group">
+                               <span class="input-group-prepend">
+                                    <span class="input-group-text"><i class="icon-droplet2"></i></span>
+                                </span>
+                            {!! Form::text('color_title', $value = null, ['id'=>'color_title','placeholder'=>'Enter Color Name','class'=>'form-control','required']) !!}
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-group">
+                               <span class="input-group-prepend">
+                                    <span class="input-group-text"><i class="icon-select2"></i></span>
+                                </span>
+                            {!! Form::text('color_code', $value = null, ['id'=>'color_code','placeholder'=>'Enter Color Code(in HEXA) ','class'=>'form-control','required']) !!}
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                           {!! Form::file('car_image', ['id'=>'car_image','class'=>'form-control']) !!}
+                        </div>
+
+                        <div class="form-group">
+                            <img id="car_image" src="{{ asset('admin/car.png') }}" alt="your image" class="preview-image" style="height: 60px; width: auto;" />
+                        </div>
+                    </fieldset>
+
+                <div class="text-right">
+                     <button type="button" data-dismiss="modal"  class="close-btn ml-2 btn bg-pink-600 btn-labeled btn-labeled-left"><b><i class="icon-cross2"></i></b>Close</button>
+                      <button type="submit" id="spinner-light-4" onclick="submitForm(this);" class="ml-2 btn bg-success-600 btn-labeled btn-labeled-left"><b><i class="icon-database-insert"></i></b> Store </button>
+                </div>
+                {!! Form::close() !!}
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Full Height Modal Right -->
 
 
 <!-- Full Height Modal Right -->
@@ -728,6 +868,17 @@ aria-hidden="true" data-direction='right'>
          $('.delete_feature').on('click', function() {
             var link = $(this).attr('link');
             $('.get_link').attr('href', link);
+        });       
+
+         $('.delete_car').on('click', function() {
+            var link = $(this).attr('link');
+            $('.get_link').attr('href', link);
+        });       
+
+   
+        $('.update_car_image').on('click', function() {
+            var car_color_id = $(this).attr('car_color_id');
+            $('#car_color_id').val(car_color_id);
         });
 
          $('.delete_gallery_image').on('click', function() {

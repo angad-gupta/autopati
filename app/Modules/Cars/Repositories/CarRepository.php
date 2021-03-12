@@ -6,6 +6,7 @@ use App\Modules\Cars\Entities\CarGallery;
 use App\Modules\Cars\Entities\CarGalleryDetail;
 use App\Modules\Cars\Entities\CarPhotoFeature;
 use App\Modules\Cars\Entities\CarSpecification;
+use App\Modules\Cars\Entities\CarColor;
 
 class CarRepository implements CarInterface
 {
@@ -139,5 +140,38 @@ class CarRepository implements CarInterface
 
     /* ----------------------------------------------------------
     |                    End of Car Specification                |
+    ------------------------------------------------------------*/
+
+    /* ----------------------------------------------------------
+    |                    Car Available Color                     |
+    ------------------------------------------------------------*/
+    public function getColorByCarId($car_id){
+        return CarColor::where('car_id','=',$car_id)->get();
+    }
+
+    public function saveAvailableColor($data){
+        return CarColor::create($data);
+    }
+
+    public function updateAvailableColor($id,$data){
+        $result = CarColor::find($id);
+        return $result->update($data);
+    }
+
+    public function uploadColorCar($file){
+        $imageName = $file->getClientOriginalName();
+        $fileName = date('Y-m-d-h-i-s') . '-' . preg_replace('[ ]', '-', $imageName);
+
+        $file->move(public_path() . CarColor::FILE_PATH, $fileName);
+
+        return $fileName;   
+    }
+
+    public function deleteColorCar($id){
+        $result = CarColor::find($id);
+        return $result->delete();
+    }
+    /* ----------------------------------------------------------
+    |                    End of  Car Available Color             |
     ------------------------------------------------------------*/
 }

@@ -42,5 +42,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','permission']], funct
     Route::post('append-feature-ajax', ['as' => 'append-feature-ajax', 'uses' => 'PhotoFeatureController@appendFeature']);
 
     Route::post('feature/storeCarFeatures', ['as' => 'feature.storeCarFeatures', 'uses' => 'PhotoFeatureController@storeCarFeatures']);   
+    
+    Route::post('feature/storeColorCar', ['as' => 'feature.storeColorCar', 'uses' => 'PhotoFeatureController@storeColorCar']);   
+    Route::post('feature/updateColorCar', ['as' => 'feature.updateColorCar', 'uses' => 'PhotoFeatureController@updateColorCar']);   
+    Route::get('feature/deleteColorCar/{id}', ['as' => 'feature.deleteColorCar', 'uses' => 'PhotoFeatureController@deleteColorCar'])->where('id','[0-9]+');
+
+    
 
 });

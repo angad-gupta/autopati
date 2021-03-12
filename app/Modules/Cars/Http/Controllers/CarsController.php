@@ -113,6 +113,7 @@ class CarsController extends Controller
         $data['photo_feature'] = $this->cars->getPhotoFeatures($car_id);
         $data['photo_gallery'] = $this->cars->getPhotoGallery($car_id);
         $data['car_spec'] = $this->spec->getAllCarSpec();
+        $data['car_color'] = $this->cars->getColorByCarId($car_id);
 
         return view('cars::cars.profile', $data);
     }
@@ -134,7 +135,14 @@ class CarsController extends Controller
      */
     public function edit($id)
     {
-        return view('cars::edit');
+        $data['is_edit'] = true;
+        $data['brand'] = $this->brand->getList(); 
+        $data['model'] = $this->vehiclemodel->getList(); 
+        $data['variant'] = $this->vehiclemodel->getListVariant();  
+        $data['car_info'] = $this->cars->find($id);
+        
+        return view('cars::cars.edit', $data);
+
     }
 
     /**
@@ -180,6 +188,12 @@ class CarsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try{
+            $this->cars->delete($id);
+             toastr()->success(' Car Deleted Successfully');
+        }catch(\Throwable $e){
+            toastr($e->getMessage())->error();
+        }
+        return redirect()->back();
     }
 }

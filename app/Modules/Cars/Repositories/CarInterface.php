@@ -53,5 +53,17 @@ interface CarInterface
     /* ----------------------------------------------------------
     |                    End of Car Specification                |
     ------------------------------------------------------------*/
+
+    /* ----------------------------------------------------------
+    |                    Car Available Color                     |
+    ------------------------------------------------------------*/
+    public function getColorByCarId($car_id);
+    public function saveAvailableColor($data);
+    public function updateAvailableColor($id,$data);
+    public function uploadColorCar($file);
+    public function deleteColorCar($id);
+    /* ----------------------------------------------------------
+    |                    End of  Car Available Color             |
+    ------------------------------------------------------------*/
     
 }
