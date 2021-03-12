@@ -174,4 +174,30 @@ class CarRepository implements CarInterface
     /* ----------------------------------------------------------
     |                    End of  Car Available Color             |
     ------------------------------------------------------------*/
+
+
+
+    /* ----------------------------------------------------------
+    |                         Car count                          |
+    ------------------------------------------------------------*/
+    public function countColor($car_id){
+        return CarColor::where('car_id','=',$car_id)->count();
+    }
+
+    public function countgallery($car_id){
+        return CarGallery::where('car_id','=',$car_id)->count();
+    }
+
+    public function countspecification($car_id){
+        return CarSpecification::where('car_id','=',$car_id)->count();
+    }
+
+    public function countFeature($car_id){
+        return CarPhotoFeature::where('car_id','=',$car_id)->count();
+    }
+
+    /* ----------------------------------------------------------
+    |                       End of   Car count                   |
+    ------------------------------------------------------------*/
+
 }

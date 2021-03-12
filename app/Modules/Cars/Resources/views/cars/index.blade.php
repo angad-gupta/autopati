@@ -29,9 +29,18 @@
 
 <div class="row">
 
-
+    @inject('cars', '\App\Modules\Cars\Repositories\CarRepository')
      @if($cars_info->total() != 0)
         @foreach($cars_info as $key => $value)
+
+        @php
+         $total_color_car = $cars->countColor($value->id);
+         $total_gallery = $cars->countgallery($value->id);
+         $total_specification = $cars->countspecification($value->id);
+         $total_features = $cars->countFeature($value->id);  
+        @endphp
+
+
           
         <div class="col-md-12 col-lg-6 col-xl-4">
         <div class="card pb-card pb-card--approved card-body">
@@ -45,58 +54,31 @@
             </div>
             <div class="row justify-content-between pt-3 pb-2">
                 <div class="col-lg-6 col-xl-3">
-                    <div class="bd-square-block" data-popup="tooltip" title="" data-placement="top" data-original-title="Order By HO">
-                        <i class="icon-file-text pb-1 text-danger"></i>
-                        <span class="d-block">0</span>
+                    <div class="bd-square-block" data-popup="tooltip" title="" data-placement="top" data-original-title="Available Color">
+                        <i class="icon-droplet pb-1 text-danger"></i>
+                        <span class="d-block">{{ $total_color_car ?? '' }}</span>
                     </div>
                 </div>
                 <div class="col-lg-6 col-xl-3">
-                    <div class="bd-square-block" data-popup="tooltip" title="" data-placement="top" data-original-title="Order Site">
-                        <i class="icon-hour-glass2 pb-1 text-warning"></i>
-                        <span class="d-block">0</span>
+                    <div class="bd-square-block" data-popup="tooltip" title="" data-placement="top" data-original-title="Image Gallery">
+                        <i class="icon-image3 pb-1 text-warning"></i>
+                        <span class="d-block">{{ $total_gallery ?? '' }}</span>
                     </div>
                 </div>
                 <div class="col-lg-6 col-xl-3">
-                    <div class="bd-square-block" data-popup="tooltip" title="" data-placement="top" data-original-title="Sent From HO ">
-                        <i class="icon-file-check pb-1 text-info"></i>
-                        <span class="d-block">0</span>
+                    <div class="bd-square-block" data-popup="tooltip" title="" data-placement="top" data-original-title="Specification Used">
+                        <i class="icon-gallery pb-1 text-info"></i>
+                        <span class="d-block">{{ $total_specification ?? '' }}</span>
                     </div>
                 </div>
                 <div class="col-lg-6 col-xl-3">
-                    <div class="bd-square-block" data-popup="tooltip" title="" data-placement="top" data-original-title="Daily Consumption">
+                    <div class="bd-square-block" data-popup="tooltip" title="" data-placement="top" data-original-title="Photo Features">
                         <i class="icon-thumbs-up3 pb-1 text-success"></i>
-                        <span class="d-block">0</span>
+                        <span class="d-block">{{ $total_features ?? '' }}</span>
                     </div>
                 </div>
             </div>
 
-            <div class="smb-1s">
-                <div class="d-flex justify-content-end w-100">
-                    <a href="#collapse-link-{{$key}}" class="font-weight-semibold text-muted" data-toggle="collapse">
-                        See More <i class="icon-chevron-down"></i>
-                    </a>
-                </div>
-                <div class="collapse" id="collapse-link-{{$key}}">
-                    <ul class="list-unstyled mb-0 pt-2">
-                        <li class="mb-3">
-                            <div class="d-flex align-items-center mb-1">Contractor Involved <span class="text-muted ml-auto">0</span></div>
-                            <div class="progress" style="height: 5px;">
-                                <div class="progress-bar bg-orange-600" style="width: 0%">
-                                    <span class="sr-only"></span>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="mb-3">
-                            <div class="d-flex align-items-center mb-1">Material Used <span class="text-muted ml-auto">0</span></div>
-                            <div class="progress" style="height: 5px;">
-                                <div class="progress-bar bg-success-600" style="width: 0%">
-                                    <span class="sr-only"></span>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
 
             <div class="btn-group align-items-center justify-content-between mt-3">
                 <h6 class="m-0">(Expected) Launch Date: <strong class="pl-1">{{ date('jS M, Y',strtotime($value->expected_launch_date)) }}</strong></h6> 

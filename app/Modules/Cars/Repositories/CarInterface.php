@@ -65,5 +65,16 @@ interface CarInterface
     /* ----------------------------------------------------------
     |                    End of  Car Available Color             |
     ------------------------------------------------------------*/
+
+    /* ----------------------------------------------------------
+    |                         Car count                          |
+    ------------------------------------------------------------*/
+    public function countColor($car_id);
+    public function countgallery($car_id);
+    public function countspecification($car_id);
+    public function countFeature($car_id);
+    /* ----------------------------------------------------------
+    |                       End of   Car count                   |
+    ------------------------------------------------------------*/
     
 }
