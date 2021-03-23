@@ -8,6 +8,8 @@ interface BannerInterface
     
     public function findAllActiveBanner($limit=null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1]);
     
+    public function findAllActiveHeaderBanner($limit=null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1]);
+
     public function findAllActiveLuxuryBanner($limit=null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1]);
 
     public function find($id);
@@ -20,7 +22,7 @@ interface BannerInterface
 
     public function delete($id);
     
-   public function upload($file);
+    public function upload($file);
 
  
 }

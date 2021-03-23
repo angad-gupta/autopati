@@ -72,7 +72,7 @@
 
             @yield('content')
         </div>
-        <!-- /content area -->
+    <!-- /content area -->
 
         @include('admin::includes.footer')
 

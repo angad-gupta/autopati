@@ -20,6 +20,25 @@ class CarRepository implements CarInterface
         
     } 
 
+    public function findDealOfMonth($limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'ASC'], $status = [0, 1])
+    {
+        $result =Car::when(array_keys($filter, true), function ($query) use ($filter) {
+
+        })->where('is_deal_of_the_month','=',1)->orderBy($sort['by'], $sort['sort'])->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
+        return $result; 
+        
+    } 
+
+    public function findLuxury($limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'ASC'], $status = [0, 1])
+    {
+        $result =Car::when(array_keys($filter, true), function ($query) use ($filter) {
+
+        })->where('is_luxury','=',1)->orderBy($sort['by'], $sort['sort'])->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
+        return $result; 
+        
+    } 
+    
+
     public function find($id){
         return Car::find($id);
     }
@@ -137,6 +156,7 @@ class CarRepository implements CarInterface
     public function clearFeaturesById($car_id,$spec_id,$config_id){
         $result = CarSpecification::where('car_id','=',$car_id)->where('spec_id','=',$spec_id)->where('config_id','=',$config_id)->delete();
     }
+    
 
     /* ----------------------------------------------------------
     |                    End of Car Specification                |

@@ -24,6 +24,15 @@ class BannerRepository implements BannerInterface
         
     }
 
+    public function findAllActiveHeaderBanner($limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1])
+    {
+        $result =Banner::when(array_keys($filter, true), function ($query) use ($filter) {
+           
+        })->where('status','=','1')->where('add_to_luxury','!=','1')->orderBy($sort['by'], $sort['sort'])->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
+        return $result; 
+        
+    }
+
     public function findAllActiveLuxuryBanner($limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1])
     {
         $result =Banner::when(array_keys($filter, true), function ($query) use ($filter) {

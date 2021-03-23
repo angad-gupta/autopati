@@ -12,6 +12,7 @@ use App\Modules\Brand\Repositories\BrandInterface;
 use App\Modules\VehicleModel\Repositories\VehicleModelInterface;
 use App\Modules\Spec\Repositories\SpecInterface;
 
+
 class CarsController extends Controller
 {
     protected $cars;
@@ -40,7 +41,6 @@ class CarsController extends Controller
 
         $data['cars_info'] = $this->cars->findAll($limit= 50,$search);  
         $data['search_value'] = $search;
-
         return view('cars::cars.index',$data);
     }
 
@@ -52,6 +52,7 @@ class CarsController extends Controller
     {
         $data['is_edit'] = false;
         $data['brand'] = $this->brand->getList(); 
+  
         return view('cars::cars.create', $data);
     }
 

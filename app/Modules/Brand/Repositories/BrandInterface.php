@@ -5,6 +5,10 @@ namespace App\Modules\Brand\Repositories;
 interface BrandInterface
 {
     public function findAll($limit=null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1]);
+
+    public function findCarType($limit=null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1]);
+
+    public function findBikeType($limit=null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1]);
     
     public function find($id);
     

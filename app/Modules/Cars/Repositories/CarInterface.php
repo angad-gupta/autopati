@@ -5,6 +5,10 @@ namespace App\Modules\Cars\Repositories;
 interface CarInterface
 {
     public function findAll($limit=null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1]);
+
+    public function findDealOfMonth($limit=null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1]);
+
+    public function findLuxury($limit=null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1]);
    
     public function find($id);
     
