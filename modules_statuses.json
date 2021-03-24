@@ -16,5 +16,7 @@
     "Configuration": true,
     "Model": true,
     "VehicleModel": true,
-    "Cars": true
+    "Cars": true,
+    "ServiceCategory": true,
+    "ServiceManagement": true
 }

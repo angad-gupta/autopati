@@ -115,6 +115,15 @@
                         </a>
                     </li>
                 @endif
+
+                <li class="nav-item nav-item-submenu">
+                    <a href="#" class="nav-link"><i class="icon-stack2"></i> <span>Services</span></a>
+
+                    <ul class="nav nav-group-sub" data-submenu-title="Services" style="display: none;">
+                        <li class="nav-item"><a href="{{route('servicecategory.index')}}" class="nav-link">Service Category</a></li>
+                        <li class="nav-item"><a href="{{route('servicemanagement.index')}}" class="nav-link">Service Management</a></li>
+                    </ul>
+                </li>
         
 
             </ul>

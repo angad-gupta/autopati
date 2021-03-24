@@ -1,0 +1,13 @@
+{
+    "name": "ServiceCategory",
+    "alias": "servicecategory",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "App\\Modules\\ServiceCategory\\Providers\\ServiceCategoryServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
