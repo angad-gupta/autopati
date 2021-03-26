@@ -37,6 +37,13 @@ class CarRepository implements CarInterface
         return $result; 
         
     } 
+
+    public function findSimilarCar($brand_id,$model_id,$variant_id,$car_id)
+    {
+        $result =Car::where('id','!=',$car_id)->where('brand_id','=',$brand_id)->where('model_id','=',$model_id)->get();
+        return $result; 
+        
+    } 
     
 
     public function find($id){
@@ -220,4 +227,10 @@ class CarRepository implements CarInterface
     |                       End of   Car count                   |
     ------------------------------------------------------------*/
 
+    public function countViews($car_id){
+        $result = Car::find($car_id);
+        $result['views'] = $result['views'] + 1;
+        $result->update();
+
+    }
 }

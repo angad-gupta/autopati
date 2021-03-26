@@ -18,5 +18,6 @@
     "VehicleModel": true,
     "Cars": true,
     "ServiceCategory": true,
-    "ServiceManagement": true
+    "ServiceManagement": true,
+    "Home": true
 }

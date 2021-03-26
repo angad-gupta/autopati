@@ -78,9 +78,9 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flexslider/2.7.2/jquery.flexslider-min.js"></script>
-<script src="home/js/owl.carousel.min.js"></script>
-<script src="home/js/imagezoom.js"></script>
-<script src="home/js/jquery.magnific-popup.min.js"></script>
-<script src="home/js/jquery.star-rating-svg.min.js"></script>
-<script src="home/js/custom.js"></script>
+<script src="{{asset('home/js/owl.carousel.min.js?v=1.1')}}"></script>
+<script src="{{asset('home/js/imagezoom.js')}}"></script>
+<script src="{{asset('home/js/jquery.magnific-popup.min.js')}}"></script>
+<script src="{{asset('home/js/jquery.star-rating-svg.min.js')}}"></script>
+<script src="{{asset('home/js/custom.js')}}"></script>
 

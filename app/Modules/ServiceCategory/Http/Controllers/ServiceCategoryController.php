@@ -35,6 +35,7 @@ class ServiceCategoryController extends Controller
      */
     public function create()
     {
+        $data['is_edit'] = false;
         return view('servicecategory::servicecategory.create');
     }
 
@@ -74,6 +75,7 @@ class ServiceCategoryController extends Controller
      */
     public function edit($id)
     {
+        $data['is_edit'] = true;
         $data['servicecategory_info'] = $this->service_category->find($id);
         return view('servicecategory::servicecategory.edit',$data);
     }

@@ -11,6 +11,8 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('index');
-// });
+Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
+
+Route::get('/car/detail/{id}', ['as' => 'car-detail', 'uses' => 'HomeController@carDetail']);
+
+
