@@ -1,3 +1,30 @@
+
+<section class="rtt-subscribe" style="background-image: url('home/img/banner-two.png');">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="text-white">
+                    <h3>Keep updated & Get Unlimited Offers</h3>
+                    <p class="mb-0">
+                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+                        Aenean commodo ec, vulputate eget, arcu.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="rtt-subscribe--form d-flex align-items-center justify-content-center">
+                    <form action="{{route('subscription')}}" method="post">
+                        @csrf
+                    <input type="email" name="email" value="" placeholder="Your email address here" required>
+                    <input type="number" name="status" value="1" hidden/>
+                    <button class="btn btn-warning ml-2" type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <footer class="section-padding">
     <div class="container">
         <div class="row">
@@ -67,7 +94,6 @@
         </div>
     </div>
 </div>
-
 
 
 <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script> -->

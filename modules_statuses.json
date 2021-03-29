@@ -19,5 +19,6 @@
     "Cars": true,
     "ServiceCategory": true,
     "ServiceManagement": true,
-    "Home": true
+    "Home": true,
+    "Subscription": true
 }

@@ -551,7 +551,7 @@
         <div class="row justify-content-center">
             <div class="col-sm-12">
                 <div class="ecm-features__title d-flex align-items-center justify-content-between">
-                    <h1><span>Popular</span> New Scooters</h1>
+                    <h1><span>Upcoming</span> New Cars</h1>
                     <a href="product-list.php" class="see-all text-right">View all <i class="fa fa-angle-right"></i></a>
                 </div>
             </div>

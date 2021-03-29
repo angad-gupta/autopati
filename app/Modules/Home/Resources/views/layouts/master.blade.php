@@ -24,14 +24,19 @@
     <link rel="stylesheet" href="{{asset('home/css/magnific-popup.css')}}">
     <link rel="stylesheet" href="{{asset('home/css/owl.carousel.min.css')}}">
     <link rel="stylesheet" href="{{asset('home/css/owl.theme.default.min.css')}}">
+    
+    @jquery
+    @toastr_css
+    @toastr_js
 
 </head>
 
 <body>
 
     @include('home::includes.header')
-
+    @toastr_render
     @yield('content')
+
 </body>
 
     @include('home::includes.footer')

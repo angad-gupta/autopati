@@ -63,7 +63,8 @@
     </div>
 </div>
 
-
+@if(sizeof($photo_gallery)>0)
+          
 <div class="compare-image">
     <div class="container">
         <div class="row">
@@ -71,8 +72,7 @@
                 <h4 class="mb-4">Photo</h4>
             </div>
     
-            @if(sizeof($photo_gallery)>0)
-          
+           
             <div class="col-md-3">
                 
                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
@@ -111,16 +111,14 @@
                     </div>
                     @endforeach
                 </div>
-              
+            
             </div>
-           
         
-     
-            @endif
+         
         </div>
     </div>
 </div>
-
+@endif
 
 
 <div class="compare-info">
@@ -313,6 +311,15 @@
 
 </section> --}}
 
+@inject('similarcars', '\App\Modules\Cars\Repositories\CarRepository')
+@php
+    $brand_id = optional($car->BrandInfo)->id;
+    $model_id = optional($car->ModelInfo)->id;
+    $variant_id = optional($car->VariantInfo)->id;
+    $similar_cars = $similarcars->findSimilarCar($limit=12,$brand_id,$model_id,$variant_id,$car->id);
+  
+@endphp
+@if($similar_cars->isNotEmpty())
 <section class="ecm-features home-tabs ecm-new bg-grey pt-4 pb-4">
     <div class="container">
         <div class="row justify-content-center">
@@ -327,16 +334,6 @@
             <div class="col-12">
                 
                 <div class="owl-carousel owl-theme new-arrival">
-                   
-                    @inject('similarcars', '\App\Modules\Cars\Repositories\CarRepository')
-                    @php
-                        $brand_id = optional($car->BrandInfo)->id;
-                        $model_id = optional($car->ModelInfo)->id;
-                        $variant_id = optional($car->VariantInfo)->id;
-                        $similar_cars = $similarcars->findSimilarCar($brand_id,$model_id,$variant_id,$car->id);
-                      
-                    @endphp
-                 
                     @foreach($similar_cars as $similar_car)
                     @php 
                     if($similar_car->car_image){
@@ -347,7 +344,7 @@
                     @endphp
 
                     <div class="item">
-                        <a href="{{route('car-detail',$similar_car->id)}}" class="services_item_desc" style="color: black;">
+                        <a href="{{route('car.detail',$similar_car->id)}}" class="services_item_desc" style="color: black;">
                             <img src="{{$imagePath}}" alt="" height="200">
                             <span>{{optional($similar_car->BrandInfo)->brand_name }} </span>
                             <h6>{{ optional($similar_car->ModelInfo)->model_name }} {{ optional($similar_car->VariantInfo)->variant_name }} </h6>
@@ -357,35 +354,11 @@
                     </div>
                     @endforeach
                     
-             
                 </div>
             </div>
         </div>
     </div>
 </section>
-
-
-<section class="rtt-subscribe" style="background-image: url('home/img/banner-two.png');">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="text-white">
-                    <h3>Keep updated & Get Unlimited Offers</h3>
-                    <p class="mb-0">
-                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                        Aenean commodo ec, vulputate eget, arcu.
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="rtt-subscribe--form d-flex align-items-center justify-content-center">
-                    <input type="text" name="" value="" placeholder="Your email address here">
-                    <button class="btn btn-warning ml-2" type="submit">Subscribe</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
+@endif
 
 @endsection

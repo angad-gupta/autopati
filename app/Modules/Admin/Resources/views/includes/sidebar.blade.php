@@ -117,12 +117,17 @@
                 @endif
 
                 <li class="nav-item nav-item-submenu">
-                    <a href="#" class="nav-link"><i class="icon-stack2"></i> <span>Services</span></a>
+                    <a href="#" class="nav-link"><i class="icon-cog3"></i> <span>Services</span></a>
 
                     <ul class="nav nav-group-sub" data-submenu-title="Services" style="display: none;">
                         <li class="nav-item"><a href="{{route('servicecategory.index')}}" class="nav-link">Service Category</a></li>
                         <li class="nav-item"><a href="{{route('servicemanagement.index')}}" class="nav-link">Service Management</a></li>
                     </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{route('subscription.index')}}" class="nav-link @if($Route[0]=='subscription') active @endif" data-popup="tooltip" data-original-title="Subscription" data-placement="right"><i class="icon-checkmark-circle"></i><span>Subscription</span>
+                    </a>
                 </li>
         
 

@@ -2,6 +2,9 @@
 namespace App\Modules\Cars\Repositories;
 
 use App\Modules\Cars\Entities\Car;
+use App\Modules\Brand\Entities\Brand;
+use App\Modules\VehicleModel\Entities\VehicleModel;
+
 use App\Modules\Cars\Entities\CarGallery;
 use App\Modules\Cars\Entities\CarGalleryDetail;
 use App\Modules\Cars\Entities\CarPhotoFeature;
@@ -29,6 +32,15 @@ class CarRepository implements CarInterface
         
     } 
 
+    public function findMostSearched($limit = null, $filter = [], $sort = ['by' => 'views', 'sort' => 'DESC'], $status = [0, 1])
+    {
+        $result =Car::when(array_keys($filter, true), function ($query) use ($filter) {
+
+        })->orderBy($sort['by'], $sort['sort'])->paginate($limit ? $limit : env('DEF_PAGE_LIMIT',9999));
+        return $result; 
+        
+    } 
+
     public function findLuxury($limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'ASC'], $status = [0, 1])
     {
         $result =Car::when(array_keys($filter, true), function ($query) use ($filter) {
@@ -38,12 +50,34 @@ class CarRepository implements CarInterface
         
     } 
 
-    public function findSimilarCar($brand_id,$model_id,$variant_id,$car_id)
+    public function findBrandVehicle($limit = null,$id)
     {
-        $result =Car::where('id','!=',$car_id)->where('brand_id','=',$brand_id)->where('model_id','=',$model_id)->get();
+        $result =Car::where('brand_id','=',$id)->orderBy('id','ASC')->paginate($limit ? $limit : env('DEF_PAGE_LIMIT',9999));
         return $result; 
         
     } 
+
+    public function findSimilarCar($limit=null,$brand_id,$model_id,$variant_id,$car_id)
+    {
+        $result =Car::where('id','!=',$car_id)->where('brand_id','=',$brand_id)->where('model_id','=',$model_id)->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
+        return $result; 
+        
+    } 
+
+    public function searchVehicle($limit = null,$data){
+        $brand_result = Brand::where('brand_name', 'LIKE', "%{$data}%") ->first();
+        $vehicle_model = VehicleModel::where('model_name', 'LIKE', "%{$data}%") ->first();
+
+        if($brand_result){
+            return $result =Car::where('brand_id','=',$brand_result->id)->paginate($limit ? $limit : env('DEF_PAGE_LIMIT',9999));
+        }elseif($vehicle_model){
+            return $result =Car::where('model_id','=',$vehicle_model->id)->orderBy('id','ASC')->paginate($limit ? $limit : env('DEF_PAGE_LIMIT',9999));
+        return $result; 
+        }else{
+            return $result =Car::where('model_id','=',999999999)->orderBy('id','ASC')->paginate($limit ? $limit : env('DEF_PAGE_LIMIT',9999));
+        }
+
+    }
     
 
     public function find($id){

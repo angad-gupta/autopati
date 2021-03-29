@@ -67,11 +67,11 @@
         <div class="owl-carousel owl-theme new-arrival">
             @inject('dealofmonth', '\App\Modules\Cars\Repositories\CarRepository')
             @php
-                $deal_of_the_months = $dealofmonth->findDealOfMonth($limit=50);
+                $deal_of_the_months = $dealofmonth->findDealOfMonth($limit=12);
             @endphp
             @foreach($deal_of_the_months as $deal_of_the_month) 
             <div class="item">
-                <a href="{{route('car-detail',$deal_of_the_month->id)}}" class="ecm-new__item">
+                <a href="{{route('car.detail',$deal_of_the_month->id)}}" class="ecm-new__item">
                     <img src="{{($deal_of_the_month->car_image) ? asset($deal_of_the_month->file_full_path).'/'.$deal_of_the_month->car_image : asset('admin/default.png' )}}" alt="{{$deal_of_the_month->ModelInfo->model_name}} {{$deal_of_the_month->VariantInfo->variant_name}}">
                     <h5>{{$deal_of_the_month->BrandInfo->brand_name}}</h5>
                 </a>
@@ -89,18 +89,18 @@
             <div class="col-sm-12">
                 <div class="ecm-features__title d-flex align-items-center justify-content-between">
                     <h1><span>Car</span> brands</h1>
-                    <a href="product-list.php" class="see-all text-right">View all <i class="fa fa-angle-right"></i></a>
+                    <a href="{{route('list.car-brand')}}" class="see-all text-right">View all <i class="fa fa-angle-right"></i></a>
                 </div>
             </div>
         </div>
         <div class="owl-carousel owl-theme brand discount-slider mt-4">
             @inject('get_car_brand', '\App\Modules\Brand\Repositories\BrandRepository')
             @php
-                $car_brands = $get_car_brand->findCarType($limit=50);
+                $car_brands = $get_car_brand->findCarType($limit=12);
             @endphp
             @foreach($car_brands as $car_brand)
             <div class="item">
-                <a href="category.php" class="brand-item">
+                <a href="{{route('list.brand.vehicles',$car_brand->id)}}" class="brand-item">
                     <img src="{{($car_brand->brand_logo) ? asset($car_brand->file_full_path).'/'.$car_brand->brand_logo : asset('admin/default.png')}}" alt="{{$car_brand->brand_name}}">
                     <h5>{{$car_brand->brand_name}}</h5>
                 </a>
@@ -116,19 +116,19 @@
             <div class="col-sm-12">
                 <div class="ecm-features__title d-flex align-items-center justify-content-between">
                     <h1><span>Bike</span> brands</h1>
-                    <a href="product-list.php" class="see-all text-right">View all <i class="fa fa-angle-right"></i></a>
+                    <a href="{{route('list.bike-brand')}}" class="see-all text-right">View all <i class="fa fa-angle-right"></i></a>
                 </div>
             </div>
         </div>
         <div class="owl-carousel owl-theme brand discount-slider mt-4">
             @inject('get_bike_brand', '\App\Modules\Brand\Repositories\BrandRepository')
             @php
-                $bike_brands = $get_bike_brand->findBikeType($limit=50);
+                $bike_brands = $get_bike_brand->findBikeType($limit=12);
             @endphp
 
             @foreach($bike_brands as $bike_brand)
                 <div class="item">
-                    <a href="category.php" class="brand-item">
+                    <a href="{{route('list.brand.vehicles',$bike_brand->id)}}" class="brand-item">
                         <img src="{{($bike_brand->brand_logo) ? asset($bike_brand->file_full_path).'/'.$bike_brand->brand_logo : asset('admin/default.png')}}" alt="{{$bike_brand->brand_name}}">
                         <h5>{{$bike_brand->brand_name}}</h5>
                     </a>
@@ -234,217 +234,35 @@
             <div class="col-sm-12">
                 <div class="ecm-features__title d-flex align-items-center justify-content-between">
                     <h1><span>Most Searched</span> Cars and Bikes</h1>
-                    <a href="product-list.php" class="see-all text-right">View all <i class="fa fa-angle-right"></i></a>
+                    <a href="{{route('list.most-searched-car')}}" class="see-all text-right">View all <i class="fa fa-angle-right"></i></a>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-12">
-                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link active" id="pills-four-tab" data-toggle="pill" href="#pills-four" role="tab" aria-controls="pills-four" aria-selected="true">Sedan</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="pills-five-tab" data-toggle="pill" href="#pills-five" role="tab" aria-controls="pills-five" aria-selected="false">SUV</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="pills-six-tab" data-toggle="pill" href="#pills-six" role="tab" aria-controls="pills-six" aria-selected="false">hatchback</a>
-                    </li>
-                </ul>
-                <div class="tab-content" id="pills-tabContent">
-                    <div class="tab-pane fade show active" id="pills-four" role="tabpanel" aria-labelledby="pills-four-tab">
-                        <div class="owl-carousel owl-theme new-featured">
-                            <div class="item">
-                                <div class="services_item">
-                                    <img src="home/img/cars/Mask-1.png" alt="">
-                                    <div class="services_item_desc">
-                                        <h6><a href="#">Hyundai Aura</a></h6>
-                                        <p class="mb-0">Starting 12 lakhs - 20 lakhs</p>
-                                        <div class="d-flex justify-content-end">
-                                            <a href="" class="btn btn-outline-warning">View Detail</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="services_item">
-                                    <img src="home/img/cars/Mask-2.png" alt="">
-                                    <div class="services_item_desc">
-                                        <h6><a href="#">Honda Amaze</a></h6>
-                                        <p class="mb-0">Starting 14 lakhs - 20 lakhs</p>
-                                        <div class="d-flex justify-content-end">
-                                            <a href="" class="btn btn-outline-warning">View Detail</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="services_item">
-                                    <img src="home/img/cars/Mask-3.png" alt="">
-                                    <div class="services_item_desc">
-                                        <h6><a href="#">Maruti Dezire</a></h6>
-                                        <p class="mb-0">Starting 11 lakhs - 20 lakhs</p>
-                                        <div class="d-flex justify-content-end">
-                                            <a href="" class="btn btn-outline-warning">View Detail</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="services_item">
-                                    <img src="home/img/cars/Mask.png" alt="">
-                                    <div class="services_item_desc">
-                                        <h6><a href="#">Hyundai Verna</a></h6>
-                                        <p class="mb-0">Starting 12 lakhs - 15 lakhs</p>
-                                        <div class="d-flex justify-content-end">
-                                            <a href="" class="btn btn-outline-warning">View Detail</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="services_item">
-                                    <img src="home/img/cars/Mask-1.png" alt="">
-                                    <div class="services_item_desc">
-                                        <h6><a href="#">Hyundai Amaze</a></h6>
-                                        <p class="mb-0">Starting 10 lakhs - 30 lakhs</p>
-                                        <div class="d-flex justify-content-end">
-                                            <a href="" class="btn btn-outline-warning">View Detail</a>
-                                        </div>
-                                    </div>
+                @inject('most_searched', '\App\Modules\Cars\Repositories\CarRepository')
+                @php
+                    $most_searched = $most_searched->findMostSearched($limit=12,$status=['1']);
+                @endphp
+
+                <div class="owl-carousel owl-theme new-featured mt-3">
+                    @foreach($most_searched as $most_search)
+                    <div class="item">
+                        <div class="services_item">
+                            <img src="{{($most_search->car_image) ? asset($most_search->file_full_path).'/'.$most_search->car_image : asset('admin/default.png')}}" alt="">
+                            <div class="services_item_desc">
+                                <h6><a href="{{route('car.detail',$most_search->id)}}">{{optional($most_search->BrandInfo)->brand_name }} {{ optional($most_search->ModelInfo)->model_name }}</a></h6>
+                                <p class="mb-0">Starting Rs {{$most_search->starting_price}}</p>
+                                <div class="d-flex justify-content-end">
+                                    <a href="{{route('car.detail',$most_search->id)}}" class="btn btn-outline-warning">View Detail</a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="pills-five" role="tabpanel" aria-labelledby="pills-five-tab">
-                        <div class="owl-carousel owl-theme new-featured">
-                            <div class="item">
-                                <div class="services_item">
-                                    <img src="home/img/cars/Mask-1.png" alt="">
-                                    <div class="services_item_desc">
-                                        <h6><a href="#">Hyundai Aura</a></h6>
-                                        <p class="mb-0">Starting 12 lakhs - 20 lakhs</p>
-                                        <div class="d-flex justify-content-end">
-                                            <a href="" class="btn btn-outline-warning">View Detail</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="services_item">
-                                    <img src="home/img/cars/Mask-2.png" alt="">
-                                    <div class="services_item_desc">
-                                        <h6><a href="#">Honda Amaze</a></h6>
-                                        <p class="mb-0">Starting 14 lakhs - 20 lakhs</p>
-                                        <div class="d-flex justify-content-end">
-                                            <a href="" class="btn btn-outline-warning">View Detail</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="services_item">
-                                    <img src="home/img/cars/Mask-3.png" alt="">
-                                    <div class="services_item_desc">
-                                        <h6><a href="#">Maruti Dezire</a></h6>
-                                        <p class="mb-0">Starting 11 lakhs - 20 lakhs</p>
-                                        <div class="d-flex justify-content-end">
-                                            <a href="" class="btn btn-outline-warning">View Detail</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="services_item">
-                                    <img src="home/img/cars/Mask.png" alt="">
-                                    <div class="services_item_desc">
-                                        <h6><a href="#">Hyundai Verna</a></h6>
-                                        <p class="mb-0">Starting 12 lakhs - 15 lakhs</p>
-                                        <div class="d-flex justify-content-end">
-                                            <a href="" class="btn btn-outline-warning">View Detail</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="services_item">
-                                    <img src="home/img/cars/Mask-1.png" alt="">
-                                    <div class="services_item_desc">
-                                        <h6><a href="#">Hyundai Amaze</a></h6>
-                                        <p class="mb-0">Starting 10 lakhs - 30 lakhs</p>
-                                        <div class="d-flex justify-content-end">
-                                            <a href="" class="btn btn-outline-warning">View Detail</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="pills-six" role="tabpanel" aria-labelledby="pills-six-tab">
-                        <div class="owl-carousel owl-theme new-featured">
-                            <div class="item">
-                                <div class="services_item">
-                                    <img src="home/img/cars/Mask-1.png" alt="">
-                                    <div class="services_item_desc">
-                                        <h6><a href="#">Hyundai Aura</a></h6>
-                                        <p class="mb-0">Starting 12 lakhs - 20 lakhs</p>
-                                        <div class="d-flex justify-content-end">
-                                            <a href="" class="btn btn-outline-warning">View Detail</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="services_item">
-                                    <img src="home/img/cars/Mask-2.png" alt="">
-                                    <div class="services_item_desc">
-                                        <h6><a href="#">Honda Amaze</a></h6>
-                                        <p class="mb-0">Starting 14 lakhs - 20 lakhs</p>
-                                        <div class="d-flex justify-content-end">
-                                            <a href="" class="btn btn-outline-warning">View Detail</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="services_item">
-                                    <img src="home/img/cars/Mask-3.png" alt="">
-                                    <div class="services_item_desc">
-                                        <h6><a href="#">Maruti Dezire</a></h6>
-                                        <p class="mb-0">Starting 11 lakhs - 20 lakhs</p>
-                                        <div class="d-flex justify-content-end">
-                                            <a href="" class="btn btn-outline-warning">View Detail</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="services_item">
-                                    <img src="home/img/cars/Mask.png" alt="">
-                                    <div class="services_item_desc">
-                                        <h6><a href="#">Hyundai Verna</a></h6>
-                                        <p class="mb-0">Starting 12 lakhs - 15 lakhs</p>
-                                        <div class="d-flex justify-content-end">
-                                            <a href="" class="btn btn-outline-warning">View Detail</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="services_item">
-                                    <img src="home/img/cars/Mask-1.png" alt="">
-                                    <div class="services_item_desc">
-                                        <h6><a href="#">Hyundai Amaze</a></h6>
-                                        <p class="mb-0">Starting 10 lakhs - 30 lakhs</p>
-                                        <div class="d-flex justify-content-end">
-                                            <a href="" class="btn btn-outline-warning">View Detail</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
+                  
                 </div>
+
             </div>
         </div>
     </div>
@@ -552,7 +370,7 @@
         <div class="row justify-content-center">
             <div class="col-sm-12">
                 <div class="ecm-features__title d-flex align-items-center justify-content-between">
-                    <h1><span>Popular</span> New Scooters</h1>
+                    <h1><span>Upcoming</span> New Cars</h1>
                     <a href="product-list.php" class="see-all text-right">View all <i class="fa fa-angle-right"></i></a>
                 </div>
             </div>
@@ -670,27 +488,6 @@
     </div>
 </section>
 
-<section class="rtt-subscribe" style="background-image: url('home/img/banner-two.png');">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="text-white">
-                    <h3>Keep updated & Get Unlimited Offers</h3>
-                    <p class="mb-0">
-                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                        Aenean commodo ec, vulputate eget, arcu.
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="rtt-subscribe--form d-flex align-items-center justify-content-center">
-                    <input type="text" name="" value="" placeholder="Your email address here">
-                    <button class="btn btn-warning ml-2" type="submit">Subscribe</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 
 @endsection
 

@@ -8,7 +8,13 @@ interface CarInterface
 
     public function findDealOfMonth($limit=null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1]);
 
-    public function findSimilarCar($brand_id,$model_id,$variant_id,$car_id);
+    public function findMostSearched($limit=null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1]);
+
+    public function findBrandVehicle($limit = null,$id);
+
+    public function searchVehicle($limit = null,$data);
+    
+    public function findSimilarCar($limit=null,$brand_id,$model_id,$variant_id,$car_id);
    
     public function find($id);
     

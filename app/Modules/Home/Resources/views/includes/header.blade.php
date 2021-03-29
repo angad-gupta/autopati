@@ -207,12 +207,12 @@
                 </div>
                 <div class="col-md-4">
                     <div class="d-flex align-items-center justify-content-center justify-content-md-end mt-3 mt-md-0">
-                        <form action="" class="ap-search">
+                        <form action="{{route('search')}}" class="ap-search">
                             <div class="search-box">
-                                <input type="text" name="" id="" placeholder="Search...">
+                                <input type="text" name="search" id="" placeholder="Search...">
                                 <i class="fa fa-search"></i>
                             </div>
-                            <div class="search-box-container">
+                            {{-- <div class="search-box-container">
                                 <h6>Trending Searches</h6>
                                 <ul class="list-unstyled mb-0">
                                     <li><a href="">Mg Hector</a></li>
@@ -228,7 +228,7 @@
                                     <li><a href="">Toyota Fortuner</a></li>
                                     <li><a href="">Kia Sonet</a></li>
                                 </ul>
-                            </div>
+                            </div> --}}
                         </form>
                         <ul class="list-unstyled mb-0 ap-header-login">
                             <li><a href="#" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-user"></i></a></li>
