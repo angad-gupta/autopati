@@ -11,9 +11,9 @@ use App\Modules\Cars\Entities\CarPhotoFeature;
 use App\Modules\Cars\Entities\CarSpecification;
 use App\Modules\Cars\Entities\CarColor;
 
+
 class CarRepository implements CarInterface
-{
-     
+{ 
     public function findAll($limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'ASC'], $status = [0, 1])
     {
         $result =Car::when(array_keys($filter, true), function ($query) use ($filter) {
@@ -50,6 +50,13 @@ class CarRepository implements CarInterface
         
     } 
 
+    public function findUpcomingCar($limit = null, $current_date)
+    {
+        $result =Car::where('expected_launch_date','>=',$current_date)->orderBy('id','ASC')->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
+        return $result; 
+        
+    } 
+
     public function findBrandVehicle($limit = null,$id)
     {
         $result =Car::where('brand_id','=',$id)->orderBy('id','ASC')->paginate($limit ? $limit : env('DEF_PAGE_LIMIT',9999));
@@ -70,10 +77,13 @@ class CarRepository implements CarInterface
 
         if($brand_result){
             return $result =Car::where('brand_id','=',$brand_result->id)->paginate($limit ? $limit : env('DEF_PAGE_LIMIT',9999));
-        }elseif($vehicle_model){
+        }
+        elseif($vehicle_model){
             return $result =Car::where('model_id','=',$vehicle_model->id)->orderBy('id','ASC')->paginate($limit ? $limit : env('DEF_PAGE_LIMIT',9999));
-        return $result; 
-        }else{
+            return $result; 
+        }
+        else
+        {
             return $result =Car::where('model_id','=',999999999)->orderBy('id','ASC')->paginate($limit ? $limit : env('DEF_PAGE_LIMIT',9999));
         }
 

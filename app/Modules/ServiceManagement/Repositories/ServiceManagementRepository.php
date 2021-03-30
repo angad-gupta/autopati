@@ -26,6 +26,10 @@ class ServiceManagementRepository implements ServiceManagementInterface
         
     }
 
+    public function findAllActiveServiceCategory($limit = null,$id){
+        return ServiceManagement::where('status','=','1')->where('category_id','=',$id)->orderBy('id','ASC')->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
+    }
+
     public function find($id){
         return ServiceManagement::find($id);
     }

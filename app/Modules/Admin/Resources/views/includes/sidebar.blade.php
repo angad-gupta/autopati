@@ -126,7 +126,12 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{route('subscription.index')}}" class="nav-link @if($Route[0]=='subscription') active @endif" data-popup="tooltip" data-original-title="Subscription" data-placement="right"><i class="icon-checkmark-circle"></i><span>Subscription</span>
+                    <a href="{{route('subscription.index')}}" class="nav-link @if($Route[0]=='subscription') active @endif" data-popup="tooltip" data-original-title="Subscription" data-placement="right"><i class="icon-checkmark-circle"></i><span>Subscriptions</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{route('page.index')}}" class="nav-link @if($Route[0]=='page') active @endif" data-popup="tooltip" data-original-title="Pages" data-placement="right"><i class="icon-stack"></i><span>Pages</span>
                     </a>
                 </li>
         

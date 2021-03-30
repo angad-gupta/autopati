@@ -2,12 +2,17 @@
 @section('title')List | Autopati @stop 
 @section('content')
 
+<div class="page-banner">
+    <img src="https://stimg.cardekho.com/pwa/img/bgimg/compare-cars.jpg" alt="">
+</div>
+
 <section class="ecm-features ecm-new pb-0">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-sm-12">
                 <div class="ecm-features__title d-flex align-items-center justify-content-between">
-                    <h1><span>{{$title}}</span></h1>
+                    <h1>Search For :<span> {{$title}}</span></h1>
+                    <h1><span style="color: #e53012">{{count($vehicles)}} </span> Found !</h1>
                   
                 </div>
             </div>
@@ -22,7 +27,8 @@
                     <div class="services_item_desc">
                         <h6><a href="{{route('car.detail',$vehicle->id)}}">{{optional($vehicle->BrandInfo)->brand_name }} {{ optional($vehicle->ModelInfo)->model_name }}</a></h6>
                         <p class="mb-0">Starting Rs {{$vehicle->starting_price}}</p>
-                        <div class="d-flex justify-content-end">
+                        <div class="d-flex justify-content-between">
+                            <h5 class="mt-3" style="color: #e53012"><i class="fa fa-eye" style=""></i>  {{$vehicle->views}}</h5>
                             <a href="{{route('car.detail',$vehicle->id)}}" class="btn btn-outline-warning">View Detail</a>
                         </div>
                     </div>

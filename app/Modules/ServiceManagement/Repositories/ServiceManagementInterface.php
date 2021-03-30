@@ -8,6 +8,8 @@ interface ServiceManagementInterface
     
     public function findAllActiveService($limit=null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1]);
 
+    public function findAllActiveServiceCategory($limit = null,$id);
+    
     public function find($id);
     
     public function getList();

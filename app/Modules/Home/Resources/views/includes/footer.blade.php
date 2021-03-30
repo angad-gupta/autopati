@@ -6,8 +6,7 @@
                 <div class="text-white">
                     <h3>Keep updated & Get Unlimited Offers</h3>
                     <p class="mb-0">
-                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                        Aenean commodo ec, vulputate eget, arcu.
+                        Subscribe to Autopati
                     </p>
                 </div>
             </div>
@@ -53,11 +52,18 @@
             </div>
             <div class="col-sm-6 col-md-3">
                 <h5>Useful Links</h5>
+                @inject('pages', '\App\Modules\Page\Repositories\PageRepository')
+                @php
+                    $active_pages = $pages->findActivePage($limit=50);
+                @endphp
+
+        
                 <ul class="list-unstyled f-links">
                     <li><a href="#">Home</a></li>
-                    <li><a href="#">About Us</a></li>
                     <li><a href="#">Blog</a></li>
-                    <li><a href="#">Disclaimer</a></li>
+                    @foreach($active_pages as $active_page)
+                    <li><a href="{{route('page',$active_page->slug)}}">{{$active_page->title}}</a></li>
+                    @endforeach
                     <li><a href="#">Contact</a></li>
                 </ul>
             </div>

@@ -20,5 +20,6 @@
     "ServiceCategory": true,
     "ServiceManagement": true,
     "Home": true,
-    "Subscription": true
+    "Subscription": true,
+    "Page": true
 }

@@ -6,6 +6,8 @@ interface ServiceCategoryInterface
 {
     public function findAll($limit=null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1]);
     
+    public function findActiveServiceCategory($limit=null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1]);
+    
     public function find($id);
     
     public function getList();

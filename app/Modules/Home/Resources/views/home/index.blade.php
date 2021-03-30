@@ -61,6 +61,7 @@
             <div class="col-sm-12">
                 <div class="ecm-features__title d-flex align-items-center justify-content-between">
                     <h1><span>Deals</span> of the Month</h1>
+                    <a href="{{route('list.deal-of-the-month')}}" class="see-all text-right">View all <i class="fa fa-angle-right"></i></a>
                 </div>
             </div>
         </div>
@@ -73,7 +74,7 @@
             <div class="item">
                 <a href="{{route('car.detail',$deal_of_the_month->id)}}" class="ecm-new__item">
                     <img src="{{($deal_of_the_month->car_image) ? asset($deal_of_the_month->file_full_path).'/'.$deal_of_the_month->car_image : asset('admin/default.png' )}}" alt="{{$deal_of_the_month->ModelInfo->model_name}} {{$deal_of_the_month->VariantInfo->variant_name}}">
-                    <h5>{{$deal_of_the_month->BrandInfo->brand_name}}</h5>
+                    <h5>{{optional($deal_of_the_month->BrandInfo)->brand_name }} {{ optional($deal_of_the_month->ModelInfo)->model_name }} </h5>
                 </a>
             </div>
             @endforeach
@@ -151,77 +152,44 @@
         </div>
         <div class="row">
             <div class="col-12">
+                @inject('service_category', '\App\Modules\ServiceCategory\Repositories\ServiceCategoryRepository')
+                @php
+                    $service_categories = $service_category->findActiveServiceCategory($limit=12);
+                @endphp
+
                 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                    @foreach($service_categories as $service_category)
                     <li class="nav-item">
-                        <a class="nav-link active" id="pills-one-tab" data-toggle="pill" href="#pills-one" role="tab" aria-controls="pills-one" aria-selected="true">Wokshop</a>
+                        <a class="nav-link @if($loop->first)active @endif" id="pills-one-tab" data-toggle="pill" href="#service-{{$service_category->id}}" role="tab" aria-controls="pills-one" aria-selected="true">{{$service_category->title}}</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="pills-two-tab" data-toggle="pill" href="#pills-two" role="tab" aria-controls="pills-two" aria-selected="false">Servicing</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="pills-three-tab" data-toggle="pill" href="#pills-three" role="tab" aria-controls="pills-three" aria-selected="false">Roadside Assistance</a>
-                    </li>
+                    @endforeach
+                
                 </ul>
                 <div class="tab-content" id="pills-tabContent">
-                    <div class="tab-pane fade show active" id="pills-one" role="tabpanel" aria-labelledby="pills-one-tab">
+                    @foreach($service_categories as $service_category)
+                    <div class="tab-pane fade show @if($loop->first)active @endif" id="service-{{$service_category->id}}" role="tabpanel" aria-labelledby="pills-one-tab">
                         <div class="owl-carousel owl-theme new-featured">
+                            @inject('services', '\App\Modules\ServiceManagement\Repositories\ServiceManagementRepository')
+                            @php
+                                $services = $services->findAllActiveServiceCategory($limit=12,$service_category->id);
+                            @endphp
+                            @foreach($services as $service)
                             <div class="item">
                                 <div class="services_item">
-                                    <img src="home/img/Mask-1.png" alt="">
+                                    <img src="{{($service->cover_image) ? asset($service->file_full_path).'/'.$service->cover_image : asset('admin/default.png' )}}" alt="">
                                     <div class="services_item_desc">
-                                        <h6><a href="">Mauris Fermentum Dictum</a></h6>
-                                        <span><i class="fa fa-map-marker"></i> &nbsp; Kathmandu, Nepal</span>
-                                        <p class="mb-0">Aenean auctor wisi et urna. Aliquam erat volutpat. Duis ac turpis. Integer rutrum ante</p>
+                                        <h6><a href="">{{$service->title}}</a></h6>
+                                        <span><i class="fa fa-map-marker"></i> &nbsp; {{$service->location}}</span>
+                                        {{-- <p class="mb-0">Aenean auctor wisi et urna. Aliquam erat volutpat. Duis ac turpis. Integer rutrum ante</p> --}}
                                     </div>
                                 </div>
                             </div>
-                            <div class="item">
-                                <div class="services_item">
-                                    <img src="home/img/Mask-2.png" alt="">
-                                    <div class="services_item_desc">
-                                        <h6><a href="">Mauris Fermentum Dictum</a></h6>
-                                        <span><i class="fa fa-map-marker"></i> &nbsp; Kathmandu, Nepal</span>
-                                        <p class="mb-0">Aenean auctor wisi et urna. Aliquam erat volutpat. Duis ac turpis. Integer rutrum ante</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="services_item">
-                                    <img src="home/img/Mask-3.png" alt="">
-                                    <div class="services_item_desc">
-                                        <h6><a href="">Mauris Fermentum Dictum</a></h6>
-                                        <span><i class="fa fa-map-marker"></i> &nbsp; Kathmandu, Nepal</span>
-                                        <p class="mb-0">Aenean auctor wisi et urna. Aliquam erat volutpat. Duis ac turpis. Integer rutrum ante</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="services_item">
-                                    <img src="home/img/Mask.png" alt="">
-                                    <div class="services_item_desc">
-                                        <h6><a href="">Mauris Fermentum Dictum</a></h6>
-                                        <span><i class="fa fa-map-marker"></i> &nbsp; Kathmandu, Nepal</span>
-                                        <p class="mb-0">Aenean auctor wisi et urna. Aliquam erat volutpat. Duis ac turpis. Integer rutrum ante</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="services_item">
-                                    <img src="home/img/Mask-1.png" alt="">
-                                    <div class="services_item_desc">
-                                        <h6><a href="">Mauris Fermentum Dictum</a></h6>
-                                        <span><i class="fa fa-map-marker"></i> &nbsp; Kathmandu, Nepal</span>
-                                        <p class="mb-0">Aenean auctor wisi et urna. Aliquam erat volutpat. Duis ac turpis. Integer rutrum ante</p>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
+                    
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="pills-two" role="tabpanel" aria-labelledby="pills-two-tab">
-
-                    </div>
-                    <div class="tab-pane fade" id="pills-three" role="tabpanel" aria-labelledby="pills-three-tab">
-                    </div>
+                    @endforeach
+         
                 </div>
             </div>
         </div>
@@ -371,53 +339,29 @@
             <div class="col-sm-12">
                 <div class="ecm-features__title d-flex align-items-center justify-content-between">
                     <h1><span>Upcoming</span> New Cars</h1>
-                    <a href="product-list.php" class="see-all text-right">View all <i class="fa fa-angle-right"></i></a>
+                    <a href="{{route('list.upcoming-car')}}" class="see-all text-right">View all <i class="fa fa-angle-right"></i></a>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-12">
                 <div class="owl-carousel owl-theme trending-products">
+                    @inject('upcoming_car', '\App\Modules\Cars\Repositories\CarRepository')
+                    @php
+                        $current_date = Carbon\Carbon::now()->format('Y-m-d');
+                        $upcoming_cars = $upcoming_car->findUpcomingCar($limit=12, $current_date);
+                    @endphp
+            
+                    @foreach($upcoming_cars as $up_car)
                     <div class="item">
                         <a href="category.php" class="ecm-luxury__item">
                             <span class="ecm-luxury__img">
-                                <img src="home/img/scooter/Mask.png" alt="">
+                                <img src="{{($up_car->car_image) ? asset($up_car->file_full_path).'/'.$up_car->car_image : asset('admin/default.png' )}}" alt="">
                             </span>
-                            <h5>Mercedez Benz</h5>
+                            <h5>{{optional($up_car->BrandInfo)->brand_name }} {{ optional($up_car->ModelInfo)->model_name }} </h5>
                         </a>
                     </div>
-                    <div class="item">
-                        <a href="category.php" class="ecm-luxury__item">
-                            <span class="ecm-luxury__img">
-                                <img src="home/img/scooter/Mask-1.png" alt="">
-                            </span>
-                            <h5>Mercedez Benz</h5>
-                        </a>
-                    </div>
-                    <div class="item">
-                        <a href="category.php" class="ecm-luxury__item">
-                            <span class="ecm-luxury__img">
-                                <img src="home/img/scooter/Mask-2.png" alt="">
-                            </span>
-                            <h5>Mercedez Benz</h5>
-                        </a>
-                    </div>
-                    <div class="item">
-                        <a href="category.php" class="ecm-luxury__item">
-                            <span class="ecm-luxury__img">
-                                <img src="home/img/scooter/Mask-3.png" alt="">
-                            </span>
-                            <h5>Mercedez Benz</h5>
-                        </a>
-                    </div>
-                    <div class="item">
-                        <a href="category.php" class="ecm-luxury__item">
-                            <span class="ecm-luxury__img">
-                                <img src="home/img/scooter/Mask-1.png" alt="">
-                            </span>
-                            <h5>Mercedez Benz</h5>
-                        </a>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>

@@ -10,6 +10,10 @@ interface CarInterface
 
     public function findMostSearched($limit=null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1]);
 
+    public function findLuxury($limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'ASC'], $status = [0, 1]);
+
+    public function findUpcomingCar($limit = null, $current_date);
+
     public function findBrandVehicle($limit = null,$id);
 
     public function searchVehicle($limit = null,$data);

@@ -14,6 +14,15 @@ class ServiceCategoryRepository implements ServiceCategoryInterface
         return $result; 
         
     } 
+
+    public function findActiveServiceCategory($limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1])
+    {
+        $result =ServiceCategory::when(array_keys($filter, true), function ($query) use ($filter) {
+           
+        })->where('status','=',1)->orderBy($sort['by'], $sort['sort'])->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
+        return $result; 
+        
+    } 
     
     public function find($id){
         return ServiceCategory::find($id);

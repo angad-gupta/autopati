@@ -10,6 +10,8 @@ use App\Modules\Cars\Repositories\CarInterface;
 use App\Modules\Spec\Repositories\SpecInterface;
 use App\Modules\Subscription\Repositories\SubscriptionInterface;
 use App\Modules\Brand\Repositories\BrandInterface;
+use App\Modules\Page\Repositories\PageInterface;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -18,13 +20,15 @@ class HomeController extends Controller
     protected $spec;
     protected $subscription;
     protected $brand;
+    protected $page;
     
-    public function __construct(CarInterface $cars, SpecInterface $spec, SubscriptionInterface $subscription,BrandInterface $brand) 
+    public function __construct(CarInterface $cars, SpecInterface $spec, SubscriptionInterface $subscription,BrandInterface $brand, PageInterface $page) 
     {
         $this->cars = $cars;
         $this->spec = $spec;
         $this->subscription = $subscription;
         $this->brand = $brand;
+        $this->page = $page;
     }
 
     /**
@@ -54,7 +58,7 @@ class HomeController extends Controller
         if($duplicate->isEmpty()){
         try{
             $this->subscription->save($data);
-            toastr()->success('Added to Newsletter Subscription');
+            toastr()->success('Subscribed to Newsletter Subscription');
 
             }catch(\Throwable $e){
                 toastr($e->getMessage())->error();
@@ -84,6 +88,19 @@ class HomeController extends Controller
         return view('home::home.list',$data);
     }
 
+    public function listDealOfMonthVehicle(){
+        $data['title'] = 'Deal of the Month';
+        $data['vehicles'] = $this->cars->findDealOfMonth($limit=50);
+        return view('home::home.list',$data);
+    }
+
+    public function listUpcomingCar(){
+        $current_date = Carbon::now()->format('Y-m-d');
+        $data['title'] = 'Upcoming Cars';
+        $data['vehicles'] = $this->cars->findUpcomingCar($limit=50,$current_date);
+        return view('home::home.list',$data);
+    }
+
     public function listBrandVehicle($id){
 
         $data['title'] = $this->brand->find($id)->brand_name;
@@ -97,6 +114,14 @@ class HomeController extends Controller
         return view('home::home.list',$data);
     }
 
+    public function new(){
+        return view('home::home.new');
+    }
+
+    public function page($slug){
+        $data['page_content'] = $this->page->findSlugPage($slug);
+        return view('home::home.page',$data);
+    }
 
 
 }

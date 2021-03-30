@@ -41,6 +41,14 @@
                             <div class="mt-auto mb-auto ml-auto mr-auto">
                                 <h3 class="text-center" style="color: #e53012"><q>{{$car->short_quote}}</q></h3>
                                 <h6 class="text-center" style="color: gray;">{{$car->short_content}} </h6>
+
+                                @php
+                                    $current_date = Carbon\Carbon::now()->format('Y-m-d');
+                                @endphp
+
+                                @if($car->expected_launch_date >= $current_date)
+                                <h6 class="text-center" style="color: # e53012"><span style="color: gray">Expected Launch Date :</span> {{date('d M Y ',strtotime($car->expected_launch_date)) }}</h6>
+                                @endif
                             </div>
                         </div>
                      
