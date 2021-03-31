@@ -5,9 +5,9 @@
                 <ul class="breadcrumbs list-unstyled d-flex">
                     <li><a href="">Home</a></li>
                     <li><i class="fa fa-angle-right"></i></li>
-                    <li><a href="">Cars</a></li>
+                    <li><a href="">Vehicle</a></li>
                     <li><i class="fa fa-angle-right"></i></li>
-                    <li>{{optional($car->BrandInfo)->brand_name }} {{ optional($car->ModelInfo)->model_name }} {{ optional($car->VariantInfo)->variant_name }}</li>
+                    <li>@yield('breadcrumb')</li>
 
                 </ul>
             </div>

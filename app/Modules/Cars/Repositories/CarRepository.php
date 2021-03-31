@@ -71,6 +71,12 @@ class CarRepository implements CarInterface
         
     } 
 
+    public function findCar($brand_id,$model_id,$variant_id)
+    {
+        $result =Car::where('brand_id','=',$brand_id)->where('model_id','=',$model_id)->where('variant_id','=',$variant_id)->first();
+        return $result; 
+    }
+
     public function searchVehicle($limit = null,$data){
         $brand_result = Brand::where('brand_name', 'LIKE', "%{$data}%") ->first();
         $vehicle_model = VehicleModel::where('model_name', 'LIKE', "%{$data}%") ->first();

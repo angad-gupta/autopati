@@ -5,6 +5,7 @@ namespace App\Modules\Home\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
 
 use App\Modules\Cars\Repositories\CarInterface;
 use App\Modules\Spec\Repositories\SpecInterface;
@@ -121,6 +122,52 @@ class HomeController extends Controller
     public function page($slug){
         $data['page_content'] = $this->page->findSlugPage($slug);
         return view('home::home.page',$data);
+    }
+
+    public function compare()
+    {
+        $data['brand'] = $this->brand->getList(); 
+        return view('home::home.compare',$data);
+    }
+
+    public function appendModel(Request $request)
+    {
+        if($request->ajax()){ 
+            $model = DB::table('vehicle_models')->where('brand_id',$request->brand_id)->pluck("model_name","id")->all();
+            $data = view('home::home.partial.select-home-model-ajax',compact('model'))->render();
+            return response()->json(['options'=>$data]);
+        }
+    }
+    public function appendvariant(Request $request)
+    {
+        if($request->ajax()){
+            $variant = DB::table('model_variants')->where('vehicle_model_id',$request->model_id)->pluck("variant_name","id")->all();
+            $data = view('home::home.partial.select-home-variant-ajax',compact('variant'))->render();
+            return response()->json(['options'=>$data]);
+        }
+    }
+
+    public function compareVehicles(Request $request){
+
+   
+
+        $data['first_vehicle'] = $this->cars->findCar($request->first_brand_id,$request->first_model_id,$request->first_variant_id);
+        $data['second_vehicle'] = $this->cars->findCar($request->second_brand_id,$request->second_model_id,$request->second_variant_id);
+
+        $data['first_vehicle_photo_feature'] = $this->cars->getPhotoFeatures($data['first_vehicle']->id);
+        $data['second_vehicle_photo_feature'] = $this->cars->getPhotoFeatures($data['second_vehicle']->id);
+
+        $data['first_vehicle_photo_gallery'] = $this->cars->getPhotoGallery($data['first_vehicle']->id);
+        $data['second_vehicle_photo_gallery'] = $this->cars->getPhotoGallery($data['second_vehicle']->id);
+
+
+
+        $data['vehicle_spec'] = $this->spec->getAllCarSpec();
+
+        $data['first_vehicle_color'] = $this->cars->getColorByCarId($data['first_vehicle']->id);
+        $data['second_vehicle_color'] = $this->cars->getColorByCarId($data['second_vehicle']->id);
+
+        return view('home::home.compare-detail',$data);
     }
 
 

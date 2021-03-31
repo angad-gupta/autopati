@@ -20,6 +20,8 @@ interface CarInterface
     
     public function findSimilarCar($limit=null,$brand_id,$model_id,$variant_id,$car_id);
    
+    public function findCar($brand_id,$model_id,$variant_id);
+   
     public function find($id);
     
     public function getList();

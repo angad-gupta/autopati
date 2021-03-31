@@ -29,6 +29,11 @@ Route::post('/subscription', ['as' => 'subscription', 'uses' => 'HomeController@
 
 Route::get('/new', ['as' => 'new', 'uses' => 'HomeController@new']);
 
-Route::get('/{slug}', ['as' => 'page', 'uses' => 'HomeController@page']);
+Route::get('/page/{slug}', ['as' => 'page', 'uses' => 'HomeController@page']);
+
+Route::get('/compare', ['as' => 'compare', 'uses' => 'HomeController@compare']);
+Route::post('/compare-vehicles', ['as' => 'compare.vehicles', 'uses' => 'HomeController@compareVehicles']);
+Route::post('home-append-model-ajax', ['as' => 'home-append-model-ajax', 'uses' => 'HomeController@appendModel']);
+Route::post('home-append-variant-ajax', ['as' => 'home-append-variant-ajax', 'uses' => 'HomeController@appendvariant']);
 
 

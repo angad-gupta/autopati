@@ -1,5 +1,6 @@
 @extends('home::layouts.master')
 @section('title')Detail | Autopati @stop 
+@section('breadcrumb'){{optional($car->BrandInfo)->brand_name }} {{ optional($car->ModelInfo)->model_name }} {{ optional($car->VariantInfo)->variant_name }} @stop
 @section('content')
 <div class="page-banner">
     <img src="https://stimg.cardekho.com/pwa/img/bgimg/compare-cars.jpg" alt="">
@@ -136,80 +137,7 @@
                     <h4 class="mb-4"><span>Technical Specification :</span> {{optional($car->BrandInfo)->brand_name }} {{ optional($car->ModelInfo)->model_name }} {{ optional($car->VariantInfo)->variant_name }}</h4>
                 <div class="page-accordian">
                     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                        {{-- <div class="panel panel-default">
-                            <div class="panel-heading" role="tab" id="headingOne">
-                                <h4 class="panel-title">
-                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                        Technical Specifications
-                                    </a>
-                                </h4>
-                            </div>
-                            <div id="collapseOne" class="panel-collapse collapse in show" role="tabpanel" aria-labelledby="headingOne">
-                                <div class="panel-body">
-                                    <table class="table">
-                                        <thead>
-                                        <tr>
-                                            <th scope="col"></th>
-                                            <th scope="col">Daihatsu Sigra</th>
-                                    
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <th scope="row">Engine</th>
-                                            <td>1997 cc, 4 Cylinders Inline, 4 Valves/Cylinder, DOHC</td>
-                                
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Engine Type	</th>
-                                            <td>2.0L I4 mStallion 150 TGDi	</td>
-                                     
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Fuel Type</th>
-                                            <td>Petrol</td>
-                                        
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Max Power (bhp@rpm)	</th>
-                                            <td>150 bhp @ 5000 rpm</td>
-             
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Max Torque (Nm@rpm)</th>
-                                            <td>300 Nm @ 1250 rpm</td>
-                                  
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Mileage (ARAI) (kmpl)</th>
-                                            <td>-</td>
-                                
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Driving Range (Km)</th>
-                                            <td>-</td>
-                                     
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Drivetrain</th>
-                                            <td>4WD / AWD</td>
-                                     
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Transmission</th>
-                                            <td>Manual - 6 Gears</td>
-                                   
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Emission Standard</th>
-                                            <td>BS6</td>
-                                     
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div> --}}
+                      
                         @inject('configuration', '\App\Modules\Configuration\Repositories\ConfigurationRepository')
                         @foreach($car_spec as $key => $spec_val)
                             @php
