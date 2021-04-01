@@ -115,6 +115,26 @@ class HomeController extends Controller
         return view('home::home.list',$data);
     }
 
+    public function searchVehicleBudget(Request $request){
+
+        $budget = $request->budget;
+        $b =explode(" ", $budget);
+        $budget_from = $b[0];
+        $budget_to = $b[1];
+      
+        $data['title'] = $request->budget;
+        $data['vehicles'] = $this->cars->searchVehicleBudget($limit=50,$budget_from, $budget_to);
+        return view('home::home.list',$data);
+    }
+
+    public function searchVehicleModel(Request $request){
+        $car_model = $request->model;
+        $data['title'] = 'Search By Model';
+        $data['vehicles'] = $this->cars->searchVehicleModel($limit=50,$request->model);
+        return view('home::home.list',$data);
+    }
+
+
     public function new(){
         return view('home::home.new');
     }
@@ -149,23 +169,51 @@ class HomeController extends Controller
 
     public function compareVehicles(Request $request){
 
-   
+ 
+        if($request->first_brand_id && $request->first_model_id && $request->first_variant_id){
 
-        $data['first_vehicle'] = $this->cars->findCar($request->first_brand_id,$request->first_model_id,$request->first_variant_id);
-        $data['second_vehicle'] = $this->cars->findCar($request->second_brand_id,$request->second_model_id,$request->second_variant_id);
+            $data['first_vehicle'] = $this->cars->findCar($request->first_brand_id,$request->first_model_id,$request->first_variant_id);
+            if($data['first_vehicle']){
+                $data['first_vehicle_photo_feature'] = $this->cars->getPhotoFeatures($data['first_vehicle']->id);
+                $data['first_vehicle_photo_gallery'] = $this->cars->getPhotoGallery($data['first_vehicle']->id);
+                $data['first_vehicle_color'] = $this->cars->getColorByCarId($data['first_vehicle']->id);
+            }else{
+                $data['first_vehicle_photo_feature'] = null;
+                $data['first_vehicle_photo_gallery'] = null;
+                $data['first_vehicle_color'] = null;
+            }
+        }
+        else{
+            $data['first_vehicle'] = null;
+            $data['first_vehicle_photo_feature'] = null;
+            $data['first_vehicle_photo_gallery'] = null;
+            $data['first_vehicle_color'] = null;
 
-        $data['first_vehicle_photo_feature'] = $this->cars->getPhotoFeatures($data['first_vehicle']->id);
-        $data['second_vehicle_photo_feature'] = $this->cars->getPhotoFeatures($data['second_vehicle']->id);
+        }
+        
 
-        $data['first_vehicle_photo_gallery'] = $this->cars->getPhotoGallery($data['first_vehicle']->id);
-        $data['second_vehicle_photo_gallery'] = $this->cars->getPhotoGallery($data['second_vehicle']->id);
-
-
+        if($request->second_brand_id && $request->second_model_id && $request->second_variant_id){
+          
+            $data['second_vehicle'] = $this->cars->findCar($request->second_brand_id,$request->second_model_id,$request->second_variant_id);
+            if($data['second_vehicle']){
+            $data['second_vehicle_photo_feature'] = $this->cars->getPhotoFeatures($data['second_vehicle']->id);
+            $data['second_vehicle_photo_gallery'] = $this->cars->getPhotoGallery($data['second_vehicle']->id);
+            $data['second_vehicle_color'] = $this->cars->getColorByCarId($data['second_vehicle']->id);
+            }else{
+                $data['second_vehicle_photo_feature'] = null;
+                $data['second_vehicle_photo_gallery'] = null;
+                $data['second_vehicle_color'] = null;
+            }
+            
+        }
+        else{
+            $data['second_vehicle'] = null;
+            $data['second_vehicle_photo_feature'] = null;
+            $data['second_vehicle_photo_gallery'] = null;
+            $data['second_vehicle_color'] = null;
+        }
 
         $data['vehicle_spec'] = $this->spec->getAllCarSpec();
-
-        $data['first_vehicle_color'] = $this->cars->getColorByCarId($data['first_vehicle']->id);
-        $data['second_vehicle_color'] = $this->cars->getColorByCarId($data['second_vehicle']->id);
 
         return view('home::home.compare-detail',$data);
     }

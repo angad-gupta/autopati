@@ -40,5 +40,5 @@
 </body>
 
     @include('home::includes.footer')
-
+    @yield('scripts')
 </html>

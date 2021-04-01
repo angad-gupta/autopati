@@ -94,8 +94,17 @@ class CarRepository implements CarInterface
         }
 
     }
-    
 
+    public function searchVehicleBudget($limit = null,$from,$to){
+        $result =Car::whereBetween('starting_price', [$from, $to])->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
+        return $result; 
+    }
+
+    public function searchVehicleModel($limit = null,$model){
+        $result =Car::where('model_id','=',$model)->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
+        return $result; 
+    }
+    
     public function find($id){
         return Car::find($id);
     }

@@ -72,6 +72,33 @@
     </div>
 </div>
 
+@if(sizeof($photo_feature)>0)
+<div class="container mt-4">
+    <h4>Featured Image</h4>
+   
+    <div class="row">
+        <div class="col-md-12">
+            <div class="owl-carousel owl-theme new-arrival">
+        @foreach($photo_feature as $key => $feature_val)
+        @php
+            $featimage = ($feature_val->feature_image) ? asset($feature_val->file_full_path).'/'.$feature_val->feature_image : asset('admin/image.png');
+            $ipath = asset($feature_val->file_full_path).'/'.$feature_val->feature_image;
+        @endphp
+     
+        <div class="item">
+            <div class="card-img-actions">
+                <a href="{{ $ipath }}" target="_blank"><img class="card-img-top img-fluid" src="{{$featimage}}" alt=""></a>
+            </div>
+        </div>
+       
+        @endforeach
+        </div>
+    </div>
+    </div>
+</div>
+@endif
+
+
 @if(sizeof($photo_gallery)>0)
           
 <div class="compare-image">
@@ -142,13 +169,16 @@
                         @foreach($car_spec as $key => $spec_val)
                             @php
                             $features = $configuration->findAllBySpecId($spec_val->id);
+                       
                             @endphp
                             <div class="panel panel-default">
                                 <div class="panel-heading" role="tab" id="headingTwo">
                                     <h4 class="panel-title">
+                                        @if($features->isNotEmpty())
                                         <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#spec-{{$spec_val->id}}" aria-expanded="false" aria-controls="collapseTwo">
                                             {{$spec_val->spec_title}}
                                         </a>
+                                        @endif
                                     </h4>
                                 </div>
                                 <div id="spec-{{$spec_val->id}}" class="panel-collapse collapse @if($loop->first)collapse show @endif role="tabpanel" aria-labelledby="headingTwo">
@@ -160,15 +190,20 @@
                                                 @php
                                                 $carFeatures = $carSpecification->getFeaturesByCarId($car->id,$spec_val->id,$spec_val->id);
                                                 @endphp
-                                          
+                                           
                                             <tr>
                                                 <th scope="row">{{$spec_val->title}}</th>
                                                 <td>
-                                                @foreach($carFeatures as $key => $car_feat_val)
-                                                    {{optional($car_feat_val->confFeatureInfo)->config_value}} 
-                                                @endforeach
-                                                </td>
+                                                @if($carFeatures->isNotEmpty())
+                                                    @foreach($carFeatures as $key => $car_feat_val)
+                                                        {{optional($car_feat_val->confFeatureInfo)->config_value}} 
+                                                    @endforeach
+                                                @else
+                                                     No Feature Found
+                                                @endif
+                                            </td>
                                             </tr>
+                                      
                                             @endforeach
                                            
                                         

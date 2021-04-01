@@ -17,7 +17,11 @@ interface CarInterface
     public function findBrandVehicle($limit = null,$id);
 
     public function searchVehicle($limit = null,$data);
-    
+
+    public function searchVehicleBudget($limit = null,$from, $to);
+
+    public function searchVehicleModel($limit = null,$model_id);
+
     public function findSimilarCar($limit=null,$brand_id,$model_id,$variant_id,$car_id);
    
     public function findCar($brand_id,$model_id,$variant_id);

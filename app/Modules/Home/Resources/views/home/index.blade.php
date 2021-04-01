@@ -20,30 +20,61 @@
                                 <div class="card-body banner-search-title">
                                     <h6>Find your Car</h6>
                                 </div>
+
+
                                 <div class="card-body">
-                                    <form action="">
+                                   
                                         <div class="mb-3">
                                             <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="budget">
+                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="budget" checked>
                                                 <label class="form-check-label" for="budget">By Budget</label>
                                             </div>
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="radio" name="inlineRadioOptions" id="model">
-                                                <label class="form-check-label" for="model">By Model</label>
+                                                <label class="form-check-label" for="model" >By Model</label>
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <select class="form-control" id="exampleFormControlSelect1">
-                                            <option>Select Budget</option>
-                                            </select>
+                                        <div class="form-group budget-class">
+                                            <form action="{{route('search.budget')}}" method="GET">
+                                                @csrf
+                                                <select class="form-control" name="budget">
+                                                <option>Select Budget From</option>
+                                                <option value="100000 500000">1 Lakh - 10 Lakh</option>
+                                                <option value="1000000 2000000">10 Lakh to 20 Lakh</option>
+                                                <option value="2000000 3000000">20 Lakh to 30 Lakh</option>
+                                                <option value="3000000 4000000">30 Lakh to 40 Lakh</option>
+                                                <option value="4000000 5000000">40 Lakh to 50 Lakh</option>
+                                                <option value="5000000 6000000">50 Lakh to 60 Lakh</option>
+                                                <option value="6000000 7000000">60 Lakh to 70 Lakh</option>
+                                                <option value="7000000 8000000">70 Lakh to 80 Lakh</option>
+                                                <option value="8000000 9000000">80 Lakh to 90 Lakh</option>
+                                                <option value="9000000 10000000">90 Lakh to 1 Crore</option>
+                                                <option value="10000000 20000000">1 Crore to 2 Crore</option>
+                                                <option value="20000000 50000000">2 Crore to 5 Crore</option>
+                                                </select>
+
+                                                <button type="submit" class="btn btn-primary w-100 mt-3">Search</button>
+                                            </form>
+                                           
                                         </div>
-                                        <div class="form-group">
-                                            <select class="form-control" id="exampleFormControlSelect1">
-                                            <option>Select City</option>
-                                            </select>
+
+                                        <div class="form-group model-class" style="display: none">
+                                            @inject('vehicle_model', '\App\Modules\VehicleModel\Repositories\VehicleModelRepository')
+                                            @php
+                                                $vehicle_models = $vehicle_model->findAll($limit=50);
+                                            @endphp
+
+                                            <form action="{{route('search.model')}}" method="GET">
+                                                <select class="form-control" name="model">
+                                                <option>Select Model</option>
+                                                    @foreach($vehicle_models as $vehicle_model)
+                                                        <option value="{{$vehicle_model->id}}">{{$vehicle_model->model_name}} </option>
+                                                     @endforeach
+                                               
+                                                </select>
+                                                <button type="submit" class="btn btn-primary w-100 mt-3">Search</button>
+                                            </form>
                                         </div>
-                                        <button type="submit" class="btn btn-primary w-100">Search</button>
-                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -433,7 +464,26 @@
 </section>
 
 
+
 @endsection
 
+@section('scripts')
+
+<script>
+    $(document).ready(function(){
+    $("input[id='budget']").change(function(){
+        $('.budget-class').show();
+       $('.model-class').hide();
+  
+    });
+
+    $("input[id='model']").change(function(){
+       $('.budget-class').hide();
+       $('.model-class').show();
+  });
+});
+    </script>
+    
+@endsection
 
 

@@ -14,6 +14,8 @@
 Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 
 Route::get('/search', ['as' => 'search', 'uses' => 'HomeController@searchVehicle']);
+Route::get('/search/budget', ['as' => 'search.budget', 'uses' => 'HomeController@searchVehicleBudget']);
+Route::get('/search/model', ['as' => 'search.model', 'uses' => 'HomeController@searchVehicleModel']);
 
 Route::get('/car/all-brand', ['as' => 'list.car-brand', 'uses' => 'HomeController@listCarBrand']);
 Route::get('/bike/all-brand', ['as' => 'list.bike-brand', 'uses' => 'HomeController@listBikeBrand']);
