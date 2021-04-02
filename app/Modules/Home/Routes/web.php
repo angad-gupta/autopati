@@ -31,6 +31,12 @@ Route::post('/subscription', ['as' => 'subscription', 'uses' => 'HomeController@
 
 Route::get('/new', ['as' => 'new', 'uses' => 'HomeController@new']);
 
+Route::get('/service/all', ['as' => 'service.all', 'uses' => 'HomeController@serviceAll']);
+Route::get('/service/{id}', ['as' => 'service', 'uses' => 'HomeController@service']);
+
+Route::get('/news/all', ['as' => 'news.all', 'uses' => 'HomeController@newsAll']);
+Route::get('/news/{id}', ['as' => 'news', 'uses' => 'HomeController@news']);
+
 Route::get('/page/{slug}', ['as' => 'page', 'uses' => 'HomeController@page']);
 
 Route::get('/compare', ['as' => 'compare', 'uses' => 'HomeController@compare']);

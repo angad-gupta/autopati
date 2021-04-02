@@ -2,9 +2,6 @@
 @section('title')Detail | Autopati @stop 
 @section('breadcrumb'){{optional($car->BrandInfo)->brand_name }} {{ optional($car->ModelInfo)->model_name }} {{ optional($car->VariantInfo)->variant_name }} @stop
 @section('content')
-<div class="page-banner">
-    <img src="https://stimg.cardekho.com/pwa/img/bgimg/compare-cars.jpg" alt="">
-</div>
 
 @include('home::home.partial.breadcrumb')
 
@@ -67,6 +64,70 @@
                 <h3> {{optional($car->BrandInfo)->brand_name }} {{ optional($car->ModelInfo)->model_name }} {{ optional($car->VariantInfo)->variant_name }}</h3>
                 <p>{!! $car->description !!}
                 </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="compare-info">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                    <h4 class="mb-4"><span>Technical Specification :</span> {{optional($car->BrandInfo)->brand_name }} {{ optional($car->ModelInfo)->model_name }} {{ optional($car->VariantInfo)->variant_name }}</h4>
+                <div class="page-accordian">
+                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                      
+                        @inject('configuration', '\App\Modules\Configuration\Repositories\ConfigurationRepository')
+                        @foreach($car_spec as $key => $spec_val)
+                            @php
+                            $features = $configuration->findAllBySpecId($spec_val->id);
+                       
+                            @endphp
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="headingTwo">
+                                    <h4 class="panel-title">
+                                        @if($features->isNotEmpty())
+                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#spec-{{$spec_val->id}}" aria-expanded="false" aria-controls="collapseTwo">
+                                            {{$spec_val->spec_title}}
+                                        </a>
+                                        @endif
+                                    </h4>
+                                </div>
+                                <div id="spec-{{$spec_val->id}}" class="panel-collapse collapse @if($loop->first)collapse show @endif role="tabpanel" aria-labelledby="headingTwo">
+                                    <div class="panel-body">
+                                        <table class="table">
+                                            <tbody>
+                                                @inject('carSpecification', '\App\Modules\Cars\Repositories\CarRepository')
+                                                @foreach($features as $key => $spec_val)
+                                                @php
+                                                $carFeatures = $carSpecification->getFeaturesByCarId($car->id,$spec_val->id,$spec_val->id);
+                                                @endphp
+                                           
+                                            <tr>
+                                                <th scope="row">{{$spec_val->title}}</th>
+                                                <td>
+                                                @if($carFeatures->isNotEmpty())
+                                                    @foreach($carFeatures as $key => $car_feat_val)
+                                                        {{optional($car_feat_val->confFeatureInfo)->config_value}} 
+                                                    @endforeach
+                                                @else
+                                                     No Feature Found
+                                                @endif
+                                            </td>
+                                            </tr>
+                                      
+                                            @endforeach
+                                           
+                                        
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                  
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -157,69 +218,7 @@
 @endif
 
 
-<div class="compare-info">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                    <h4 class="mb-4"><span>Technical Specification :</span> {{optional($car->BrandInfo)->brand_name }} {{ optional($car->ModelInfo)->model_name }} {{ optional($car->VariantInfo)->variant_name }}</h4>
-                <div class="page-accordian">
-                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                      
-                        @inject('configuration', '\App\Modules\Configuration\Repositories\ConfigurationRepository')
-                        @foreach($car_spec as $key => $spec_val)
-                            @php
-                            $features = $configuration->findAllBySpecId($spec_val->id);
-                       
-                            @endphp
-                            <div class="panel panel-default">
-                                <div class="panel-heading" role="tab" id="headingTwo">
-                                    <h4 class="panel-title">
-                                        @if($features->isNotEmpty())
-                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#spec-{{$spec_val->id}}" aria-expanded="false" aria-controls="collapseTwo">
-                                            {{$spec_val->spec_title}}
-                                        </a>
-                                        @endif
-                                    </h4>
-                                </div>
-                                <div id="spec-{{$spec_val->id}}" class="panel-collapse collapse @if($loop->first)collapse show @endif role="tabpanel" aria-labelledby="headingTwo">
-                                    <div class="panel-body">
-                                        <table class="table">
-                                            <tbody>
-                                                @inject('carSpecification', '\App\Modules\Cars\Repositories\CarRepository')
-                                                @foreach($features as $key => $spec_val)
-                                                @php
-                                                $carFeatures = $carSpecification->getFeaturesByCarId($car->id,$spec_val->id,$spec_val->id);
-                                                @endphp
-                                           
-                                            <tr>
-                                                <th scope="row">{{$spec_val->title}}</th>
-                                                <td>
-                                                @if($carFeatures->isNotEmpty())
-                                                    @foreach($carFeatures as $key => $car_feat_val)
-                                                        {{optional($car_feat_val->confFeatureInfo)->config_value}} 
-                                                    @endforeach
-                                                @else
-                                                     No Feature Found
-                                                @endif
-                                            </td>
-                                            </tr>
-                                      
-                                            @endforeach
-                                           
-                                        
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
-                  
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
 
 
 {{-- <section class="ecm-features home-tabs ecm-new bg-grey pt-4 pb-4">

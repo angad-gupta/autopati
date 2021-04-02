@@ -16,7 +16,7 @@
             
             @foreach($brands as $brand)
             <div class="col-md-2">
-                <a href="category.php" class="brand-item">
+                <a href="{{route('list.brand.vehicles',$brand->id)}}" class="brand-item">
                     <img src="{{($brand->brand_logo) ? asset($brand->file_full_path).'/'.$brand->brand_logo : asset('admin/default.png')}}" alt="{{$brand->brand_name}}">
                     <h5>{{$brand->brand_name}}</h5>
                 </a>

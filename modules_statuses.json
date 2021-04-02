@@ -21,5 +21,6 @@
     "ServiceManagement": true,
     "Home": true,
     "Subscription": true,
-    "Page": true
+    "Page": true,
+    "SearchLog": true
 }

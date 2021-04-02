@@ -12,6 +12,12 @@ use App\Modules\Spec\Repositories\SpecInterface;
 use App\Modules\Subscription\Repositories\SubscriptionInterface;
 use App\Modules\Brand\Repositories\BrandInterface;
 use App\Modules\Page\Repositories\PageInterface;
+use App\Modules\Banner\Repositories\BannerInterface;
+use App\Modules\ServiceCategory\Repositories\ServiceCategoryInterface;
+use App\Modules\SearchLog\Repositories\SearchLogInterface;
+use App\Modules\VehicleModel\Repositories\VehicleModelInterface;
+use App\Modules\ServiceManagement\Repositories\ServiceManagementInterface;
+use App\Modules\News\Repositories\NewsInterface;
 use Carbon\Carbon;
 
 class HomeController extends Controller
@@ -22,14 +28,29 @@ class HomeController extends Controller
     protected $subscription;
     protected $brand;
     protected $page;
+    protected $banner;
+    protected $service_category;
+    protected $search_log;
+    protected $vehicle_model;
+    protected $service_management;
+    protected $news;
     
-    public function __construct(CarInterface $cars, SpecInterface $spec, SubscriptionInterface $subscription,BrandInterface $brand, PageInterface $page) 
+    public function __construct(CarInterface $cars, SpecInterface $spec, SubscriptionInterface $subscription,
+    BrandInterface $brand, PageInterface $page, BannerInterface $banner,ServiceCategoryInterface $service_category,
+    SearchLogInterface $search_log, VehicleModelInterface $vehicle_model, ServiceManagementInterface $service_management,
+    NewsInterface $news) 
     {
         $this->cars = $cars;
         $this->spec = $spec;
         $this->subscription = $subscription;
         $this->brand = $brand;
         $this->page = $page;
+        $this->banner = $banner;
+        $this->service_category = $service_category;
+        $this->search_log = $search_log;
+        $this->vehicle_model = $vehicle_model;
+        $this->service_management = $service_management;
+        $this->news = $news;
     }
 
     /**
@@ -38,7 +59,16 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home::home.index');
+        $data['header_banners'] = $this->banner->findAllActiveHeaderBanner($limit=50);
+        $data['deal_of_the_months'] = $this->cars->findDealOfMonth($limit=12);
+        $data['car_brands'] = $this->brand->findCarType($limit=12);
+        $data['bike_brands'] = $this->brand->findBikeType($limit=12);
+        $data['service_categories'] = $this->service_category->findActiveServiceCategory($limit=12);
+        $data['most_searched'] = $this->cars->findMostSearched($limit=12,$status=['1']);
+        $data['luxury_banners'] = $this->banner->findAllActiveLuxuryBanner($limit=50);
+        $data['luxuary_cars'] = $this->cars->findLuxury();
+        $data['news'] = $this->news->findAllActiveNews();
+        return view('home::home.index',$data);
     }
 
     public function carDetail($car_id)
@@ -110,8 +140,15 @@ class HomeController extends Controller
     }
 
     public function searchVehicle(Request $request){
-        $data['title'] = $request->search;
-        $data['vehicles'] = $this->cars->searchVehicle($limit=50,$request->search);
+
+        $q['keyword'] = $request->keyword;
+        $q['date'] = $request->date;
+        if($request->keyword != null){
+            $this->search_log->save($q);
+        }
+        $data['title'] = $request->keyword;
+        $data['vehicles'] = $this->cars->searchVehicle($limit=50,$request->keyword);
+        
         return view('home::home.list',$data);
     }
 
@@ -122,14 +159,15 @@ class HomeController extends Controller
         $budget_from = $b[0];
         $budget_to = $b[1];
       
-        $data['title'] = $request->budget;
+        $data['title'] =  'Rs. '.number_format($budget_from).' - '.' Rs. '.number_format($budget_to).' Budget';
         $data['vehicles'] = $this->cars->searchVehicleBudget($limit=50,$budget_from, $budget_to);
         return view('home::home.list',$data);
     }
 
     public function searchVehicleModel(Request $request){
         $car_model = $request->model;
-        $data['title'] = 'Search By Model';
+        $find_model = $this->vehicle_model->find($car_model);
+        $data['title'] = $find_model->model_name;
         $data['vehicles'] = $this->cars->searchVehicleModel($limit=50,$request->model);
         return view('home::home.list',$data);
     }
@@ -216,6 +254,30 @@ class HomeController extends Controller
         $data['vehicle_spec'] = $this->spec->getAllCarSpec();
 
         return view('home::home.compare-detail',$data);
+    }
+
+    public function service($id)
+    {     
+        $data['service'] = $this->service_management->find($id);
+        return view('home::home.service',$data);
+    }
+
+    public function serviceAll()
+    {     
+        $data['service_categories'] = $this->service_category->findActiveServiceCategory($limit=12);
+        return view('home::home.list-services',$data);
+    }
+
+    public function news($id)
+    {   
+        $data['news'] = $this->news->find($id);
+        return view('home::home.news',$data);
+    }
+
+    public function newsAll()
+    {     
+        $data['news'] = $this->news->findAllActiveNews($limit=50);
+        return view('home::home.list-news',$data);
     }
 
 

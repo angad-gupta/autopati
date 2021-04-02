@@ -206,29 +206,30 @@
                     </nav>
                 </div>
                 <div class="col-md-4">
+                    @php
+                        $current_date = Carbon\Carbon::now()->format('Y-m-d H:i:s');
+                    @endphp
                     <div class="d-flex align-items-center justify-content-center justify-content-md-end mt-3 mt-md-0">
                         <form action="{{route('search')}}" class="ap-search">
-                            <div class="search-box">
-                                <input type="text" name="search" id="" placeholder="Search...">
-                                <i class="fa fa-search"></i>
+                            <input type="text" name="date" id="" value="{{$current_date}}" hidden>
+                            <div class="search-box d-flex">
+                                <input type="text" name="keyword" id="" placeholder="Search...">
+                                <button type="submit" class="btn btn-primary" style="padding:8px 18px;border-radius: 0px;"><i class="fa fa-search text-white"></i></button>
                             </div>
-                            {{-- <div class="search-box-container">
+                            <div class="search-box-container">
                                 <h6>Trending Searches</h6>
+                                @inject('search', '\App\Modules\SearchLog\Repositories\SearchLogRepository')
+                                @php
+                                    $most_searched = $search->most_searched();
+                                @endphp
                                 <ul class="list-unstyled mb-0">
-                                    <li><a href="">Mg Hector</a></li>
-                                    <li><a href="">Toyota Fortuner</a></li>
-                                    <li><a href="">Kia Sonet</a></li>
-                                    <li><a href="">Mg Hector</a></li>
-                                    <li><a href="">Toyota Fortuner</a></li>
-                                    <li><a href="">Kia Sonet</a></li>
-                                    <li><a href="">Mg Hector</a></li>
-                                    <li><a href="">Toyota Fortuner</a></li>
-                                    <li><a href="">Kia Sonet</a></li>
-                                    <li><a href="">Mg Hector</a></li>
-                                    <li><a href="">Toyota Fortuner</a></li>
-                                    <li><a href="">Kia Sonet</a></li>
+                                    @foreach($most_searched as $ms)
+                                        <li><a href="{{route('search')}}?date={{$current_date}}&keyword={{$ms->keyword}}">{{$ms->keyword}}</a></li>
+                                    @endforeach
+                                 
                                 </ul>
-                            </div> --}}
+                            </div>
+                  
                         </form>
                         <ul class="list-unstyled mb-0 ap-header-login">
                             <li><a href="#" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-user"></i></a></li>

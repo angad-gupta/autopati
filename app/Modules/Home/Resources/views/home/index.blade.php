@@ -4,13 +4,8 @@
 @section('content')
 <section class="ecm-banner">
     <div class="owl-carousel owl-theme banner-slider">
-        @inject('banner', '\App\Modules\Banner\Repositories\BannerRepository')
-        @php
-            $header_banners = $banner->findAllActiveHeaderBanner($limit=50);
-        @endphp
 
         @foreach($header_banners as $header_banner)
-
         <div class="item">
             <div class="banner-block" style="background-image: url('{{ ($header_banner->banner_image) ? asset($header_banner->file_full_path).'/'.$header_banner->banner_image : asset('admin/default.png' )}}');">
                 <div class="container">
@@ -20,10 +15,7 @@
                                 <div class="card-body banner-search-title">
                                     <h6>Find your Car</h6>
                                 </div>
-
-
                                 <div class="card-body">
-                                   
                                         <div class="mb-3">
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="radio" name="inlineRadioOptions" id="budget" checked>
@@ -97,10 +89,6 @@
             </div>
         </div>
         <div class="owl-carousel owl-theme new-arrival">
-            @inject('dealofmonth', '\App\Modules\Cars\Repositories\CarRepository')
-            @php
-                $deal_of_the_months = $dealofmonth->findDealOfMonth($limit=12);
-            @endphp
             @foreach($deal_of_the_months as $deal_of_the_month) 
             <div class="item">
                 <a href="{{route('car.detail',$deal_of_the_month->id)}}" class="ecm-new__item">
@@ -126,10 +114,6 @@
             </div>
         </div>
         <div class="owl-carousel owl-theme brand discount-slider mt-4">
-            @inject('get_car_brand', '\App\Modules\Brand\Repositories\BrandRepository')
-            @php
-                $car_brands = $get_car_brand->findCarType($limit=12);
-            @endphp
             @foreach($car_brands as $car_brand)
             <div class="item">
                 <a href="{{route('list.brand.vehicles',$car_brand->id)}}" class="brand-item">
@@ -153,11 +137,6 @@
             </div>
         </div>
         <div class="owl-carousel owl-theme brand discount-slider mt-4">
-            @inject('get_bike_brand', '\App\Modules\Brand\Repositories\BrandRepository')
-            @php
-                $bike_brands = $get_bike_brand->findBikeType($limit=12);
-            @endphp
-
             @foreach($bike_brands as $bike_brand)
                 <div class="item">
                     <a href="{{route('list.brand.vehicles',$bike_brand->id)}}" class="brand-item">
@@ -177,17 +156,13 @@
             <div class="col-sm-12">
                 <div class="ecm-features__title d-flex align-items-center justify-content-between">
                     <h1><span>Available</span> Services</h1>
-                    <a href="product-list.php" class="see-all text-right">View all <i class="fa fa-angle-right"></i></a>
+                    <a href="{{route('service.all')}}" class="see-all text-right">View all <i class="fa fa-angle-right"></i></a>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-12">
-                @inject('service_category', '\App\Modules\ServiceCategory\Repositories\ServiceCategoryRepository')
-                @php
-                    $service_categories = $service_category->findActiveServiceCategory($limit=12);
-                @endphp
-
+            
                 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                     @foreach($service_categories as $service_category)
                     <li class="nav-item">
@@ -207,9 +182,9 @@
                             @foreach($services as $service)
                             <div class="item">
                                 <div class="services_item">
-                                    <img src="{{($service->cover_image) ? asset($service->file_full_path).'/'.$service->cover_image : asset('admin/default.png' )}}" alt="">
+                                    <a href="{{route('service',$service->id)}}"><img src="{{($service->cover_image) ? asset($service->file_full_path).'/'.$service->cover_image : asset('admin/default.png' )}}" alt=""></a>
                                     <div class="services_item_desc">
-                                        <h6><a href="">{{$service->title}}</a></h6>
+                                        <h6><a href="{{route('service',$service->id)}}">{{$service->title}}</a></h6>
                                         <span><i class="fa fa-map-marker"></i> &nbsp; {{$service->location}}</span>
                                         {{-- <p class="mb-0">Aenean auctor wisi et urna. Aliquam erat volutpat. Duis ac turpis. Integer rutrum ante</p> --}}
                                     </div>
@@ -239,11 +214,7 @@
         </div>
         <div class="row">
             <div class="col-12">
-                @inject('most_searched', '\App\Modules\Cars\Repositories\CarRepository')
-                @php
-                    $most_searched = $most_searched->findMostSearched($limit=12,$status=['1']);
-                @endphp
-
+            
                 <div class="owl-carousel owl-theme new-featured mt-3">
                     @foreach($most_searched as $most_search)
                     <div class="item">
@@ -323,10 +294,6 @@
         </div>
     </div>
     <div class="owl-carousel owl-theme luxury-block stock-clearance">
-        @inject('banner', '\App\Modules\Banner\Repositories\BannerRepository')
-        @php
-            $luxury_banners = $banner->findAllActiveLuxuryBanner($limit=50);
-        @endphp
         @foreach($luxury_banners as $luxury_banners)
             <div class="item">
                 <div class="luxury-slider" style="background-image: url('{{ ($luxury_banners->banner_image) ? asset($luxury_banners->file_full_path).'/'.$luxury_banners->banner_image : asset('admin/default.png' )}}">
@@ -344,13 +311,10 @@
     </div>
     <div class="container">
         <div class="row">
-            @inject('luxury', '\App\Modules\Cars\Repositories\CarRepository')
-            @php
-                $luxuaries = $luxury->findLuxury();
-            @endphp
-            @foreach($luxuaries as $luxury)
+         
+            @foreach($luxuary_cars as $luxury)
             <div class="col-md-3">
-                <a href="category.php" class="ecm-luxury__item">
+                <a href="{{route('car.detail',$luxury->id)}}" class="ecm-luxury__item">
                     <span class="ecm-luxury__img">
                         <img src="{{ ($luxury->car_image) ? asset($luxury->file_full_path).'/'.$luxury->car_image : asset('admin/default.png' )}}" alt="{{$luxury->ModelInfo->model_name}} {{$luxury->VariantInfo->variant_name}}">
                     </span>
@@ -385,7 +349,7 @@
             
                     @foreach($upcoming_cars as $up_car)
                     <div class="item">
-                        <a href="category.php" class="ecm-luxury__item">
+                        <a href="{{route('car.detail',$up_car->id)}}" class="ecm-luxury__item">
                             <span class="ecm-luxury__img">
                                 <img src="{{($up_car->car_image) ? asset($up_car->file_full_path).'/'.$up_car->car_image : asset('admin/default.png' )}}" alt="">
                             </span>
@@ -406,59 +370,32 @@
             <div class="col-sm-12">
                 <div class="ecm-features__title d-flex align-items-center justify-content-between">
                     <h1><span>Latest</span> News/Blogs</h1>
-                    <a href="product-list.php" class="see-all text-right">View all <i class="fa fa-angle-right"></i></a>
+                    <a href="{{route('news.all')}}" class="see-all text-right">View all <i class="fa fa-angle-right"></i></a>
                 </div>
             </div>
         </div>
         <div class="row">
+            @foreach($news as $new)
             <div class="col-md-3">
-                <a href="category.php" class="ecm-luxury__item">
+                <a href="{{route('news',$new->id)}}" class="ecm-luxury__item">
                     <span class="ecm-luxury__img">
-                        <img src="home/img/blog/Mask.png" alt="">
+                        @php 
+                        if($new->news_image){
+                            $imagePath = asset($new->file_full_path).'/'.$new->news_image;
+                        }else{
+                            $imagePath = asset('admin/vehicle.jpeg');
+                        }
+                    @endphp
+                        <img src="{{$imagePath}}" alt="">
                     </span>
                     <div class="ecm-luxury__desc">
-                        <span><i class="fa fa-calendar"></i> &nbsp;October 28, 2020</span>
-                        <h5>Mercedez Benz</h5>
-                        <p>Aenean auctor wisi et urna. Aliquam erat volutpat. Duis ac turpis.</p>
+                        <span><i class="fa fa-calendar"></i> &nbsp;{{$new->date}}</span>
+                        <h5>{{$new->title}}</h5>
+                        <p>{!!str_limit($new->content,40)!!}</p>
                     </div>
                 </a>
             </div>
-            <div class="col-md-3">
-                <a href="category.php" class="ecm-luxury__item">
-                    <span class="ecm-luxury__img">
-                        <img src="home/img/blog/Mask-1.png" alt="">
-                    </span>
-                    <div class="ecm-luxury__desc">
-                        <span><i class="fa fa-calendar"></i> &nbsp;October 28, 2020</span>
-                        <h5>Mercedez Benz</h5>
-                        <p>Aenean auctor wisi et urna. Aliquam erat volutpat. Duis ac turpis.</p>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-3">
-                <a href="category.php" class="ecm-luxury__item">
-                    <span class="ecm-luxury__img">
-                        <img src="home/img/blog/Mask-2.png" alt="">
-                    </span>
-                    <div class="ecm-luxury__desc">
-                        <span><i class="fa fa-calendar"></i> &nbsp;October 28, 2020</span>
-                        <h5>Mercedez Benz</h5>
-                        <p>Aenean auctor wisi et urna. Aliquam erat volutpat. Duis ac turpis.</p>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-3">
-                <a href="category.php" class="ecm-luxury__item">
-                    <span class="ecm-luxury__img">
-                        <img src="home/img/blog/Mask-3.png" alt="">
-                    </span>
-                    <div class="ecm-luxury__desc">
-                        <span><i class="fa fa-calendar"></i> &nbsp;October 28, 2020</span>
-                        <h5>Mercedez Benz</h5>
-                        <p>Aenean auctor wisi et urna. Aliquam erat volutpat. Duis ac turpis.</p>
-                    </div>
-                </a>
-            </div>
+            @endforeach
         </div>
     </div>
 </section>

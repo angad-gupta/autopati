@@ -2,9 +2,6 @@
 @section('title')List | Autopati @stop 
 @section('content')
 
-<div class="page-banner">
-    <img src="https://stimg.cardekho.com/pwa/img/bgimg/compare-cars.jpg" alt="">
-</div>
 
 <section class="ecm-features ecm-new pb-0">
     <div class="container">
