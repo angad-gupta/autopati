@@ -186,7 +186,7 @@
                                     <div class="services_item_desc">
                                         <h6><a href="{{route('service',$service->id)}}">{{$service->title}}</a></h6>
                                         <span><i class="fa fa-map-marker"></i> &nbsp; {{$service->location}}</span>
-                                        {{-- <p class="mb-0">Aenean auctor wisi et urna. Aliquam erat volutpat. Duis ac turpis. Integer rutrum ante</p> --}}
+                                      
                                     </div>
                                 </div>
                             </div>
@@ -219,10 +219,10 @@
                     @foreach($most_searched as $most_search)
                     <div class="item">
                         <div class="services_item">
-                            <img src="{{($most_search->car_image) ? asset($most_search->file_full_path).'/'.$most_search->car_image : asset('admin/default.png')}}" alt="">
+                            <a href="{{route('car.detail',$most_search->id)}}"><img src="{{($most_search->car_image) ? asset($most_search->file_full_path).'/'.$most_search->car_image : asset('admin/default.png')}}" alt=""></a>
                             <div class="services_item_desc">
                                 <h6><a href="{{route('car.detail',$most_search->id)}}">{{optional($most_search->BrandInfo)->brand_name }} {{ optional($most_search->ModelInfo)->model_name }}</a></h6>
-                                <p class="mb-0">Starting Rs {{$most_search->starting_price}}</p>
+                                <p class="mb-0">Starting Rs {{number_format($most_search->starting_price)}}</p>
                                 <div class="d-flex justify-content-end">
                                     <a href="{{route('car.detail',$most_search->id)}}" class="btn btn-outline-warning">View Detail</a>
                                 </div>
@@ -300,7 +300,7 @@
                     <div class="position-relative">
                         <h4>Checkout Luxury car</h4>
                         <p>{{$luxury_banners->short_content}}</p>
-                        <a href="{{$luxury_banners->banner_link}}" class="btn btn-light">
+                        <a href="{{route('list.luxury-car')}}" class="btn btn-light">
                             View All
                         </a>
                     </div>

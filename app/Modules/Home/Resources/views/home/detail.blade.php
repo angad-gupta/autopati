@@ -39,6 +39,7 @@
                             <div class="mt-auto mb-auto ml-auto mr-auto">
                                 <h3 class="text-center" style="color: #e53012"><q>{{$car->short_quote}}</q></h3>
                                 <h6 class="text-center" style="color: gray;">{{$car->short_content}} </h6>
+                                <h2 class="text-center" >Rs. {{number_format($car->starting_price)}} </h2>
 
                                 @php
                                     $current_date = Carbon\Carbon::now()->format('Y-m-d');
@@ -79,10 +80,13 @@
                       
                         @inject('configuration', '\App\Modules\Configuration\Repositories\ConfigurationRepository')
                         @foreach($car_spec as $key => $spec_val)
+                        
                             @php
                             $features = $configuration->findAllBySpecId($spec_val->id);
-                       
+                            $config_count = $configuration->countBySpecId($spec_val->id);
                             @endphp
+                            
+                            @if($config_count)
                             <div class="panel panel-default">
                                 <div class="panel-heading" role="tab" id="headingTwo">
                                     <h4 class="panel-title">
@@ -102,28 +106,28 @@
                                                 @php
                                                 $carFeatures = $carSpecification->getFeaturesByCarId($car->id,$spec_val->id,$spec_val->id);
                                                 @endphp
-                                           
-                                            <tr>
-                                                <th scope="row">{{$spec_val->title}}</th>
-                                                <td>
-                                                @if($carFeatures->isNotEmpty())
-                                                    @foreach($carFeatures as $key => $car_feat_val)
-                                                        {{optional($car_feat_val->confFeatureInfo)->config_value}} 
-                                                    @endforeach
-                                                @else
-                                                     No Feature Found
-                                                @endif
-                                            </td>
-                                            </tr>
-                                      
-                                            @endforeach
-                                           
+                                         
+                                                <tr>
+                                                    <th scope="row">{{$spec_val->title}}</th>
+                                                    <td>
+                                                        @if($carFeatures->isNotEmpty())
+                                                            @foreach($carFeatures as $key => $car_feat_val)
+                                                                {{optional($car_feat_val->confFeatureInfo)->config_value}} 
+                                                            @endforeach
+                                                        @else
+                                                            -
+                                                        @endif
+                                                    </td>
+                                                </tr>
+                                            
+                                                @endforeach
                                         
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
                             </div>
+                            @endif
                         @endforeach
                   
                     </div>
@@ -319,7 +323,7 @@
                             <span>{{optional($similar_car->BrandInfo)->brand_name }} </span>
                             <h6>{{ optional($similar_car->ModelInfo)->model_name }} {{ optional($similar_car->VariantInfo)->variant_name }} </h6>
       
-                            <h5>Rs.{{$similar_car->starting_price}}</h5>
+                            <h5>Rs.{{number_format($similar_car->starting_price)}}</h5>
                         </a>
                     </div>
                     @endforeach

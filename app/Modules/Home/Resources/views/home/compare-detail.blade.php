@@ -137,23 +137,25 @@
                         @endif
 
                 <div class="page-accordian">
+                   
                     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                     
+                      
                         @inject('configuration', '\App\Modules\Configuration\Repositories\ConfigurationRepository')
                         @foreach($vehicle_spec as $key => $spec_val)
-                            @php
-                            $features = $configuration->findAllBySpecId($spec_val->id);
-                            @endphp
 
+                            @php
+                            // dd($spec_val->configValues);
+                            $features = $configuration->findAllBySpecId($spec_val->id);
+                            $config_count = $configuration->countBySpecId($spec_val->id);
+                            // dd($spec_val->configValues);
+                            @endphp
+                            @if($config_count)
                             <div class="panel panel-default">
                                 <div class="panel-heading" role="tab" id="headingTwo">
                                     <h4 class="panel-title">
-                                        @if($features->isNotEmpty())
                                         <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#spec-{{$spec_val->id}}" aria-expanded="false" aria-controls="collapseTwo">
                                             {{$spec_val->spec_title}}
                                         </a>
-                                        @endif
-                        
                                     </h4>
                                 </div>
                                 <div id="spec-{{$spec_val->id}}" class="panel-collapse collapse @if($loop->first)collapse show @endif role="tabpanel" aria-labelledby="headingTwo">
@@ -163,6 +165,7 @@
                                                
                                                 @inject('carSpecification', '\App\Modules\Cars\Repositories\CarRepository')
                                                 @foreach($features as $key => $spec_val)
+                                             
                                                 <tr>
                                                     <th scope="row" style="font-size:1rem;">{{$spec_val->title}}</th>
                                                     <td style="font-size:1rem;font-size: 1rem;font-weight: 400;line-height: 1.5;">
@@ -170,9 +173,15 @@
                                                             @php
                                                                 $first_vehicle_features = $carSpecification->getFeaturesByCarId($first_vehicle->id,$spec_val->id,$spec_val->id);
                                                             @endphp
+                                                             @if(count($first_vehicle_features) > 0 )
                                                             @foreach($first_vehicle_features as $key => $first_vehicle_feature_val)
+                                                           
                                                                 {{optional($first_vehicle_feature_val->confFeatureInfo)->config_value}} 
+                                                              
                                                             @endforeach
+                                                            @else
+                                                                <p> - </p>
+                                                            @endif
                                                         @else
                                                             {{$empty_feature}}
                                                         @endif
@@ -182,22 +191,27 @@
                                                             @php
                                                                 $second_vehicle_features = $carSpecification->getFeaturesByCarId($second_vehicle->id,$spec_val->id,$spec_val->id);
                                                             @endphp
-                                                            @foreach($second_vehicle_features as $key => $second_vehicle_feature_val)
-                                                                {{optional($second_vehicle_feature_val->confFeatureInfo)->config_value}} 
-                                                            @endforeach
+                                                            @if(count($second_vehicle_features) > 0 )
+                                                                @foreach($second_vehicle_features as $key => $second_vehicle_feature_val)
+                                                                    {{optional($second_vehicle_feature_val->confFeatureInfo)->config_value}} 
+                                                                @endforeach
+                                                            @else
+                                                            <p> - </p>
+                                                            @endif
                                                         @else
                                                             {{$empty_feature}}
                                                         @endif
                                                         
                                                     </td>
                                                 </tr>
+                                             
                                             @endforeach
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
                             </div>
-                       
+                            @endif
                         @endforeach
                    
                     </div>

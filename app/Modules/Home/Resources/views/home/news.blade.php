@@ -28,7 +28,8 @@
             <div class="row">
                 <div class="col-12 mt-3">
                     <p>{!! $news->sub_content !!}</p>
-                    <p>{!! $news->description !!}</p>
+                    <p>{!! $news->content !!}</p>
+                  
                 </div>
             </div>
         </div>

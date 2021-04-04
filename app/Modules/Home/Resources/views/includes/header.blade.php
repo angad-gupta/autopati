@@ -22,33 +22,37 @@
                                         <div class="dropdown">
                                             <div class="row">
                                                 <div class="col-sm-12 col-md-12 col-lg-3">
-                                                    <a href="#" class="dropdown-sponsored d-block" title="MG Hector">
-                                                        <img src="img/cars/Mask.png" alt="">
+                                                    @inject('popular', '\App\Modules\Cars\Repositories\CarRepository')
+                                                    @php
+                                                        $popular_car = $popular->findPopularCar()->first();
+                                                    @endphp
+                                                    <a href="{{route('car.detail',$popular_car->id)}}" class="dropdown-sponsored d-block" title="">
+                                                        <img src="{{($popular_car->car_image) ? asset($popular_car->file_full_path).'/'.$popular_car->car_image : asset('admin/default.png')}}" alt="">
                                                         <div class="dropdown-sponsored__desc">
-                                                            <h6 class="mb-0">MG Hector</h6>
-                                                            <p class="small mb-0">Know More</p>
+                                                            <h6 class="mb-0">{{optional($popular_car->BrandInfo)->brand_name }} {{ optional($popular_car->ModelInfo)->model_name }}</h6>
+                                                            <a href="{{route('car.detail',$popular_car->id)}}" class="small mb-0 text-primary">Know More</a>
                                                         </div>
                                                     </a>
                                                 </div>
                                                 <div class="col-sm-12 col-md-12 col-lg-3">
                                                     <ul class="list-unstyled">
-                                                        <li><a href="new.php">Search New Cars</a></li>
-                                                        <li><a href="latest-cars.php">Latest Cars</a></li>
-                                                        <li><a href="popular-cars.php">Most Popular Cars</a></li>
-                                                        <li><a href="latest-cars.php">Electric Cars</a></li>
+                                                        <li><a href="/">Search New Cars</a></li>
+                                                        <li><a href="{{route('list.latest-car')}}">Latest Cars</a></li>
+                                                        <li><a href="{{route('list.most-searched-car')}}">Most Popular Cars</a></li>
+                                                        <li><a href="{{route('list.electric-car')}}">Electric Cars</a></li>
                                                     </ul>
                                                 </div>
 
                                                 <div class="col-sm-12 col-md-12 col-lg-3">
                                                     <ul class="list-unstyled">
-                                                        <li><a href="suggest-me.php">Suggest me a Car</a></li>
-                                                        <li><a href="compare.php">Compare Cars</a></li>
+                                                        <li><a href="/">Suggest me a Car</a></li>
+                                                        <li><a href="{{route('compare')}}">Compare Cars</a></li>
                                                     </ul>
                                                 </div>
                                             </div>
                                         </div>
                                     </li>
-                                    <li class="nav-item">
+                                    {{-- <li class="nav-item">
                                         <a class="nav-link" href="">New Bikes</a>
                                         <div class="dropdown">
                                             <div class="row">
@@ -78,72 +82,35 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </li>
+                                    </li> --}}
                                     <li class="nav-item">
                                         <a class="nav-link" href="">Brands</a>
+                                        @inject('brands', '\App\Modules\Brand\Repositories\BrandRepository')
+                                        @php
+                                            $all_brands = $brands->findAll($limit=50);
+                                        @endphp
                                         <div class="dropdown">
                                             <div class="row">
-                                                <div class="col-md-3 col-lg-2">
-                                                    <a href="category.php" class="brand-menu">
-                                                        <img src="img/brand/Bitmap.png" alt="">
-                                                        <h5>Maruti Suzuki</h5>
-                                                    </a>
-                                                </div>
-                                                <div class="col-md-3 col-lg-2">
-                                                    <a href="category.php" class="brand-menu">
-                                                        <img src="img/brand/Bitmap-1.png" alt="">
-                                                        <h5>Hyundai</h5>
-                                                    </a>
-                                                </div>
-                                                <div class="col-md-3 col-lg-2">
-                                                    <a href="category.php" class="brand-menu">
-                                                        <img src="img/brand/Bitmap-2.png" alt="">
-                                                        <h5>Tata</h5>
-                                                    </a>
-                                                </div>
-                                                <div class="col-md-3 col-lg-2">
-                                                    <a href="category.php" class="brand-menu">
-                                                        <img src="img/brand/Bitmap-3.png" alt="">
-                                                        <h5>Ford</h5>
-                                                    </a>
-                                                </div>
-                                                <div class="col-md-3 col-lg-2">
-                                                    <a href="category.php" class="brand-menu">
-                                                        <img src="img/brand/Bitmap-4.png" alt="">
-                                                        <h5>Honda</h5>
-                                                    </a>
-                                                </div>
-                                                <div class="col-md-3 col-lg-2">
-                                                    <a href="category.php" class="brand-menu">
-                                                        <img src="img/brand/Bitmap-2.png" alt="">
-                                                        <h5>Tata</h5>
-                                                    </a>
-                                                </div>
-                                                <div class="col-md-3 col-lg-2">
-                                                    <a href="category.php" class="brand-menu">
-                                                        <img src="img/brand/Screen Shot 2020-11-25 at 12.13.15 PM.png" alt="">
-                                                        <h5>Yamaha</h5>
-                                                    </a>
-                                                </div>
-                                                <div class="col-md-3 col-lg-2">
-                                                    <a href="category.php" class="brand-menu">
-                                                        <img src="img/brand/suzuki.png" alt="">
-                                                        <h5>Suzuki</h5>
-                                                    </a>
-                                                </div>
-                                                <div class="col-md-3 col-lg-2">
-                                                    <a href="category.php" class="brand-menu">
-                                                        <img src="img/brand/tvs.png" alt="">
-                                                        <h5>TVS</h5>
-                                                    </a>
-                                                </div>
+                                                @foreach($all_brands as $brand)
+                                                    <div class="col-md-3 col-lg-2">
+                                                        <a href="{{route('list.brand.vehicles',$brand->id)}}" class="brand-menu">
+                                                            <img src="{{($brand->brand_logo) ? asset($brand->file_full_path).'/'.$brand->brand_logo : asset('admin/default.png')}}" alt="{{$brand->brand_name}}" alt="">
+                                                            <h5>{{$brand->brand_name}}</h5>
+                                                        </a>
+                                                    </div>
+                                                @endforeach
+                                       
                                             </div>
                                         </div>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="news-reviews.php">News & Reviews</a>
+                                        <a class="nav-link" href="{{route('news.all')}}">News & Reviews</a>
                                     </li>
+
                                     <li class="nav-item">
+                                        <a class="nav-link" href="{{route('service.all')}}">Services</a>
+                                    </li>
+                                    {{-- <li class="nav-item">
                                         <a class="nav-link" href="">Auto Ventures</a>
                                         <div class="dropdown">
                                             <div class="row">
@@ -199,7 +166,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </li>
+                                    </li> --}}
                                 </ul>
                             </div>
                         </div>

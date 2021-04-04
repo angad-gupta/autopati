@@ -71,19 +71,25 @@
             <div class="col-sm-6 col-md-3">
                 <h5>Customer Links</h5>
                 <ul class="list-unstyled f-links">
-                    <li><a href="#">Latest Cars</a></li>
-                    <li><a href="#">Featured Cars</a></li>
-                    <li><a href="#">Top 10 Reviews</a></li>
+                    <li><a href="{{route('list.latest-car')}}">Latest Cars</a></li>
+                    <li><a href="{{route('list.popular-car')}}">Popular Cars</a></li>
+                    {{-- <li><a href="#">Top 10 Reviews</a></li> --}}
                 </ul>
             </div>
 
             <div class="col-sm-6 col-md-3">
                 <h5>Popular Cars By Make</h5>
+                @inject('popular_brand', '\App\Modules\Cars\Repositories\CarRepository')
+                @php
+                    $popular_brands = $popular_brand->findPopularBrand($limit=5);
+               
+                @endphp
+        
                 <ul class="list-unstyled f-links">
-                    <li><a href="#">Audi</a></li>
-                    <li><a href="#">BMW</a></li>
-                    <li><a href="#">Ford</a></li>
-                    <li><a href="#">Honda</a></li>
+                    @foreach($popular_brands as $popular_brand)
+                        <li><a href="{{route('list.brand.vehicles',$popular_brand->brand_id)}}">{{$popular_brand->BrandInfo->brand_name}}</a></li>
+                    @endforeach
+                   
                 </ul>
             </div>
         </div>

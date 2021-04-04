@@ -57,6 +57,26 @@ class CarRepository implements CarInterface
         
     } 
 
+    public function findElectricCar($limit = null){
+        $result =Car::where('is_electric','=',1)->orderBy('id','DESC')->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
+        return $result; 
+    }
+
+    public function findPopularCar($limit = null){
+        $result =Car::where('is_popular','=',1)->orderBy('views','DESC')->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
+        return $result;
+    }
+
+    public function findPopularBrand($limit = null){
+        $result = Car::where('is_popular','=',1)->select('brand_id')->selectRaw('COUNT(*) AS count')->groupBy('brand_id')->orderByDesc('count')->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
+        return $result;
+    }
+
+    public function findLatestCar($limit = null){
+        $result =Car::where('currently_launch','=',1)->orderBy('id','DESC')->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
+        return $result; 
+    }
+
     public function findBrandVehicle($limit = null,$id)
     {
         $result =Car::where('brand_id','=',$id)->orderBy('id','ASC')->paginate($limit ? $limit : env('DEF_PAGE_LIMIT',9999));

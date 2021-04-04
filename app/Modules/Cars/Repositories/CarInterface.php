@@ -14,6 +14,14 @@ interface CarInterface
 
     public function findUpcomingCar($limit = null, $current_date);
 
+    public function findElectricCar($limit);
+
+    public function findPopularCar();
+
+    public function findPopularBrand($limit);
+
+    public function findLatestCar($limit);
+
     public function findBrandVehicle($limit = null,$id);
 
     public function searchVehicle($limit = null,$data);

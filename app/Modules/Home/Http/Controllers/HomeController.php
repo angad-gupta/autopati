@@ -139,6 +139,30 @@ class HomeController extends Controller
         return view('home::home.list',$data);
     }
 
+    public function listLatestCar(){
+        $data['title'] = 'Latest Car';
+        $data['vehicles'] = $this->cars->findLatestCar($limit=50);
+        return view('home::home.list',$data);
+    }
+
+    public function listElectricCar(){
+        $data['title'] = 'Electric Car';
+        $data['vehicles'] = $this->cars->findElectricCar($limit=50);
+        return view('home::home.list',$data);
+    }
+
+    public function listPopularCar(){
+        $data['title'] = 'Popular Car';
+        $data['vehicles'] = $this->cars->findPopularCar($limit=50);
+        return view('home::home.list',$data);
+    }
+
+    public function listLuxuryCar(){
+        $data['title'] = 'Luxury Car';
+        $data['vehicles'] = $this->cars->findLuxury($limit=50);
+        return view('home::home.list',$data);
+    }
+
     public function searchVehicle(Request $request){
 
         $q['keyword'] = $request->keyword;
