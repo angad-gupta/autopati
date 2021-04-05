@@ -2,12 +2,14 @@
 @extends('home::layouts.master')
 @section('title')Home | Autopati @stop 
 @section('content')
+
+@if(count($header_banners) > 0)
 <section class="ecm-banner">
     <div class="owl-carousel owl-theme banner-slider">
 
         @foreach($header_banners as $header_banner)
         <div class="item">
-            <div class="banner-block" style="background-image: url('{{ ($header_banner->banner_image) ? asset($header_banner->file_full_path).'/'.$header_banner->banner_image : asset('admin/default.png' )}}');">
+            <div class="banner-block" style="background-image: url('{{ ($header_banner->banner_image) ? asset($header_banner->file_full_path).'/'.$header_banner->banner_image : asset('admin/vehicle.jpeg' )}}');">
                 <div class="container">
                     <div class="row justify-content-end">
                         <div class="col-md-4">
@@ -77,7 +79,9 @@
         @endforeach
     </div>
 </section>
+@endif
 
+@if(count($deal_of_the_months) > 0)
 <section class="ecm-features ecm-new pb-0">
     <div class="container">
         <div class="row justify-content-center">
@@ -92,7 +96,7 @@
             @foreach($deal_of_the_months as $deal_of_the_month) 
             <div class="item">
                 <a href="{{route('car.detail',$deal_of_the_month->id)}}" class="ecm-new__item">
-                    <img src="{{($deal_of_the_month->car_image) ? asset($deal_of_the_month->file_full_path).'/'.$deal_of_the_month->car_image : asset('admin/default.png' )}}" alt="{{$deal_of_the_month->ModelInfo->model_name}} {{$deal_of_the_month->VariantInfo->variant_name}}">
+                    <img src="{{($deal_of_the_month->car_image) ? asset($deal_of_the_month->file_full_path).'/'.$deal_of_the_month->car_image : asset('admin/vehicle.jpeg' )}}" alt="{{$deal_of_the_month->ModelInfo->model_name}} {{$deal_of_the_month->VariantInfo->variant_name}}">
                     <h5>{{optional($deal_of_the_month->BrandInfo)->brand_name }} {{ optional($deal_of_the_month->ModelInfo)->model_name }} </h5>
                 </a>
             </div>
@@ -101,8 +105,9 @@
         </div>
     </div>
 </section>
+@endif
 
-
+@if(count($car_brands) > 0)
 <section class="ecm-features ecm-new pb-0">
     <div class="container">
         <div class="row justify-content-center">
@@ -117,7 +122,7 @@
             @foreach($car_brands as $car_brand)
             <div class="item">
                 <a href="{{route('list.brand.vehicles',$car_brand->id)}}" class="brand-item">
-                    <img src="{{($car_brand->brand_logo) ? asset($car_brand->file_full_path).'/'.$car_brand->brand_logo : asset('admin/default.png')}}" alt="{{$car_brand->brand_name}}">
+                    <img src="{{($car_brand->brand_logo) ? asset($car_brand->file_full_path).'/'.$car_brand->brand_logo : asset('admin/vehicle.jpeg')}}" alt="{{$car_brand->brand_name}}">
                     <h5>{{$car_brand->brand_name}}</h5>
                 </a>
             </div>
@@ -125,7 +130,9 @@
         </div>
     </div>
 </section>
+@endif
 
+@if(count($bike_brands) > 0)
 <section class="ecm-features ecm-new pt-3 pb-0">
     <div class="container">
         <div class="row justify-content-center">
@@ -140,7 +147,7 @@
             @foreach($bike_brands as $bike_brand)
                 <div class="item">
                     <a href="{{route('list.brand.vehicles',$bike_brand->id)}}" class="brand-item">
-                        <img src="{{($bike_brand->brand_logo) ? asset($bike_brand->file_full_path).'/'.$bike_brand->brand_logo : asset('admin/default.png')}}" alt="{{$bike_brand->brand_name}}">
+                        <img src="{{($bike_brand->brand_logo) ? asset($bike_brand->file_full_path).'/'.$bike_brand->brand_logo : asset('admin/vehicle.jpeg')}}" alt="{{$bike_brand->brand_name}}">
                         <h5>{{$bike_brand->brand_name}}</h5>
                     </a>
                 </div>
@@ -148,8 +155,10 @@
         </div>
     </div>
 </section>
+@endif
 
 
+@if(count($service_categories) > 0)
 <section class="ecm-features home-tabs ecm-new pt-3 pb-3">
     <div class="container">
         <div class="row justify-content-center">
@@ -182,7 +191,7 @@
                             @foreach($services as $service)
                             <div class="item">
                                 <div class="services_item">
-                                    <a href="{{route('service',$service->id)}}"><img src="{{($service->cover_image) ? asset($service->file_full_path).'/'.$service->cover_image : asset('admin/default.png' )}}" alt=""></a>
+                                    <a href="{{route('service',$service->id)}}"><img src="{{($service->cover_image) ? asset($service->file_full_path).'/'.$service->cover_image : asset('admin/vehicle.jpeg' )}}" alt=""></a>
                                     <div class="services_item_desc">
                                         <h6><a href="{{route('service',$service->id)}}">{{$service->title}}</a></h6>
                                         <span><i class="fa fa-map-marker"></i> &nbsp; {{$service->location}}</span>
@@ -201,7 +210,9 @@
         </div>
     </div>
 </section>
+@endif
 
+@if(count($most_searched) > 0)
 <section class="ecm-features home-tabs ecm-new pt-0 pb-4">
     <div class="container">
         <div class="row justify-content-center">
@@ -219,7 +230,7 @@
                     @foreach($most_searched as $most_search)
                     <div class="item">
                         <div class="services_item">
-                            <a href="{{route('car.detail',$most_search->id)}}"><img src="{{($most_search->car_image) ? asset($most_search->file_full_path).'/'.$most_search->car_image : asset('admin/default.png')}}" alt=""></a>
+                            <a href="{{route('car.detail',$most_search->id)}}"><img src="{{($most_search->car_image) ? asset($most_search->file_full_path).'/'.$most_search->car_image : asset('admin/vehicle.jpeg')}}" alt=""></a>
                             <div class="services_item_desc">
                                 <h6><a href="{{route('car.detail',$most_search->id)}}">{{optional($most_search->BrandInfo)->brand_name }} {{ optional($most_search->ModelInfo)->model_name }}</a></h6>
                                 <p class="mb-0">Starting Rs {{number_format($most_search->starting_price)}}</p>
@@ -237,6 +248,7 @@
         </div>
     </div>
 </section>
+@endif
 
 <section class="ap-features">
     <div class="container">
@@ -281,7 +293,7 @@
     </div>
 </section>
 
-
+@if(count($luxuary_cars) > 0)
 <section class="ecm-features">
     <div class="container">
         <div class="row justify-content-center">
@@ -296,7 +308,7 @@
     <div class="owl-carousel owl-theme luxury-block stock-clearance">
         @foreach($luxury_banners as $luxury_banners)
             <div class="item">
-                <div class="luxury-slider" style="background-image: url('{{ ($luxury_banners->banner_image) ? asset($luxury_banners->file_full_path).'/'.$luxury_banners->banner_image : asset('admin/default.png' )}}">
+                <div class="luxury-slider" style="background-image: url('{{ ($luxury_banners->banner_image) ? asset($luxury_banners->file_full_path).'/'.$luxury_banners->banner_image : asset('admin/vehicle.jpeg' )}}">
                     <div class="position-relative">
                         <h4>Checkout Luxury car</h4>
                         <p>{{$luxury_banners->short_content}}</p>
@@ -316,7 +328,7 @@
             <div class="col-md-3">
                 <a href="{{route('car.detail',$luxury->id)}}" class="ecm-luxury__item">
                     <span class="ecm-luxury__img">
-                        <img src="{{ ($luxury->car_image) ? asset($luxury->file_full_path).'/'.$luxury->car_image : asset('admin/default.png' )}}" alt="{{$luxury->ModelInfo->model_name}} {{$luxury->VariantInfo->variant_name}}">
+                        <img src="{{ ($luxury->car_image) ? asset($luxury->file_full_path).'/'.$luxury->car_image : asset('admin/vehicle.jpeg' )}}" alt="{{$luxury->ModelInfo->model_name}} {{$luxury->VariantInfo->variant_name}}">
                     </span>
                     <h5>{{$luxury->BrandInfo->brand_name}}</h5>
                 </a>
@@ -326,6 +338,8 @@
         </div>
     </div>
 </section>
+@endif
+
 
 
 <section class="ecm-features pt-0 pb-3">
@@ -351,7 +365,7 @@
                     <div class="item">
                         <a href="{{route('car.detail',$up_car->id)}}" class="ecm-luxury__item">
                             <span class="ecm-luxury__img">
-                                <img src="{{($up_car->car_image) ? asset($up_car->file_full_path).'/'.$up_car->car_image : asset('admin/default.png' )}}" alt="">
+                                <img src="{{($up_car->car_image) ? asset($up_car->file_full_path).'/'.$up_car->car_image : asset('admin/vehicle.jpeg' )}}" alt="">
                             </span>
                             <h5>{{optional($up_car->BrandInfo)->brand_name }} {{ optional($up_car->ModelInfo)->model_name }} </h5>
                         </a>
@@ -364,6 +378,8 @@
 </section>
 
 
+
+@if(count($news) > 0)
 <section class="ecm-features pt-0">
     <div class="container">
         <div class="row justify-content-center">
@@ -391,7 +407,7 @@
                     <div class="ecm-luxury__desc">
                         <span><i class="fa fa-calendar"></i> &nbsp;{{$new->date}}</span>
                         <h5>{{$new->title}}</h5>
-                        <p>{!!str_limit($new->content,40)!!}</p>
+                        <p>{!! \Illuminate\Support\Str::limit($new->content,40)!!}</p>
                     </div>
                 </a>
             </div>
@@ -399,6 +415,7 @@
         </div>
     </div>
 </section>
+@endif
 
 
 

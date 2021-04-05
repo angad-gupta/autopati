@@ -52,10 +52,9 @@ class ServiceManagementController extends Controller
            if ($request->hasFile('cover_image')) {
                $data['cover_image'] = $this->service_management->upload($data['cover_image']);
            }
-
            $this->service_management->save($data);
-
            toastr()->success('Service Created Successfully');
+
        }catch(\Throwable $e){
            toastr($e->getMessage())->error();
        }

@@ -29,7 +29,7 @@
                     <div class="ecm-luxury__desc">
                         <span><i class="fa fa-calendar"></i> &nbsp;{{$new->date}}</span>
                         <h5>{{$new->title}}</h5>
-                        <p>{!!str_limit($new->content,40)!!}</p>
+                        <p>{!! \Illuminate\Support\Str::limit($new->content,40)!!}</p>
                     </div>
                 </a>
             </div>

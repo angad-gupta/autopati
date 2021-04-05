@@ -5,6 +5,7 @@ namespace App\Modules\Page\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Str;
 
 use App\Modules\Page\Repositories\PageInterface;
 
@@ -50,7 +51,7 @@ class PageController extends Controller
         $data = $request->all();
     
         $title =$data['title'];
-        $data['slug'] = $slug = str_slug($title, '_');
+        $data['slug'] = $slug = Str::slug($title, '_');
 
         $pageInfo = $this->page->checkPageInfo($slug);   
 

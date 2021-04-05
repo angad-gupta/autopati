@@ -24,8 +24,7 @@
                     <div class="services_item_desc">
                         <h6><a href="{{route('car.detail',$vehicle->id)}}">{{optional($vehicle->BrandInfo)->brand_name }} {{ optional($vehicle->ModelInfo)->model_name }}</a></h6>
                         <p class="mb-0">Starting Rs {{$vehicle->starting_price}}</p>
-                        <div class="d-flex justify-content-between">
-                            <h5 class="mt-3" style="color: #e53012"><i class="fa fa-eye" style=""></i>  {{$vehicle->views}}</h5>
+                        <div class="d-flex justify-content-end">
                             <a href="{{route('car.detail',$vehicle->id)}}" class="btn btn-outline-warning">View Detail</a>
                         </div>
                     </div>

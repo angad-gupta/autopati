@@ -136,7 +136,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{route('search_log.index')}}" class="nav-link @if($Route[0]=='page') active @endif" data-popup="tooltip" data-original-title="Search Log" data-placement="right"><i class="icon-search4"></i><span>Search Log</span>
+                    <a href="{{route('search_log.index')}}" class="nav-link @if($Route[0]=='search_log') active @endif" data-popup="tooltip" data-original-title="Search Log" data-placement="right"><i class="icon-search4"></i><span>Search Log</span>
                     </a>
                 </li>
         
