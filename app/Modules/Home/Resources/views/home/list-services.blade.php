@@ -32,7 +32,7 @@
                                 $services = $services->findAllActiveServiceCategory($limit=50,$service_category->id);
                             @endphp
                              <div class="row">
-                            @foreach($services as $service)
+                            @forelse($services as $service)
                            
                             <div class="col-md-3">
                                 <div class="services_item">
@@ -44,7 +44,11 @@
                                     </div>
                                 </div>
                             </div>
-                            @endforeach
+                            @empty
+                            <div class="container" style="margin: 20px 20px;">
+                                <h1 class="text-center">No Service Available ! </h1>
+                            </div>
+                            @endforelse
                              </div>
                         </div>
                     </div>

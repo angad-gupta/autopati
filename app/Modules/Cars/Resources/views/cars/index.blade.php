@@ -45,8 +45,17 @@
         <div class="col-md-12 col-lg-6 col-xl-4">
         <div class="card pb-card pb-card--approved card-body">
             <div class="d-flex justify-content-between align-items-center">
-                <h5 class="text-uppercase font-weight-semibold m-0">{{ optional($value->BrandInfo)->brand_name }} :: {{ optional($value->ModelInfo)->model_name }} :: {{ optional($value->VariantInfo)->variant_name }}</h5>
-                <div class="pb-card-status d-flex align-items-center"><i class="text-danger icon-car"></i></div>
+                @php 
+                if($value){
+                    $imagePath = asset($value->file_full_path).'/'.$value->car_image;
+                }else{
+                    $imagePath = asset('admin/vehicle.jpeg');
+                }
+                @endphp
+
+                <h5 class="text-uppercase font-weight-semibold m-0"><i class="text-danger icon-car"></i>  {{ optional($value->BrandInfo)->brand_name }} :: {{ optional($value->ModelInfo)->model_name }} :: {{ optional($value->VariantInfo)->variant_name }}</h5>
+                
+                <div class="pb-card-status d-flex align-items-center"><img class="image-fluid rounded-round" src="{{ $imagePath}}" style="width: 60px; height: 60px; object-fit: cover; border: 1px solid #eeeeec"/> </div>
             </div>
             <span>{{$value->short_quote}}</span>
             <div class="d-flex justify-content-between align-items-center pt-1">

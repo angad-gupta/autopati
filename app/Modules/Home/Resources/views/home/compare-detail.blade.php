@@ -43,7 +43,9 @@
                                     <h6><a href="{{route('car.detail',$first_vehicle->id)}}">{{optional($first_vehicle->BrandInfo)->brand_name }} {{ optional($first_vehicle->ModelInfo)->model_name }} {{ optional($first_vehicle->VariantInfo)->variant_name }}</a></h6>
                                     <h6>Rs.{{$first_vehicle->starting_price}}</h6>
                                     <span>Avg. Ex-Showroom price</span>
-                                    <a href="#" class="btn btn-primary btn-sm">Get Offers</a>
+                                    @if($first_vehicle->is_offer_available == 1)
+                                        <a href="{{route('car.offer',$first_vehicle->id)}}" class="btn btn-primary btn-sm" target="_blank">Get Offers</a>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -59,7 +61,9 @@
                                     <h6><a href="{{route('car.detail',$second_vehicle->id)}}">{{optional($second_vehicle->BrandInfo)->brand_name }} {{ optional($second_vehicle->ModelInfo)->model_name }} {{ optional($second_vehicle->VariantInfo)->variant_name }}</a></h6>
                                     <h6>Rs.{{$second_vehicle->starting_price}}</h6>
                                     <span>Avg. Ex-Showroom price</span>
-                                    <a href="#" class="btn btn-primary btn-sm">Get Offers</a>
+                                    @if($second_vehicle->is_offer_available == 1)
+                                    <a href="{{route('car.offer',$first_vehicle->id)}}" class="btn btn-primary btn-sm" target="_blank">Get Offers</a>
+                                @endif
                                 </div>
                             </div>
                         </div>

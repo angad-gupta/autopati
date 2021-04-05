@@ -13,7 +13,7 @@
             </div>
         </div>
         <div class="row">
-            @foreach($news as $new)
+            @forelse($news as $new)
             <div class="col-md-3">
                 <a href="{{route('news',$new->id)}}" class="ecm-luxury__item">
                     <span class="ecm-luxury__img">
@@ -33,7 +33,11 @@
                     </div>
                 </a>
             </div>
-            @endforeach
+            @empty
+                <div class="container" style="margin: 20px 20px;">
+                    <h1 class="text-center">No News/Blog Available ! </h1>
+                </div>
+            @endforelse
         </div>
     </div>
 </section>

@@ -83,6 +83,18 @@ class HomeController extends Controller
         return view('home::home.detail',$data);
     }
 
+    public function carOffer($car_id)
+    {
+        $data['car'] = $this->cars->find($car_id);
+        $data['photo_feature'] = $this->cars->getPhotoFeatures($car_id);
+        $data['photo_gallery'] = $this->cars->getPhotoGallery($car_id);
+        $data['car_spec'] = $this->spec->getAllCarSpec();
+        $data['car_color'] = $this->cars->getColorByCarId($car_id);
+        return view('home::home.offer',$data);
+    }
+
+    
+
     public function subscription(Request $request){
        $data = $request->all();
        $duplicate = $this->subscription->findDuplicate($data['email']); 
@@ -303,6 +315,7 @@ class HomeController extends Controller
         $data['news'] = $this->news->findAllActiveNews($limit=50);
         return view('home::home.list-news',$data);
     }
+
 
 
 }

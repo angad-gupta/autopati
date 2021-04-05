@@ -31,10 +31,10 @@
                                         <div class="form-group budget-class">
                                             <form action="{{route('search.budget')}}" method="GET">
                                                 @csrf
-                                                <select class="form-control" name="budget">
+                                                <select class="form-control" name="budget" required>
                                                 <option>Select Budget From</option>
                                                 <option value="100000 500000">1 Lakh - 10 Lakh</option>
-                                                <option value="1000000 2000000">10 Lakh to 20 Lakh</option>
+                                                <option value="1000000 2000000" selected>10 Lakh to 20 Lakh</option>
                                                 <option value="2000000 3000000">20 Lakh to 30 Lakh</option>
                                                 <option value="3000000 4000000">30 Lakh to 40 Lakh</option>
                                                 <option value="4000000 5000000">40 Lakh to 50 Lakh</option>
@@ -59,7 +59,7 @@
                                             @endphp
 
                                             <form action="{{route('search.model')}}" method="GET">
-                                                <select class="form-control" name="model">
+                                                <select class="form-control" name="model" required>
                                                 <option>Select Model</option>
                                                     @foreach($vehicle_models as $vehicle_model)
                                                         <option value="{{$vehicle_model->id}}">{{$vehicle_model->model_name}} </option>

@@ -59,8 +59,8 @@
 
         
                 <ul class="list-unstyled f-links">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Blog</a></li>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="{{route('news.all')}}">Blog</a></li>
                     @foreach($active_pages as $active_page)
                     <li><a href="{{route('page',$active_page->slug)}}">{{$active_page->title}}</a></li>
                     @endforeach

@@ -91,7 +91,7 @@ class SubscriptionController extends Controller
             $this->subscription->delete($id);
              toastr()->success('Subscription Deleted Successfully');
         }catch(\Throwable $e){
-            toastr($e->getMessage())->error();
+            toastr()->error($e->getMessage());
         }
       return redirect(route('subscription.index'));
     

@@ -20,6 +20,7 @@ Route::get('/search/model', ['as' => 'search.model', 'uses' => 'HomeController@s
 Route::get('/bike/all-brand', ['as' => 'list.bike-brand', 'uses' => 'HomeController@listBikeBrand']);
 
 Route::get('/car/detail/{id}', ['as' => 'car.detail', 'uses' => 'HomeController@carDetail']);
+Route::get('/car/offer/{id}', ['as' => 'car.offer', 'uses' => 'HomeController@carOffer']);
 Route::get('/car/all-brand', ['as' => 'list.car-brand', 'uses' => 'HomeController@listCarBrand']);
 Route::get('/car/most-searched-car', ['as' => 'list.most-searched-car', 'uses' => 'HomeController@listMostSearchedVehicle']);
 Route::get('/vehicle/deal-of-the-month', ['as' => 'list.deal-of-the-month', 'uses' => 'HomeController@listDealOfMonthVehicle']);

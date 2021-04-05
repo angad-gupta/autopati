@@ -48,6 +48,10 @@
                                 @if($car->expected_launch_date >= $current_date)
                                 <h6 class="text-center" style="color: # e53012"><span style="color: gray">Expected Launch Date :</span> {{date('d M Y ',strtotime($car->expected_launch_date)) }}</h6>
                                 @endif
+
+                                @if($car->is_offer_available == 1)
+                                <h4 class="text-center"><a href="{{route('car.offer',$car->id)}}" class="btn btn-primary btn-sm ">Get Offers</a></h4>
+                                @endif
                             </div>
                         </div>
                      

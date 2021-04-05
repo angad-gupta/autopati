@@ -107,7 +107,7 @@ class PageController extends Controller
         $data = $request->all();
 
         $title =$data['title'];
-        $data['slug'] = $slug = str_slug($title, '_');
+        $data['slug'] = $slug = Str::slug($title, '_');
          
         try{
 
