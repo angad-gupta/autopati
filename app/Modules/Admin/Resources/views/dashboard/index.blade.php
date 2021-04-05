@@ -36,7 +36,7 @@
 									</div>
 								</div>
 								<h6 class="pl-2 m-0 font-weight-semibold">Brand -
-									<strong>0</strong>
+									<strong>{{count($brands)}}</strong>
 								</h6>
 							</div>
 						</li>
@@ -48,7 +48,7 @@
 									</div>
 								</div>
 								<h6 class="pl-2 m-0 font-weight-semibold">Model -
-									<strong>0</strong>
+									<strong>{{count($vehiclemodel)}}</strong>
 								</h6>
 							</div>
 						</li>
@@ -60,7 +60,7 @@
 									</div>
 								</div>
 								<h6 class="pl-2 m-0 font-weight-semibold">Banner -
-									<strong>0</strong>
+									<strong>{{count($banners)}}</strong>
 								</h6>
 							</div>
 						</li>
@@ -72,7 +72,7 @@
 									</div>
 								</div>
 								<h6 class="pl-2 m-0 font-weight-semibold">Newsletter -
-									<strong>0</strong>
+									<strong>{{count($subscriptions)}}</strong>
 								</h6>
 							</div>
 						</li>
@@ -84,7 +84,7 @@
 									</div>
 								</div>
 								<h6 class="pl-2 m-0 font-weight-semibold">Page -
-									<strong>0</strong>
+									<strong>{{count($pages)}}</strong>
 								</h6>
 							</div>
 						</li>
@@ -96,7 +96,7 @@
 									</div>
 								</div>
 								<h6 class="pl-2 m-0 font-weight-semibold">News -
-									<strong>0</strong>
+									<strong>{{count($news)}}</strong>
 								</h6>
 							</div>
 						</li>

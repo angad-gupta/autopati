@@ -62,14 +62,13 @@ class PageController extends Controller
         
          try{
 
-
             if ($request->hasFile('image')) {
                 $data['image'] = $this->page->upload($data['image']);
             }
             $this->page->save($data);
             toastr()->success('Page Created Successfully');
         }catch(\Throwable $e){
-            toastr($e->getMessage())->error();
+            toastr()->error($e->getMessage());
         }
         
         return redirect(route('page.index'));
@@ -119,7 +118,7 @@ class PageController extends Controller
             $this->page->update($id,$data);
             toastr()->success('Page Updated Successfully');
         }catch(\Throwable $e){
-            toastr($e->getMessage())->error();
+            toastr()->error($e->getMessage());
         }
         
         return redirect(route('page.index'));
@@ -136,7 +135,7 @@ class PageController extends Controller
             $this->page->delete($id);
             toastr()->success('Page Deleted Successfully');
         }catch(\Throwable $e){
-            toastr($e->getMessage())->error();
+            toastr()->error($e->getMessage());
         }
       return redirect(route('page.index'));
     }

@@ -300,7 +300,7 @@
             <div class="col-sm-12">
                 <div class="ecm-features__title d-flex align-items-center justify-content-between">
                     <h1><span>Explore Luxury</span> Vehicles</h1>
-                    <a href="product-list.php" class="see-all text-right">View all <i class="fa fa-angle-right"></i></a>
+                    <a href="{{route('list.luxury-car')}}" class="see-all text-right">View all <i class="fa fa-angle-right"></i></a>
                 </div>
             </div>
         </div>

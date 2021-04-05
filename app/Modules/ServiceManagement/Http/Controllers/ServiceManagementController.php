@@ -56,7 +56,7 @@ class ServiceManagementController extends Controller
            toastr()->success('Service Created Successfully');
 
        }catch(\Throwable $e){
-           toastr($e->getMessage())->error();
+           toastr()->error($e->getMessage());
        }
        
        return redirect(route('servicemanagement.index'));
@@ -106,7 +106,7 @@ class ServiceManagementController extends Controller
             toastr()->success('Service Updated Successfully');
             
         }catch(\Throwable $e){
-           toastr($e->getMessage())->error();
+           toastr()->error($e->getMessage());
         }
         
         return redirect(route('servicemanagement.index'));
@@ -123,7 +123,7 @@ class ServiceManagementController extends Controller
             $this->service_management->delete($id);
              toastr()->success('Service Deleted Successfully');
         }catch(\Throwable $e){
-            toastr($e->getMessage())->error();
+            toastr()->error($e->getMessage());
         }
       return redirect(route('servicemanagement.index'));
     }
