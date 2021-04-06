@@ -1,5 +1,5 @@
 @extends('home::layouts.master')
-@section('title')Service | Autopati @stop 
+@section('title'){{ $service->title }} | Service | Autopati @stop 
 @section('content')
 
 

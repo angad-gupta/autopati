@@ -106,5 +106,7 @@ interface CarInterface
     ------------------------------------------------------------*/
 
     public function countViews($car_id);
+
+  
     
 }

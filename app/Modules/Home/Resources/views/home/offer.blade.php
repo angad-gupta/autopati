@@ -1,5 +1,5 @@
 @extends('home::layouts.master')
-@section('title')Offer| Autopati @stop 
+@section('title')Offer | Autopati @stop 
 @section('content')
 
 <div class="compare-page">
@@ -28,7 +28,7 @@
                         <div class="col-md-6 d-flex" >
                             <div class="">
                                 <img src="{{$imagePath}}" alt="" style="width: 100%">
-                                <h2 class="text-center" style="color:#e53012 " >Rs. {{number_format($car->starting_price)}} </h2>
+                                <h2 class="text-center" style="color:#e53012 " >Rs. {{number_to_words($car->starting_price)}} </h2>
                             </div>
                         </div>
                         <div class="col-md-6 mt-auto mb-auto">
@@ -38,7 +38,7 @@
                                 <h4 style="color:#e53012 " >Discount Percentage</h4>
                                 <h1 class="pricing-table-price text-success" ><span>{{$car->discount_percent}}</span>%</h1>
                                 <ul class="list-unstyled content-group">
-                                    <li><strong>Discount Amount : </strong> <span class="text-success">Rs. {{number_format($car->discount_amount)}}</span></li>
+                                    <li><strong>Discount Amount : </strong> <span class="text-success">Rs. {{number_to_words($car->discount_amount)}}</span></li>
                                 </ul>
                             </div>
                             <hr>
@@ -46,7 +46,7 @@
                             @if($car->flat_amount != null)
                             <div class="pricing-table-body">
                                 <h4 style="color:#e53012 " >Flat Discount</h4>
-                                <h1 class="pricing-table-price text-success"><span>Rs. {{number_format($car->flat_amount)}}</span></h1>
+                                <h1 class="pricing-table-price text-success"><span>Rs. {{number_to_words($car->flat_amount)}}</span></h1>
                                 
                             </div>
                             @endif

@@ -1,5 +1,17 @@
 @extends('home::layouts.master')
-@section('title')Compare Detail| Autopati @stop 
+@section('title')
+@if(isset($first_vehicle))
+    {{optional($first_vehicle->BrandInfo)->brand_name }} {{ optional($first_vehicle->ModelInfo)->model_name }} {{ optional($first_vehicle->VariantInfo)->variant_name }} 
+@else
+   -
+@endif
+vs 
+@if(isset($second_vehicle))
+    {{optional($second_vehicle->BrandInfo)->brand_name }} {{ optional($second_vehicle->ModelInfo)->model_name }} {{ optional($second_vehicle->VariantInfo)->variant_name }}</h5>
+@else
+    -
+@endif
+| Compare Detail| Autopati @stop 
 @section('breadcrumb') Compare Detail @stop
 @section('content')
 
@@ -41,7 +53,7 @@
                                 <img src="{{$first_vehicle->car_image ? asset($first_vehicle->file_full_path).'/'.$first_vehicle->car_image : asset('admin/vehicle.jpeg')}}" alt="">
                                 <div class="services_item_desc">
                                     <h6><a href="{{route('car.detail',$first_vehicle->id)}}">{{optional($first_vehicle->BrandInfo)->brand_name }} {{ optional($first_vehicle->ModelInfo)->model_name }} {{ optional($first_vehicle->VariantInfo)->variant_name }}</a></h6>
-                                    <h6>Rs.{{$first_vehicle->starting_price}}</h6>
+                                    <h6>Rs. {{number_to_words($first_vehicle->starting_price)}}</h6>
                                     <span>Avg. Ex-Showroom price</span>
                                     @if($first_vehicle->is_offer_available == 1)
                                         <a href="{{route('car.offer',$first_vehicle->id)}}" class="btn btn-primary btn-sm" target="_blank">Get Offers</a>
@@ -59,10 +71,10 @@
                                 <img src="{{$second_vehicle->car_image ? asset($second_vehicle->file_full_path).'/'.$second_vehicle->car_image : asset('admin/vehicle.jpeg')}}" alt="">
                                 <div class="services_item_desc">
                                     <h6><a href="{{route('car.detail',$second_vehicle->id)}}">{{optional($second_vehicle->BrandInfo)->brand_name }} {{ optional($second_vehicle->ModelInfo)->model_name }} {{ optional($second_vehicle->VariantInfo)->variant_name }}</a></h6>
-                                    <h6>Rs.{{$second_vehicle->starting_price}}</h6>
+                                    <h6>Rs. {{number_to_words($second_vehicle->starting_price)}}</h6>
                                     <span>Avg. Ex-Showroom price</span>
                                     @if($second_vehicle->is_offer_available == 1)
-                                    <a href="{{route('car.offer',$first_vehicle->id)}}" class="btn btn-primary btn-sm" target="_blank">Get Offers</a>
+                                    <a href="{{route('car.offer',$second_vehicle->id)}}" class="btn btn-primary btn-sm" target="_blank">Get Offers</a>
                                 @endif
                                 </div>
                             </div>

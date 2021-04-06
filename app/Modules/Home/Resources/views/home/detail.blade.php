@@ -1,5 +1,5 @@
 @extends('home::layouts.master')
-@section('title')Detail | Autopati @stop 
+@section('title'){{optional($car->BrandInfo)->brand_name }} {{ optional($car->ModelInfo)->model_name }} {{ optional($car->VariantInfo)->variant_name }} | Detail | Autopati @stop 
 @section('breadcrumb'){{optional($car->BrandInfo)->brand_name }} {{ optional($car->ModelInfo)->model_name }} {{ optional($car->VariantInfo)->variant_name }} @stop
 @section('content')
 
@@ -39,7 +39,7 @@
                             <div class="mt-auto mb-auto ml-auto mr-auto">
                                 <h3 class="text-center" style="color: #e53012"><q>{{$car->short_quote}}</q></h3>
                                 <h6 class="text-center" style="color: gray;">{{$car->short_content}} </h6>
-                                <h2 class="text-center" >Rs. {{number_format($car->starting_price)}} </h2>
+                                <h2 class="text-center" >Rs. {{number_to_words($car->starting_price)}} </h2>
 
                                 @php
                                     $current_date = Carbon\Carbon::now()->format('Y-m-d');
@@ -327,7 +327,7 @@
                             <span>{{optional($similar_car->BrandInfo)->brand_name }} </span>
                             <h6>{{ optional($similar_car->ModelInfo)->model_name }} {{ optional($similar_car->VariantInfo)->variant_name }} </h6>
       
-                            <h5>Rs.{{number_format($similar_car->starting_price)}}</h5>
+                            <h5>Rs. {{number_to_words($similar_car->starting_price)}}</h5>
                         </a>
                     </div>
                     @endforeach

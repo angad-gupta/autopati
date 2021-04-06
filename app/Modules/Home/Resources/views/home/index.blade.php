@@ -3,6 +3,7 @@
 @section('title')Home | Autopati @stop 
 @section('content')
 
+
 @if(count($header_banners) > 0)
 <section class="ecm-banner">
     <div class="owl-carousel owl-theme banner-slider">
@@ -233,7 +234,7 @@
                             <a href="{{route('car.detail',$most_search->id)}}"><img src="{{($most_search->car_image) ? asset($most_search->file_full_path).'/'.$most_search->car_image : asset('admin/vehicle.jpeg')}}" alt=""></a>
                             <div class="services_item_desc">
                                 <h6><a href="{{route('car.detail',$most_search->id)}}">{{optional($most_search->BrandInfo)->brand_name }} {{ optional($most_search->ModelInfo)->model_name }}</a></h6>
-                                <p class="mb-0">Starting Rs {{number_format($most_search->starting_price)}}</p>
+                                <p class="mb-0">Starting Rs. {{number_to_words($most_search->starting_price)}}</p>
                                 <div class="d-flex justify-content-end">
                                     <a href="{{route('car.detail',$most_search->id)}}" class="btn btn-outline-warning">View Detail</a>
                                 </div>

@@ -1,5 +1,5 @@
 @extends('home::layouts.master')
-@section('title')List | Autopati @stop 
+@section('title')Vehicle List | Autopati @stop 
 @section('content')
 
 <style>
@@ -127,7 +127,7 @@
                     <img src="{{($vehicle->car_image) ? asset($vehicle->file_full_path).'/'.$vehicle->car_image : asset('admin/default.png')}}" alt="">
                     <div class="services_item_desc">
                         <h6><a href="{{route('car.detail',$vehicle->id)}}">{{optional($vehicle->BrandInfo)->brand_name }} {{ optional($vehicle->ModelInfo)->model_name }}</a></h6>
-                        <p class="mb-0">Starting Rs {{$vehicle->starting_price}}</p>
+                        <p class="mb-0">Starting Rs. {{number_to_words($vehicle->starting_price)}}</p>
                         <div class="d-flex justify-content-end">
                             <a href="{{route('car.detail',$vehicle->id)}}" class="btn btn-outline-warning">View Detail</a>
                         </div>

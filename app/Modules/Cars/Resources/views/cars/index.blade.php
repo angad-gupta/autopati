@@ -59,7 +59,7 @@
             </div>
             <span>{{$value->short_quote}}</span>
             <div class="d-flex justify-content-between align-items-center pt-1">
-                <span>Starting Price: <strong class="pl-1">Rs. {{ number_format($value->starting_price) }}/-</strong></span>
+                <span>Starting Price: <strong class="pl-1">Rs. {{ number_to_words($value->starting_price) }} /-</strong></span>
             </div>
             <div class="row justify-content-between pt-3 pb-2">
                 <div class="col-lg-6 col-xl-3">
