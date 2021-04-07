@@ -195,7 +195,7 @@ class HomeController extends Controller
         $budget_from = $b[0];
         $budget_to = $b[1];
       
-        $data['title'] =  'Rs. '.number_format($budget_from).' - '.' Rs. '.number_format($budget_to).' Budget';
+        $data['title'] =  'Rs. '.number_to_words($budget_from).' - '.' Rs. '.number_to_words($budget_to).' Budget';
         $data['vehicles'] = $this->cars->searchVehicleBudget($limit=50,$budget_from, $budget_to);
         return view('home::home.list',$data);
     }

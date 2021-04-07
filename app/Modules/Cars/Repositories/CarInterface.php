@@ -8,7 +8,7 @@ interface CarInterface
 
     public function findDealOfMonth($limit=null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1]);
 
-    public function findMostSearched($limit=null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1]);
+    public function findMostSearched($limit=null, $filter = [], $sort = ['by' => 'views', 'sort' => 'DESC'], $status = [0, 1]);
 
     public function findLuxury($limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'ASC'], $status = [0, 1]);
 
