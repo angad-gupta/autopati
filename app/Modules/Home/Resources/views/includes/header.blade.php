@@ -4,8 +4,17 @@
             <div class="row align-items-center">
                 <div class="col-md-8 d-flex align-items-center">
                     <a class="logo" href="/">
-                       {{-- <img src="home/img/Autopati.png" alt="logo" class="img-fluid"> --}}
-                        <h4 class="mb-0" style="font-size: 28px;">Autopati</h4>
+        
+                        @inject('settings', '\App\Modules\Setting\Repositories\SettingRepository')
+                        @php
+                            $setting = $settings->getdata();
+                        @endphp
+
+                        @if($setting != null && $setting->company_logo != null)
+                        <img src="{{asset('uploads/setting/'.$setting->company_logo)}}" alt="" style="height:60px;width:auto;">
+                        @else
+                                <h4 class="mb-0" style="font-size: 28px;">Autopati</h4>
+                        @endif
                     </a>
                     <nav class="navbar navbar-expand-lg navbar-light bg-light">
                         <div class="container">
