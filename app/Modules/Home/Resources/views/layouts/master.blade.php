@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="{{asset('home/css/owl.carousel.min.css')}}">
     <link rel="stylesheet" href="{{asset('home/css/owl.theme.default.min.css')}}">
 
+    
     @inject('settings', '\App\Modules\Setting\Repositories\SettingRepository')
     @php
         $setting = $settings->getdata();
