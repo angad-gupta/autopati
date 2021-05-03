@@ -49,6 +49,10 @@ class SettingController extends Controller
             if($request->hasFile('company_logo')){
                 $data['company_logo'] = $this->setting->upload($data['company_logo']);
             }
+
+            if($request->hasFile('company_favicon')){
+                $data['company_favicon'] = $this->setting->upload($data['company_favicon']);
+            }
             $this->setting->save($data);
             toastr()->success('Setting Created Successfully');
 
@@ -66,6 +70,10 @@ class SettingController extends Controller
                     if ($request->hasFile('company_logo')) {
                         $data['company_logo'] = $this->setting->upload($data['company_logo']);
                     }
+
+                    if($request->hasFile('company_favicon')){
+                        $data['company_favicon'] = $this->setting->upload($data['company_favicon']);
+                    }
                     $this->setting->saveBasicSetting($data);
                      toastr()->success('Basic Setting Updated Created Successfully');
                 }
@@ -75,6 +83,11 @@ class SettingController extends Controller
                     if ($request->hasFile('company_logo')) {
                         $data['company_logo'] = $this->setting->upload($data['company_logo']);
                     }
+
+                    if($request->hasFile('company_favicon')){
+                        $data['company_favicon'] = $this->setting->upload($data['company_favicon']);
+                    }
+                    
                     $b=$this->setting->update($id,$data);
                      toastr()->success('Basic Setting Updated Created Successfully');
                 }
@@ -93,12 +106,18 @@ class SettingController extends Controller
                 if ($request->hasFile('company_logo')) {
                     $data['company_logo'] = $this->setting->upload($data['company_logo']);
                 }
+                if($request->hasFile('company_favicon')){
+                    $data['company_favicon'] = $this->setting->upload($data['company_favicon']);
+                }
                 $this->setting->saveBasicSetting($data);
                  toastr()->success('Basic Setting Updated Successfully');
             }
             else {
                 if ($request->hasFile('company_logo')) {
                     $data['company_logo'] = $this->setting->upload($data['company_logo']);
+                }
+                if($request->hasFile('company_favicon')){
+                    $data['company_favicon'] = $this->setting->upload($data['company_favicon']);
                 }
                 $this->setting->update($id,$data);
                  toastr()->success('Basic Setting Updated Successfully');
@@ -141,6 +160,11 @@ class SettingController extends Controller
             if ($request->hasFile('company_logo')) {
                 $data['company_logo'] = $this->setting->upload($data['company_logo']);
             }
+
+            if($request->hasFile('company_favicon')){
+                $data['company_favicon'] = $this->setting->upload($data['company_favicon']);
+            }
+
             $this->setting->update($id,$data);
              toastr()->success('Setting Updated Successfully');
         }catch(\Throwable $e){

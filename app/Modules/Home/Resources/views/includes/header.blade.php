@@ -189,7 +189,7 @@
                         <form action="{{route('search')}}" class="ap-search">
                             <input type="text" name="date" id="" value="{{$current_date}}" hidden>
                             <div class="search-box d-flex">
-                                <input type="text" name="keyword" id="" placeholder="Search...">
+                                <input type="text" name="keyword" id="" placeholder="Search..." autocomplete="off">
                                 <button type="submit" class="btn btn-primary" style="padding:8px 18px;border-radius: 0px;"><i class="fa fa-search text-white"></i></button>
                             </div>
                             <div class="search-box-container">

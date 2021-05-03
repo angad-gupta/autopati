@@ -14,6 +14,7 @@
     <link  href="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet">
     <link  href="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flexslider/2.7.2/flexslider.min.css">
+    <link rel="icon" href="" type="image/svg+xml" sizes="16x16">
     <link href="{{asset('home/css/animate.css')}}" rel="stylesheet">
     <link href="{{asset('home/css/checkbox.css')}}" rel="stylesheet">
     <link href="{{asset('home/css/custom.css')}}" rel="stylesheet">
@@ -24,6 +25,13 @@
     <link rel="stylesheet" href="{{asset('home/css/magnific-popup.css')}}">
     <link rel="stylesheet" href="{{asset('home/css/owl.carousel.min.css')}}">
     <link rel="stylesheet" href="{{asset('home/css/owl.theme.default.min.css')}}">
+
+    @inject('settings', '\App\Modules\Setting\Repositories\SettingRepository')
+    @php
+        $setting = $settings->getdata();
+    @endphp
+    <link rel="icon" href="{{asset('uploads/setting/'.$setting->company_favicon)}}" type="image/svg+xml" sizes="16x16">
+
     
     @jquery
     @toastr_css

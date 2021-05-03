@@ -76,6 +76,33 @@
         </div>
     </div>
 
+    <div class="form-group row mt-3" >
+        <label class="col-form-label col-lg-3">Company Favicon:</label>
+        <div class="col-lg-3 form-group-feedback form-group-feedback-right">
+            <div class="input-group">
+                <span class="input-group-prepend">
+                    <span class="input-group-text"><i class="icon-image2"></i></span>
+                </span>
+               {!! Form::file('company_favicon',$value = null, ['id'=>'company_favicon', 'class'=>'form-control']) !!}
+                <span class="text-danger">{{ $errors->first('company_favicon') }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3 form-group-feedback form-group-feedback-right">
+        </div>
+        <div class="col-lg-9 form-group-feedback form-group-feedback-right">
+            @if($is_edit AND $setting->company_favicon !== NULL)
+                <img id="bannerImage" src="{{asset('uploads/setting/'.$setting->company_favicon)}}"
+                     alt="your image" class="preview-image" style="height: 32px;width: auto;border-radius:30px;"/>
+            @else
+                <img id="bannerImage" src="{{ asset('admin/image.png') }}" alt="your image"
+                     class="preview-image"
+                     style="height: 32px; width: auto;border-radius:30px;"/>
+            @endif
+        </div>
+    </div>
+
     </fieldset>
 
     <fieldset class="mb-1">
