@@ -20,6 +20,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','permission']], funct
 
     Route::get('configuration/create', ['as' => 'configuration.create', 'uses' => 'ConfigurationController@create']);
     Route::post('configuration/store', ['as' => 'configuration.store', 'uses' => 'ConfigurationController@store']);
+    Route::post('configurationexcel/store', ['as' => 'configurationexcel.store', 'uses' => 'ConfigurationController@excelStore']);
+
 
     Route::get('configuration/edit/{id}', ['as' => 'configuration.edit', 'uses' => 'ConfigurationController@edit'])->where('id','[0-9]+');
     Route::post('configuration/update', ['as' => 'configuration.update', 'uses' => 'ConfigurationController@update']);

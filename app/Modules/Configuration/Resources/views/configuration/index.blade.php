@@ -6,6 +6,7 @@
 @section('content') 
 
 
+
 <div class="card card-body bg-pink-400" style="background-image: url(http://demo.interface.club/limitless/assets/images/bg.png);">
     <div class="media">
         <div class="mr-3 align-self-center">
@@ -15,9 +16,36 @@
         <div class="media-body text-center">
             <h5 class="media-title font-weight-semibold">List of Spec Managemnt</h5>
             <span class="opacity-75">Did you want to add Spec ? If yes, <a href="{{route('spec.create')}}" target="_blank" class="text-light">Click Me !</a></span>
-        </div>
+		</div>
+		
+		
     </div>
 </div>
+
+<div class="card card-body" style="border: dashed;border-radius: 25px;border-width: thin;">
+<div class="mb-0">
+{!! Form::open(['route'=>'configurationexcel.store','method'=>'POST','id'=>'configurationexcel_submit','class'=>'form-horizontal','role'=>'form','files' => true]) !!}
+
+<div class="col-lg-6">
+	<div class="row">
+		<label class="col-form-label col-lg-3">Choose Feature Excel File:</label>
+		<div class="col-lg-3 form-group-feedback form-group-feedback-right">
+			<div class="input-group mt-1">
+			
+			   {!! Form::file('excelfile', $value = null, ['id'=>'excelfile','class'=>'form-control']) !!}
+			</div>
+		</div>
+
+		<div class="">
+			<button type="submit" class="ml-2 mt-1 btn bg-success-600 btn-labeled btn-labeled-left"><b><i class=" icon-folder-upload3"></i></b> Upload</button>
+		</div>
+	</div>
+</div>
+
+{!! Form::close() !!}
+</div>
+</div>
+
 
 <div class="card-group-control card-group-control-right" id="accordion-control-right">
 

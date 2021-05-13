@@ -8,6 +8,7 @@ use Illuminate\Routing\Controller;
 
 use App\Modules\Configuration\Repositories\ConfigurationInterface;
 use App\Modules\Spec\Repositories\SpecInterface;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ConfigurationController extends Controller
 {
@@ -84,6 +85,22 @@ class ConfigurationController extends Controller
         return redirect(route('configuration.index'));
         
     }
+
+    public function excelStore(Request $request)
+    {
+      
+        try{
+            Excel::import(new FeatureImport, $request->excelfile);
+
+            toastr()->success('Feature Excel Uploaded Successfully');
+        }catch(\Throwable $e){
+            toastr()->error($e->getMessage());
+        }
+        
+        return redirect(route('configuration.index'));
+        
+    }
+
 
     /**
      * Show the specified resource.
