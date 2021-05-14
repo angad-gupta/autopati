@@ -1226,13 +1226,13 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light {
 
 .ecm-ribbon {
   text-align: left;
-  padding: 8px 0;
+  padding: 16px 0;
   background-color: #eee;
   color: #525050;
 }
 .ecm-ribbon h1 {
   color: #e53012;
-  margin-bottom: 0;
+  margin-bottom: .25rem;
   font-size: 32px;
 }
 .ecm-ribbon a {
@@ -1244,6 +1244,12 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light {
 .ecm-ribbon li {
   font-size: 12px;
   padding: 0 5px;
+}
+.ecm-ribbon li:first-child {
+  padding-left: 0 !important;
+}
+.ecm-ribbon li:last-child {
+  padding-right: 0 !important;
 }
 .ecm-ribbon a:hover {
   color: #e53012;

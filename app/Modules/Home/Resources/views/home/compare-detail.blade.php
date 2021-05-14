@@ -51,6 +51,7 @@ vs
                         <div class="col-md-3 d-flex offset-3">
                             <div class="compare_vehicles">
                                 <img src="{{$first_vehicle->car_image ? asset($first_vehicle->file_full_path).'/'.$first_vehicle->car_image : asset('admin/vehicle.jpeg')}}" alt="">
+
                                 <div class="services_item_desc">
                                     <h6><a href="{{route('car.detail',$first_vehicle->id)}}">{{optional($first_vehicle->BrandInfo)->brand_name }} {{ optional($first_vehicle->ModelInfo)->model_name }} {{ optional($first_vehicle->VariantInfo)->variant_name }}</a></h6>
                                     <h6>Rs. {{number_to_words($first_vehicle->starting_price)}}</h6>
