@@ -1,4 +1,4 @@
-<div class="main-title pt-2 pb-0">
+<div class="main-title">
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -8,7 +8,6 @@
                     <li><a href="/">Vehicle</a></li>
                     <li><i class="fa fa-angle-right"></i></li>
                     <li>@yield('breadcrumb')</li>
-
                 </ul>
             </div>
         </div>

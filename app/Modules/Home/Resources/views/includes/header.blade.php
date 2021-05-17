@@ -1,10 +1,9 @@
 <header>
     <div class="top-header">
-        <div class="container-fluid">
+        <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-8 d-flex align-items-center">
-                    <a class="logo" href="/">
-        
+                    <a class="navbar-brand mr-3 logo" href="/">
                         @inject('settings', '\App\Modules\Setting\Repositories\SettingRepository')
                         @php
                             $setting = $settings->getdata();
@@ -16,6 +15,7 @@
                                 <h4 class="mb-0" style="font-size: 28px;">Autopati</h4>
                         @endif
                     </a>
+
                     <nav class="navbar navbar-expand-lg navbar-light bg-light">
                         <div class="container">
                             <button class="navbar-toggler" type="button" data-toggle="collapse"
