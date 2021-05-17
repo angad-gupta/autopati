@@ -33,6 +33,7 @@
                         <?php echo e($car->short_quote); ?>
                     </div>
 
+                    
                     <div class="product-launch-date">
                         <?php
                         $current_date = Carbon\Carbon::now()->format('Y-m-d');
@@ -47,7 +48,7 @@
                         <?php echo e($car->short_content); ?>
                     </div>
 
-                    
+
                     <div class="product-price" >
                         Rs. <?php echo e(number_to_words($car->starting_price)); ?>
                     </div>
