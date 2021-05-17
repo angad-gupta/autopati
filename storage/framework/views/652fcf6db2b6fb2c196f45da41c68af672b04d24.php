@@ -33,7 +33,6 @@
                         <?php echo e($car->short_quote); ?>
                     </div>
 
-                    
                     <div class="product-launch-date">
                         <?php
                         $current_date = Carbon\Carbon::now()->format('Y-m-d');
