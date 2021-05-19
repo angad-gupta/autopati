@@ -33,7 +33,7 @@
             @endphp
             <div class="col-sm-6 col-md-3">
                 <h5>{{$footer->company_name}}</h5>
-                <ul class="list-unstyled">
+                <ul class="list-info">
                     <li> <i class="fa fa-map-marker"></i>
                         {{$footer->address1}}
                     </li>

@@ -3,15 +3,15 @@
 /*--======================== MENUBAR --*/
 /*--============== ASPECT RATIO --*/
 /*--============== CONTENT CENTER --*/
-.ratio_4-3 {
+.ratio_4-3, .product .product-media {
   display: block;
   position: relative; }
-  .ratio_4-3:before {
+  .ratio_4-3:before, .product .product-media:before {
     content: "";
     display: block;
     padding-top: 75%;
     width: 100%; }
-  .ratio_4-3 img {
+  .ratio_4-3 img, .product .product-media img {
     bottom: 0;
     left: 0;
     position: absolute;
@@ -96,8 +96,10 @@
     border: 0;
     border-radius: 0;
     color: #646161;
+    font-weight: 600;
     padding-left: 50px;
     padding-right: 50px;
+    text-transform: capitalize;
     transition: .36s all; }
   .nav-tabs .nav-link.active, .nav-tabs .nav-link:hover {
     background: #e53012;
@@ -105,6 +107,13 @@
   .nav-tabs .nav-item {
     margin-bottom: 0;
     padding: 0 3px; }
+
+.nav-table {
+  display: table;
+  width: 100%; }
+  .nav-table .nav-item, .nav-table .nav-link {
+    display: table-cell;
+    text-align: center; }
 
 /*--====================== Owl Carousel --*/
 .owl-theme .owl-nav {
@@ -2514,6 +2523,15 @@ header .bg-light .nav-item {
   padding-top: 3px;
   line-height: 26px; }
 
+/*--==================== U*T*I*L*I*T*I*E*S --*/
+.theme-dark {
+  background: #202020; }
+.theme-gray {
+  background: #e9ecef; }
+.theme-light {
+  background: #f8f9fa; }
+
+/*--==================== C*O*M*P*O*N*E*N*T*S --*/
 .main-title {
   background: #f2f4f6;
   padding: 2rem 0; }
@@ -2528,13 +2546,29 @@ header .bg-light .nav-item {
     margin-bottom: 0; }
 
 .section-padding {
-  padding: 50px 0; }
+  padding: 60px 0; }
 .section-title {
   margin-bottom: 36px; }
   .section-title h2, .section-title h3, .section-title h4 {
     color: #343a40;
     line-height: 1.5;
     margin: 0; }
+
+.list-info {
+  list-style: none;
+  margin: 0;
+  padding: 0; }
+  .list-info li {
+    display: grid;
+    grid-gap: 8px;
+    grid-template-columns: 20px auto;
+    margin-bottom: .25rem; }
+    .list-info li:last-child {
+      margin-bottom: 0; }
+    .list-info li i {
+      color: #17a2b8;
+      line-height: 1.65;
+      text-align: center; }
 
 /*-- Swatch radio [Tab] --*/
 .swatch {
@@ -2626,6 +2660,109 @@ header .bg-light .nav-item {
       width: 20px; }
   .swatch label + input[type=radio] + label {
     border-left: solid 2px #201678; }
+
+.gallery {
+  display: grid;
+  grid-gap: 8px;
+  grid-template-columns: repeat(3, 1fr); }
+  .gallery-item a {
+    display: inline-block; }
+    .gallery-item a img {
+      height: auto;
+      width: 100%; }
+
+/*
+.gallery {
+  &-item {
+    display: block;
+    width: 50%;
+
+    a {
+      display: inline-block;
+    }
+
+    img {
+      height: auto;
+      width: 100%;
+    }
+  }
+
+  &-item_2x {
+    width: 50%;
+  }
+
+  &-item_3x {
+    width: 33.33%;
+  }
+
+  &-item_4x {
+    width: 25%;
+  }
+
+  &-item_5x {
+    width: 20%;
+  }
+}
+*/
+.product {
+  background: #000;
+  display: grid;
+  grid-template-columns: auto 400px; }
+  .product .product-action-bar {
+    margin-top: 1.5rem; }
+  .product .product-content {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    color: #dee2e6;
+    font-size: 1rem;
+    line-height: 1.65;
+    margin: .75rem 0 0; }
+  .product .product-launch-date {
+    color: #999999;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 1.15rem; }
+    .product .product-launch-date span {
+      color: #f8f9fa; }
+  .product .product-media {
+    margin: 0; }
+  .product .product-price {
+    border-left: 2px solid #e53012;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: .25rem;
+    padding-left: 5rem; }
+  .product .product-quote {
+    color: #e9ecef;
+    font-size: 1rem;
+    font-weight: 500;
+    margin-top: .35rem; }
+  .product .product-title {
+    color: #f8f9fa;
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0; }
+  .product .product-views {
+    background: #f1f1f1;
+    border: 1px solid #cccccc;
+    border-radius: 1.25rem;
+    font-size: .85rem;
+    font-weight: 600;
+    margin-bottom: 1.1rem;
+    padding: .35rem 1.1rem; }
+    .product .product-views i {
+      color: #ffc107;
+      margin-right: .25rem; }
+  .product .product-excerpt {
+    align-items: flex-start;
+    padding: 40px 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative; }
 
 .product-full {
   background: #000;
