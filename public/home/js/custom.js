@@ -100,6 +100,50 @@ $(".new-featured").owlCarousel({
     }
 });
 
+$(".carousel_product-featured").owlCarousel({
+    loop: true,
+    margin: 24,
+    smartSpeed: 1000,
+    nav: true,
+    dots: false,
+    responsive:{
+        0:{
+            items:1
+        },
+        600:{
+            items:2
+        },
+        922:{
+            items:4
+        },
+        1000:{
+            items:4
+        }
+    }
+});
+
+$(".carousel_product-variant").owlCarousel({
+    loop: true,
+    margin: 24,
+    smartSpeed: 1000,
+    nav: true,
+    dots: false,
+    responsive:{
+        0:{
+            items:1
+        },
+        600:{
+            items:2
+        },
+        922:{
+            items:4
+        },
+        1000:{
+            items:4
+        }
+    }
+});
+
 $(".compare-vehicles").owlCarousel({
     loop: true,
     margin: 24,
@@ -457,3 +501,20 @@ $('#pills-tab a').click(function (e) {
 
 })(jQuery);
 
+$('.carousel_product-view').owlCarousel({
+    dots: 0,
+    loop:0,
+    margin:0,
+    nav:1,
+    responsive:{
+        0:{
+            items:1
+        },
+        600:{
+            items:1
+        },
+        1000:{
+            items:1
+        }
+    }
+});
