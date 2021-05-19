@@ -1,11 +1,12 @@
 <?php $__env->startSection('title'); ?><?php echo e(optional($car->BrandInfo)->brand_name); ?> <?php echo e(optional($car->ModelInfo)->model_name); ?> <?php echo e(optional($car->VariantInfo)->variant_name); ?> | Detail | Autopati <?php $__env->stopSection(); ?>
-<?php $__env->startSection('breadcrumb'); ?><?php echo e(optional($car->BrandInfo)->brand_name); ?> <?php echo e(optional($car->ModelInfo)->model_name); ?> <?php echo e(optional($car->VariantInfo)->variant_name); ?> <?php $__env->stopSection(); ?>
-<?php $__env->startSection('content'); ?>
 
+<?php $__env->startSection('breadcrumb'); ?><?php echo e(optional($car->BrandInfo)->brand_name); ?> <?php echo e(optional($car->ModelInfo)->model_name); ?> <?php echo e(optional($car->VariantInfo)->variant_name); ?> <?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('content'); ?>
     <?php echo $__env->make('home::home.partial.breadcrumb', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
     
-    <div class="section-padding">
+    <div class="section-padding section-first">
         <div class="container">
             <div class="product-full">
                 <?php
@@ -51,12 +52,33 @@
                         Rs. <?php echo e(number_to_words($car->starting_price)); ?>
                     </div>
 
+                    <?php if($car->is_offer_available == 1): ?>
                     <div class="product-action-bar">
-                        <?php if($car->is_offer_available == 1): ?>
-                        <h4 class="text-center"><a href="<?php echo e(route('car.offer',$car->id)); ?>" class="btn btn-primary btn-sm ">Get Offers</a></h4>
-                        <?php endif; ?>
+                        <h3 class="text-center"><a href="<?php echo e(route('car.offer',$car->id)); ?>" class="btn btn-primary btn-sm ">Get Offers</a></h3>
                     </div>
+                    <?php endif; ?>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="section-padding section-light">
+        <div class="container">
+            <div class="product-description">
+                <div class="product-information">
+                    <div class="block-title">
+                        <h3>
+                            <?php echo e(optional($car->BrandInfo)->brand_name); ?> <?php echo e(optional($car->ModelInfo)->model_name); ?> <?php echo e(optional($car->VariantInfo)->variant_name); ?>
+                        </h3>
+                    </div>
+
+                    <p><?php echo $car->description; ?>
+
+                    </p>
+                </div>
+
+                <div></div>
             </div>
         </div>
     </div>
@@ -64,14 +86,20 @@
     
     <div class="section-padding">
         <div class="container">
-            <div class="viewer">
-                <div class="viewer-control">
-                    <div class="block-title">
-                        <h3>
-                            Choose you vehicle colors
-                        </h3>
-                    </div>
+            <div class="block-title">
+                <h3>
+                    Choose you vehicle colors
+                </h3>
+            </div>
 
+            <div class="viewer">
+                <div class="viewer-display">
+                    <figure>
+                        <img src="/home/img/2.png" alt="">
+                    </figure>
+                </div>
+
+                <div class="viewer-control">
                     <div class="swatch swatch_color-picker">
                         <div class="swatch-option color">
                             <input type="radio" id="colorName1" name="Address" checked>
@@ -111,39 +139,13 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="viewer-display">
-                    <figure>
-                        <img src="/home/img/2.png" alt="">
-                    </figure>
-                </div>
             </div>
         </div>
     </div>
 
     
-    <div class="section-padding">
-        <div class="container">
-            <div class="product-description">
-                <div class="product-information">
-                    <div class="block-title">
-                        <h3>
-                            <?php echo e(optional($car->BrandInfo)->brand_name); ?> <?php echo e(optional($car->ModelInfo)->model_name); ?> <?php echo e(optional($car->VariantInfo)->variant_name); ?>
-                        </h3>
-                    </div>
-
-                    <p><?php echo $car->description; ?>
-
-                    </p>
-                </div>
-
-                <div></div>
-            </div>
-        </div>
-    </div>
-
-    
-    <div class="section-padding">
+   
+    <div class="section-padding section-light">
         <div class="container">
             <div class="block-product-specification">
                 <div class="block-title">
@@ -166,17 +168,16 @@
 
                         <?php if($config_count): ?>
                         <div class="column">
-
                             <div class="panel panel-default">
                                 <div class="panel-heading" role="tab" id="headingTwo">
-                                    <h4 class="panel-title">
+                                    <h3 class="panel-title">
                                         <?php if($features->isNotEmpty()): ?>
                                         <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#spec-<?php echo e($spec_val->id); ?>" aria-expanded="false" aria-controls="collapseTwo">
                                             <?php echo e($spec_val->spec_title); ?>
 
                                         </a>
                                         <?php endif; ?>
-                                    </h4>
+                                    </h3>
                                 </div>
                                 <div id="spec-<?php echo e($spec_val->id); ?>" class="panel-collapse collapse <?php if($loop->first): ?>collapse show <?php endif; ?> role="tabpanel" aria-labelledby="headingTwo">
                                 <div class="panel-body">
@@ -209,69 +210,80 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+
+                            </div>
+
+                            <div class="col-md-6">
+
+                            </div>
+                        </div>
                     </div>
                     <?php endif; ?>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+                    <div class="action-bar text-center mt-5">
+                        <a href="" class="btn btn-info">
+                            Show more
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
-    
     </div>
 
+    
     <?php if(sizeof($photo_feature)>0): ?>
-        <div class="container mt-4">
-            <h4>Featured Image</h4>
+        <div class="section-padding">
+            <div class="container">
+                <div class="block-title">
+                    <h3>Featured Image</h3>
+                </div>
 
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="owl-carousel owl-theme new-arrival">
-                        <?php $__currentLoopData = $photo_feature; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $feature_val): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            <?php
-                                $featimage = ($feature_val->feature_image) ? asset($feature_val->file_full_path).'/'.$feature_val->feature_image : asset('admin/image.png');
-                                $ipath = asset($feature_val->file_full_path).'/'.$feature_val->feature_image;
-                            ?>
+                
+                <div class="owl-carousel owl-theme nav-inside carousel_product-featured">
+                    <?php $__currentLoopData = $photo_feature; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $feature_val): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <?php
+                            $featimage = ($feature_val->feature_image) ? asset($feature_val->file_full_path).'/'.$feature_val->feature_image : asset('admin/image.png');
+                            $ipath = asset($feature_val->file_full_path).'/'.$feature_val->feature_image;
+                        ?>
 
-                            <div class="item">
-                                <div class="card-img-actions">
-                                    <a href="<?php echo e($ipath); ?>" target="_blank"><img class="card-img-top img-fluid" src="<?php echo e($featimage); ?>" alt=""></a>
-                                </div>
+                        <div class="item">
+                            <div class="card-img-actions">
+                                <a class="" href="<?php echo e($ipath); ?>" target="_blank"><img src="<?php echo e($featimage); ?>" alt=""></a>
                             </div>
-
-                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                    </div>
+                        </div>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </div>
             </div>
         </div>
     <?php endif; ?>
 
-
+    
     <?php if(sizeof($photo_gallery)>0): ?>
-
-        <div class="compare-image">
+        <div class="section-padding section-light">
             <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h4 class="mb-4">Photo</h4>
-                    </div>
+                <div class="block-title">
+                    <h3>Gallery</h3>
+                </div>
 
-
-                    <div class="col-md-3">
-
-                        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <div class="row align-items-start">
+                    <div class="col-md-3 sticky-theme">
+                        <div class="nav flex-column nav-pills menu-vertical" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                             <?php $__currentLoopData = $photo_gallery; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <a class="nav-link <?php if($loop->first): ?> active <?php endif; ?>" id="v-pills-home-tab" data-toggle="pill" href="#v<?php echo e($value->id); ?>" role="tab" aria-controls="v-pills-home" aria-selected="true"><?php echo e($value->gallery_title); ?></a>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </div>
                     </div>
 
-                    <div class="col-md-8">
-
+                    <div class="col-md-9">
                         <div class="tab-content" id="v-pills-tabContent">
                             <?php $__currentLoopData = $photo_gallery; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <div class="tab-pane fade show <?php if($loop->first): ?> active <?php endif; ?>" id="v<?php echo e($value->id); ?>" role="tabpanel" aria-labelledby="v-pills-home-tab">
-                                    <div class="row">
+                                    <div class="gallery">
                                         <?php if(!$value->galleryDetail->isEmpty()): ?>
                                             <?php $__currentLoopData = $value->galleryDetail; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $gallery): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <?php
@@ -279,86 +291,197 @@
                                                     $ipath = asset($gallery->file_full_path).'/'.$gallery->car_image_path;
                                                 ?>
 
-                                                <div class="col-md-6">
-                                                    <div class="compare-image__item">
-                                                        <a href="<?php echo e($ipath); ?>" target="_blank"><img src="<?php echo e($ipath); ?>"></a>
-                                                        
-                                                        
-                                                    </div>
+                                                <div class="gallery-item">
+                                                    <a href="<?php echo e($ipath); ?>" target="_blank"><img src="<?php echo e($ipath); ?>"></a>
+                                                    
+                                                    
                                                 </div>
                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         <?php else: ?>
                                             <p>No Gallery Images Added</p>>
                                         <?php endif; ?>
-
                                     </div>
                                 </div>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </div>
-
                     </div>
-
-
                 </div>
             </div>
         </div>
     <?php endif; ?>
 
+    
+    <section class="section-padding">
+        <div class="container">
+            <div class="block-title">
+                <div class="section-title--content">
+                    <h4>
+                        Car <span>variant</span>
+                    </h4>
+                </div>
+            </div>
 
+            <div class="owl-carousel owl-theme carousel_product-variant nav-inside">
+                <div class="item product is-dark">
+                    <figure class="product-media">
+                        <img src="/home/img/f1.jpg" alt="">
+                    </figure>
 
+                    <div class="product-excerpt">
+                        <div class="product-title">
+                            Hyundai Corola
+                        </div>
 
+                        <div class="product-price">
+                            <div class="price-new">
+                                <span>Rs</span>
+                                <span>35,00,000</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item product is-dark">
+                    <figure class="product-media">
+                        <img src="/home/img/f1.jpg" alt="">
+                    </figure>
+
+                    <div class="product-excerpt">
+                        <div class="product-title">
+                            Hyundai Corola
+                        </div>
+
+                        <div class="product-price">
+                            <div class="price-new">
+                                <span>Rs</span>
+                                <span>35,00,000</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item product is-dark">
+                    <figure class="product-media">
+                        <img src="/home/img/f1.jpg" alt="">
+                    </figure>
+
+                    <div class="product-excerpt">
+                        <div class="product-title">
+                            Hyundai Corola
+                        </div>
+
+                        <div class="product-price">
+                            <div class="price-new">
+                                <span>Rs</span>
+                                <span>35,00,000</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item product is-dark">
+                    <figure class="product-media">
+                        <img src="/home/img/f1.jpg" alt="">
+                    </figure>
+
+                    <div class="product-excerpt">
+                        <div class="product-title">
+                            Hyundai Corola
+                        </div>
+
+                        <div class="product-price">
+                            <div class="price-new">
+                                <span>Rs</span>
+                                <span>35,00,000</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item product is-dark">
+                    <figure class="product-media">
+                        <img src="/home/img/f1.jpg" alt="">
+                    </figure>
+
+                    <div class="product-excerpt">
+                        <div class="product-title">
+                            Hyundai Corola
+                        </div>
+
+                        <div class="product-price">
+                            <div class="price-new">
+                                <span>Rs</span>
+                                <span>35,00,000</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     
+    <section class="section-padding section-dark">
+        <div class="container">
+            <div class="block_video-1x text-center">
+                <iframe src="https://www.youtube.com/embed/55Na62DP6-U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
 
+    
     <?php $similarcars = app('\App\Modules\Cars\Repositories\CarRepository'); ?>
     <?php
         $brand_id = optional($car->BrandInfo)->id;
         $model_id = optional($car->ModelInfo)->id;
         $variant_id = optional($car->VariantInfo)->id;
         $similar_cars = $similarcars->findSimilarCar($limit=12,$brand_id,$model_id,$variant_id,$car->id);
-
     ?>
     <?php if($similar_cars->isNotEmpty()): ?>
-        <section class="ecm-features home-tabs ecm-new bg-grey pt-4 pb-4">
+        <section class="section-padding section-light">
             <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-sm-12">
-                        <div class="ecm-features__title d-flex align-items-center justify-content-between">
-                            <h1><span>Similar</span> Cars</h1>
-                            <a href="product-list.php" class="see-all text-right">View all <i class="fa fa-angle-right"></i></a>
-                        </div>
-                    </div>
+                <div class="ecm-features__title d-flex align-items-center justify-content-between">
+                    <h1><span>Similar</span> Cars</h1>
+                    <a href="product-list.php" class="see-all text-right">View all <i class="fa fa-angle-right"></i></a>
                 </div>
-                <div class="row">
-                    <div class="col-12">
 
-                        <div class="owl-carousel owl-theme new-arrival">
-                            <?php $__currentLoopData = $similar_cars; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $similar_car): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <?php
-                                    if($similar_car->car_image){
-                                        $imagePath = asset($similar_car->file_full_path).'/'.$similar_car->car_image;
-                                    }else{
-                                        $imagePath = asset('admin/vehicle.jpeg');
-                                    }
-                                ?>
+                <div class="owl-carousel owl-theme new-arrival">
+                    <?php $__currentLoopData = $similar_cars; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $similar_car): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <?php
+                            if($similar_car->car_image){
+                                $imagePath = asset($similar_car->file_full_path).'/'.$similar_car->car_image;
+                            }else{
+                                $imagePath = asset('admin/vehicle.jpeg');
+                            }
+                        ?>
 
-                                <div class="item">
-                                    <a href="<?php echo e(route('car.detail',$similar_car->id)); ?>" class="services_item_desc" style="color: black;">
-                                        <img src="<?php echo e($imagePath); ?>" alt="" height="200">
-                                        <span><?php echo e(optional($similar_car->BrandInfo)->brand_name); ?> </span>
-                                        <h6><?php echo e(optional($similar_car->ModelInfo)->model_name); ?> <?php echo e(optional($similar_car->VariantInfo)->variant_name); ?> </h6>
-
-                                        <h5>Rs. <?php echo e(number_to_words($similar_car->starting_price)); ?></h5>
-                                    </a>
+                        <div class="item">
+                            <a href="<?php echo e(route('car.detail',$similar_car->id)); ?>" class="product" style="color: black;">
+                                <div class="product-media">
+                                    <img src="<?php echo e($imagePath); ?>" alt="">
                                 </div>
-                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
+                                <div class="product-excerpt">
+                                    <div class="product-brand">
+                                        <?php echo e(optional($similar_car->BrandInfo)->brand_name); ?>
+
+                                    </div>
+
+                                    <h6 class="product-title"><?php echo e(optional($similar_car->ModelInfo)->model_name); ?> <?php echo e(optional($similar_car->VariantInfo)->variant_name); ?> </h6>
+
+                                    <h5 class="product-price">Rs. <?php echo e(number_to_words($similar_car->starting_price)); ?></h5>
+                                </div>
+                            </a>
                         </div>
-                    </div>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
                 </div>
             </div>
         </section>
     <?php endif; ?>
-
 <?php $__env->stopSection(); ?>
+
+
+
+
+
+
+
+
 <?php echo $__env->make('home::layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /Users/angadgupta/Desktop/Bidhee/Autopati/autopati/app/Modules/Home/Resources/views/home/detail.blade.php ENDPATH**/ ?>
