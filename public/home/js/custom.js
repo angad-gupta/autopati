@@ -106,7 +106,6 @@ $(".carousel_product-featured").owlCarousel({
     smartSpeed: 1000,
     nav: true,
     dots: false,
-    navText : ["<i class='fa fa-chevron-left'></i>","<i class='fa fa-chevron-right'></i>"],
     responsive:{
         0:{
             items:1
@@ -129,7 +128,6 @@ $(".carousel_product-variant").owlCarousel({
     smartSpeed: 1000,
     nav: true,
     dots: false,
-    navText : ["<i class='fa fa-chevron-left'></i>","<i class='fa fa-chevron-right'></i>"],
     responsive:{
         0:{
             items:1

@@ -1,7 +1,7 @@
 
 <section class="rtt-subscribe" style="background-image: url('home/img/banner-two.png');">
     <div class="container">
-        <div class="row justify-content-center">
+        <div class="row align-items-center">
             <div class="col-md-6">
                 <div class="text-white">
                     <h3>Keep updated & Get Unlimited Offers</h3>
@@ -11,12 +11,12 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="rtt-subscribe--form d-flex align-items-center justify-content-center">
+                <div class="rtt-subscribe--form justify-content-end">
                     <form action="{{route('subscription')}}" method="post">
                         @csrf
-                        <input type="email" name="email" value="" placeholder="Your email address here" required>
+                        <input class="form-control" type="email" name="email" value="" placeholder="Your email address here" required>
                         <input type="number" name="status" value="1" hidden/>
-                        <button class="btn btn-warning ml-2" type="submit">Subscribe</button>
+                        <button class="btn btn-info" type="submit">Subscribe</button>
                     </form>
                 </div>
             </div>

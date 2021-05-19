@@ -5,11 +5,10 @@
 @section('breadcrumb'){{optional($car->BrandInfo)->brand_name }} {{ optional($car->ModelInfo)->model_name }} {{ optional($car->VariantInfo)->variant_name }} @stop
 
 @section('content')
-
     @include('home::home.partial.breadcrumb')
 
     {{-- Product Details --}}
-    <div class="section-padding">
+    <div class="section-padding section-first">
         <div class="container">
             <div class="product-full">
                 <?php
@@ -147,16 +146,13 @@
     </div>
 
     {{-- Product technical specification --}}
-    <div class="section-padding section-light">
+   {{-- <div class="section-padding section-light">
         <div class="container">
             <div class="row">
-                {{-- Technical specificaiton block --}}
                 <div class="col-md-6">
                     <div class="block-title">
                         <h3>
                             <span>Technical Specification :</span>
-                            <!-- Product name redundant -->
-                        <?php /*echo e(optional($car->BrandInfo)->brand_name); */?><!-- <?php /*echo e(optional($car->ModelInfo)->model_name); */?> --><?php /*echo e(optional($car->VariantInfo)->variant_name); */?>
                         </h3>
                     </div>
 
@@ -164,13 +160,12 @@
                         <div class="panel-group">
                             <div class="column">
                                 Dummy item
-                                {{-- Panel item goes here--}}
+                                 Panel item goes here
                             </div>
                         </div>
                     </div>
                 </div>
 
-                {{-- Technical specificaiton block --}}
                 <div class="col-md-6">
                     <div class="block-title">
                         <h3>
@@ -182,14 +177,14 @@
                         <div class="panel-group">
                             <div class="column">
                                 Dummy item
-                                {{-- Panel item goes here--}}
+                                 Panel item goes here
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </div>--}}
     <div class="section-padding section-light">
         <div class="container">
             <div class="block-product-specification">
@@ -268,6 +263,12 @@
                     </div>
                     <?php endif; ?>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+                    <div class="action-bar text-center mt-5">
+                        <a href="" class="btn btn-info">
+                            Show more
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -352,15 +353,87 @@
     {{-- Product variant --}}
     <section class="section-padding">
         <div class="container">
-            <div class="section-title">
+            <div class="block-title">
                 <div class="section-title--content">
-                    <h2>
+                    <h4>
                         Car <span>variant</span>
-                    </h2>
+                    </h4>
                 </div>
             </div>
 
-            <div class="owl-carousel owl-theme carousel_product-variant">
+            <div class="owl-carousel owl-theme carousel_product-variant nav-inside">
+                <div class="item product is-dark">
+                    <figure class="product-media">
+                        <img src="/home/img/f1.jpg" alt="">
+                    </figure>
+
+                    <div class="product-excerpt">
+                        <div class="product-title">
+                            Hyundai Corola
+                        </div>
+
+                        <div class="product-price">
+                            <div class="price-new">
+                                <span>Rs</span>
+                                <span>35,00,000</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item product is-dark">
+                    <figure class="product-media">
+                        <img src="/home/img/f1.jpg" alt="">
+                    </figure>
+
+                    <div class="product-excerpt">
+                        <div class="product-title">
+                            Hyundai Corola
+                        </div>
+
+                        <div class="product-price">
+                            <div class="price-new">
+                                <span>Rs</span>
+                                <span>35,00,000</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item product is-dark">
+                    <figure class="product-media">
+                        <img src="/home/img/f1.jpg" alt="">
+                    </figure>
+
+                    <div class="product-excerpt">
+                        <div class="product-title">
+                            Hyundai Corola
+                        </div>
+
+                        <div class="product-price">
+                            <div class="price-new">
+                                <span>Rs</span>
+                                <span>35,00,000</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item product is-dark">
+                    <figure class="product-media">
+                        <img src="/home/img/f1.jpg" alt="">
+                    </figure>
+
+                    <div class="product-excerpt">
+                        <div class="product-title">
+                            Hyundai Corola
+                        </div>
+
+                        <div class="product-price">
+                            <div class="price-new">
+                                <span>Rs</span>
+                                <span>35,00,000</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="item product is-dark">
                     <figure class="product-media">
                         <img src="/home/img/f1.jpg" alt="">
