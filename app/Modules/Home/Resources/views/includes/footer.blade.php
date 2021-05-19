@@ -101,7 +101,9 @@
 
 <div class="footer-bottom">
     <div class="container">
-        <p class="m-0">©{{$footer->company_copyright}} <a href="/">{{$footer->company_name}}</a>. Developed by <a href="https://www.bidhee.com/" target="__blank">Bidhee Pvt. Ltd.</a></p>
+        <p class="m-0 text-center">
+            <small>© {{$footer->company_copyright}} <a href="/">{{$footer->company_name}}</a>. Developed by <a href="https://www.bidhee.com/" target="__blank">Bidhee Pvt. Ltd.</a></small>
+        </p>
     </div>
 </div>
 

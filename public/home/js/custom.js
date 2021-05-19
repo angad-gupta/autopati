@@ -53,13 +53,12 @@ $(".discount-slider").owlCarousel({
 });
 
 $(".new-arrival").owlCarousel({
-    loop: true,
+    loop: 1,
     margin: 30,
     smartSpeed: 1000,
     autoplay: true,
     nav: true,
     dots: false,
-    navText : ["<i class='fa fa-chevron-left'></i>","<i class='fa fa-chevron-right'></i>"],
     responsive:{
         0:{
             items:1
@@ -76,14 +75,12 @@ $(".new-arrival").owlCarousel({
     }
 });
 
-
 $(".new-featured").owlCarousel({
     loop: true,
     margin: 24,
     smartSpeed: 1000,
     nav: true,
     dots: false,
-    navText : ["<i class='fa fa-chevron-left'></i>","<i class='fa fa-chevron-right'></i>"],
     responsive:{
         0:{
             items:1
@@ -150,7 +147,6 @@ $(".compare-vehicles").owlCarousel({
     smartSpeed: 1000,
     nav: true,
     dots: false,
-    navText : ["<i class='fa fa-chevron-left'></i>","<i class='fa fa-chevron-right'></i>"],
     responsive:{
         0:{
             items:1
@@ -174,8 +170,7 @@ $(".stock-clearance").owlCarousel({
     smartSpeed: 1000,
     autoplay: true,
     nav: true,
-    dots: false,
-    navText : ["<i class='fa fa-chevron-left'></i>","<i class='fa fa-chevron-right'></i>"],
+    dots: false
 });
 
 $(".trending-products").owlCarousel({
@@ -185,7 +180,6 @@ $(".trending-products").owlCarousel({
     autoplay: true,
     nav: true,
     dots: false,
-    navText : ["<i class='fa fa-chevron-left'></i>","<i class='fa fa-chevron-right'></i>"],
     responsive:{
         0:{
             items:1

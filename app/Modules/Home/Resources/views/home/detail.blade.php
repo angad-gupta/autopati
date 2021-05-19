@@ -476,6 +476,18 @@
     @if($similar_cars->isNotEmpty())
         <section class="section-padding section-light">
             <div class="container">
+                <div class="section-title">
+                    <div class="section-title--content">
+                        <h2>
+                            Similar <span>cars</span>
+                        </h2>
+                    </div>
+
+                    <div class="section-title--support">
+
+                    </div>
+                </div>
+
                 <div class="ecm-features__title d-flex align-items-center justify-content-between">
                     <h1><span>Similar</span> Cars</h1>
                     <a href="product-list.php" class="see-all text-right">View all <i class="fa fa-angle-right"></i></a>
