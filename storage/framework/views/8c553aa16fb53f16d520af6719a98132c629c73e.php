@@ -1,7 +1,7 @@
 
 <section class="rtt-subscribe" style="background-image: url('home/img/banner-two.png');">
     <div class="container">
-        <div class="row align-items-center">
+        <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="text-white">
                     <h3>Keep updated & Get Unlimited Offers</h3>
@@ -11,11 +11,11 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="rtt-subscribe--form">
+                <div class="rtt-subscribe--form d-flex align-items-center justify-content-center">
                     <form action="<?php echo e(route('subscription')); ?>" method="post">
                         <?php echo csrf_field(); ?>
-                        <input class="form-control" type="email" name="email" value="" placeholder="Your email address here" required>
-                        <input class="form-control" type="number" name="status" value="1" hidden/>
+                        <input type="email" name="email" value="" placeholder="Your email address here" required>
+                        <input type="number" name="status" value="1" hidden/>
                         <button class="btn btn-warning ml-2" type="submit">Subscribe</button>
                     </form>
                 </div>
@@ -29,7 +29,7 @@
         <div class="row">
             <?php $setting = app('\App\Modules\Setting\Repositories\SettingRepository'); ?>
             <?php
-            $footer = $setting->getdata();
+                $footer = $setting->getdata();
             ?>
             <div class="col-sm-6 col-md-3">
                 <h5><?php echo e($footer->company_name); ?></h5>
@@ -53,11 +53,12 @@
                     <a class="youtube" href="<?php echo e($footer->youtube_link); ?>" target="__blank"><i class="fa fa-youtube"></i></a>
                 </div>
             </div>
-            <div class="col-sm-6 col-md-3">
+
+            <div class="col-sm-6 col-md-3 mt-3 mt-md-0">
                 <h5>Useful Links</h5>
                 <?php $pages = app('\App\Modules\Page\Repositories\PageRepository'); ?>
                 <?php
-                $active_pages = $pages->findActivePage($limit=50);
+                    $active_pages = $pages->findActivePage($limit=50);
                 ?>
 
 
@@ -71,20 +72,20 @@
                 </ul>
             </div>
 
-            <div class="col-sm-6 col-md-3">
+            <div class="col-sm-6 col-md-3 mt-3 mt-sm- 3 mt-md-0">
                 <h5>Customer Links</h5>
                 <ul class="list-unstyled f-links">
                     <li><a href="<?php echo e(route('list.latest-car')); ?>">Latest Cars</a></li>
                     <li><a href="<?php echo e(route('list.popular-car')); ?>">Popular Cars</a></li>
-
+                    
                 </ul>
             </div>
 
-            <div class="col-sm-6 col-md-3">
+            <div class="col-sm-6 col-md-3 mt-3 mt-sm- 3 mt-md-0">
                 <h5>Popular Cars By Make</h5>
                 <?php $popular_brand = app('\App\Modules\Cars\Repositories\CarRepository'); ?>
                 <?php
-                $popular_brands = $popular_brand->findPopularBrand($limit=5);
+                    $popular_brands = $popular_brand->findPopularBrand($limit=5);
 
                 ?>
 
@@ -97,19 +98,15 @@
             </div>
         </div>
     </div>
+
     <a id="back2Top" title="Back to top" href="#"><i class="fa fa-angle-up"></i></a>
 </footer>
 
 <div class="footer-bottom">
     <div class="container">
-        <div class="row">
-            <div class="col-12 text-center">
-                <p>©<?php echo e($footer->company_copyright); ?> <a href="/"><?php echo e($footer->company_name); ?></a>. Developed by <a href="https://www.bidhee.com/" target="__blank">Bidhee Pvt. Ltd.</a></p>
-            </div>
-        </div>
+        <p class="m-0">©<?php echo e($footer->company_copyright); ?> <a href="/"><?php echo e($footer->company_name); ?></a>. Developed by <a href="https://www.bidhee.com/" target="__blank">Bidhee Pvt. Ltd.</a></p>
     </div>
 </div>
-
 
 <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script> -->
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>

@@ -205,12 +205,13 @@
                                  
                                 </ul>
                             </div>
-                  
                         </form>
+
                         <ul class="list-unstyled mb-0 ap-header-login">
                             <li><a href="#" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-user"></i></a></li>
                         </ul>
-                        <i class="fa fa-bars text-white" id="mobile-trigger"></i>
+
+                        <i class="fa fa-bars btn-nav-toggler" id="mobile-trigger"></i>
                     </div>
                 </div>
             </div>

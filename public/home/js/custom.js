@@ -457,3 +457,21 @@ $('#pills-tab a').click(function (e) {
 
 })(jQuery);
 
+$('.carousel_product-view').owlCarousel({
+    dots: 0,
+    loop:0,
+    margin:0,
+    nav:1,
+    responsive:{
+        0:{
+            items:1
+        },
+        600:{
+            items:1
+        },
+        1000:{
+            items:1
+        }
+    }
+});
+
