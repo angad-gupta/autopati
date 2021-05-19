@@ -5,6 +5,7 @@
 
     @include('home::home.partial.breadcrumb')
 
+    {{-- Product Details --}}
     <div class="section-padding">
         <div class="container">
             <div class="product-full">
@@ -43,10 +44,9 @@
                         <?php endif; ?>
                     </div>
 
-                    <div class="product-content" style="color: gray;">
+                    <div class="product-content">
                         <?php echo e($car->short_content); ?>
                     </div>
-
 
                     <div class="product-price" >
                         Rs. <?php echo e(number_to_words($car->starting_price)); ?>
@@ -62,6 +62,67 @@
         </div>
     </div>
 
+    {{-- Product color varient --}}
+    <div class="section-padding">
+        <div class="container">
+            <div class="viewer">
+                <div class="viewer-control">
+                    <div class="block-title">
+                        <h3>
+                            Choose you vehicle colors
+                        </h3>
+                    </div>
+
+                    <div class="swatch swatch_color-picker">
+                        <div class="swatch-option color">
+                            <input type="radio" id="colorName1" name="Address" checked>
+
+                            <label for="colorName1" data-toggle="tooltip" data-placement="top" title="Red" style="background: red">
+                            </label>
+                        </div>
+                        <div class="swatch-option color">
+                            <input type="radio" id="colorName2" name="Address">
+
+                            <label for="colorName2" data-toggle="tooltip" data-placement="top" title="Yellow" style="background: yellow">
+                            </label>
+                        </div>
+                        <div class="swatch-option color">
+                            <input type="radio" id="colorName3" name="Address">
+
+                            <label for="colorName3" data-toggle="tooltip" data-placement="top" title="White" style="background: white">
+                            </label>
+                        </div>
+                        <div class="swatch-option color">
+                            <input type="radio" id="colorName4" name="Address">
+
+                            <label for="colorName4" data-toggle="tooltip" data-placement="top" title="Pink" style="background: pink">
+                            </label>
+                        </div>
+                        <div class="swatch-option color">
+                            <input type="radio" id="colorName5" name="Address">
+
+                            <label for="colorName5" data-toggle="tooltip" data-placement="top" title="Black" style="background: black">
+                            </label>
+                        </div>
+                        <div class="swatch-option color">
+                            <input type="radio" id="colorName6" name="Address">
+
+                            <label for="colorName6" data-toggle="tooltip" data-placement="top" title="Purple" style="background: purple">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="viewer-display">
+                    <figure>
+                        <img src="/home/img/2.png" alt="">
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- Product description --}}
     <div class="section-padding">
         <div class="container">
             <div class="product-description">
@@ -77,27 +138,36 @@
                     </p>
                 </div>
 
-                <div class="product-specification">
-                    <div class="block-title">
-                        <h3>
-                            <span>Technical Specification :</span>
-                            <!-- Product name redundant -->
-                        <?php /*echo e(optional($car->BrandInfo)->brand_name); */?><!-- <?php /*echo e(optional($car->ModelInfo)->model_name); */?> --><?php /*echo e(optional($car->VariantInfo)->variant_name); */?>
-                        </h3>
-                    </div>
+                <div></div>
+            </div>
+        </div>
+    </div>
 
-                    <div class="page-accordian">
-                        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    {{-- Product technical specification --}}
+    <div class="section-padding">
+        <div class="container">
+            <div class="block-product-specification">
+                <div class="block-title">
+                    <h3>
+                        <span>Technical Specification :</span>
+                        <!-- Product name redundant -->
+                    <?php /*echo e(optional($car->BrandInfo)->brand_name); */?><!-- <?php /*echo e(optional($car->ModelInfo)->model_name); */?> --><?php /*echo e(optional($car->VariantInfo)->variant_name); */?>
+                    </h3>
+                </div>
 
-                            <?php $configuration = app('\App\Modules\Configuration\Repositories\ConfigurationRepository'); ?>
-                            <?php $__currentLoopData = $car_spec; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $spec_val): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <div class="page-accordian">
+                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                        <?php $configuration = app('\App\Modules\Configuration\Repositories\ConfigurationRepository'); ?>
+                        <?php $__currentLoopData = $car_spec; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $spec_val): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
-                            <?php
-                            $features = $configuration->findAllBySpecId($spec_val->id);
-                            $config_count = $configuration->countBySpecId($spec_val->id);
-                            ?>
+                        <?php
+                        $features = $configuration->findAllBySpecId($spec_val->id);
+                        $config_count = $configuration->countBySpecId($spec_val->id);
+                        ?>
 
-                            <?php if($config_count): ?>
+                        <?php if($config_count): ?>
+                        <div class="column">
+
                             <div class="panel panel-default">
                                 <div class="panel-heading" role="tab" id="headingTwo">
                                     <h4 class="panel-title">
@@ -140,10 +210,9 @@
                                 </div>
                             </div>
                         </div>
-                        <?php endif; ?>
-                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-
                     </div>
+                    <?php endif; ?>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </div>
             </div>
         </div>
