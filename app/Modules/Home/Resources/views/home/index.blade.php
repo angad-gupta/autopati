@@ -3,11 +3,9 @@
 @section('title')Home | Autopati @stop
 @section('content')
 
-
     @if(count($header_banners) > 0)
         <section class="ecm-banner">
-            <div class="owl-carousel owl-theme banner-slider">
-
+            <div class="owl-carousel owl-theme banner-slider nav-inside pagination-inside">
                 @foreach($header_banners as $header_banner)
                     <div class="item">
                         <div class="banner-block" style="background-image: url('{{ ($header_banner->banner_image) ? asset($header_banner->file_full_path).'/'.$header_banner->banner_image : asset('admin/vehicle.jpeg' )}}');">

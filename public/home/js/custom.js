@@ -22,11 +22,13 @@ $(".image-popup").magnificPopup({
 $(".banner-slider").owlCarousel({
     items: 1,
     loop: true,
-    margin: 10,
-    smartSpeed: 1000,
+    margin: 0,
+    smartSpeed: 2000,
     autoplay: true,
     nav: false,
     dots: true,
+    autoplayTimeout:10000,
+    autoplayHoverPause:true
 });
 
 $(".discount-slider").owlCarousel({

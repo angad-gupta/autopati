@@ -185,7 +185,7 @@
                 @endphp
 
                 <div class="d-flex align-items-center">
-                    <form action="{{route('search')}}" class="ap-search">
+                    <form action="{{route('search')}}" class="ap-search mr-3">
                         <input type="text" name="date" id="" value="{{$current_date}}" hidden>
                         <div class="search-box d-flex">
                             <input type="text" name="keyword" id="" placeholder="Search..." autocomplete="off">

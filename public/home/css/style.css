@@ -254,12 +254,9 @@ header .top-header .search-box {
   overflow: hidden;
   width: 100%; }
 
-header .top-header form {
-  width: 60%;
-  margin-right: 30px; }
-
 header .top-header .search-box input {
   background: #fff;
+  min-width: 220px;
   width: 100%;
   padding: 5px 15px;
   border: 1px solid #ccc; }
