@@ -97,7 +97,7 @@
             <div class="viewer">
                 <div class="viewer-display">
                     <figure>
-                        <img src="/home/img/2.png" alt="">
+                        <img src="http://127.0.0.1:8000/uploads/car/2021-03-25-10-30-50-hyundai-i30-n-front.jpeg" alt="">
                     </figure>
                 </div>
 
@@ -351,6 +351,16 @@
     @endif
 
     {{-- Product variant --}}
+
+    @inject('similarcars', '\App\Modules\Cars\Repositories\CarRepository')
+    @php
+        $brand_id = optional($car->BrandInfo)->id;
+        $model_id = optional($car->ModelInfo)->id;
+        $variant_id = optional($car->VariantInfo)->id;
+        $similar_cars = $similarcars->findSimilarCar($limit=12,$brand_id,$model_id,$variant_id,$car->id);
+    @endphp
+    @if($similar_cars->isNotEmpty())
+
     <section class="section-padding">
         <div class="container">
             <div class="block-title">
@@ -362,99 +372,38 @@
             </div>
 
             <div class="owl-carousel owl-theme carousel_product-variant nav-inside">
+                @foreach($similar_cars as $similar_car)
+                @php
+                    if($similar_car->car_image){
+                        $imagePath = asset($similar_car->file_full_path).'/'.$similar_car->car_image;
+                    }else{
+                        $imagePath = asset('admin/vehicle.jpeg');
+                    }
+                @endphp
+
                 <div class="item product is-dark">
                     <figure class="product-media">
-                        <img src="/home/img/f1.jpg" alt="">
+                        <img src="{{$imagePath}}" alt="">
                     </figure>
 
                     <div class="product-excerpt">
                         <div class="product-title">
-                            Hyundai Corola
+                            <a href="{{route('car.detail',$similar_car->id)}}" style="color: black;">{{ optional($similar_car->ModelInfo)->model_name }} {{ optional($similar_car->VariantInfo)->variant_name }}</a>
                         </div>
 
                         <div class="product-price">
                             <div class="price-new">
                                 <span>Rs</span>
-                                <span>35,00,000</span>
+                                <span>{{number_to_words($similar_car->starting_price)}}</span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="item product is-dark">
-                    <figure class="product-media">
-                        <img src="/home/img/f1.jpg" alt="">
-                    </figure>
-
-                    <div class="product-excerpt">
-                        <div class="product-title">
-                            Hyundai Corola
-                        </div>
-
-                        <div class="product-price">
-                            <div class="price-new">
-                                <span>Rs</span>
-                                <span>35,00,000</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item product is-dark">
-                    <figure class="product-media">
-                        <img src="/home/img/f1.jpg" alt="">
-                    </figure>
-
-                    <div class="product-excerpt">
-                        <div class="product-title">
-                            Hyundai Corola
-                        </div>
-
-                        <div class="product-price">
-                            <div class="price-new">
-                                <span>Rs</span>
-                                <span>35,00,000</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item product is-dark">
-                    <figure class="product-media">
-                        <img src="/home/img/f1.jpg" alt="">
-                    </figure>
-
-                    <div class="product-excerpt">
-                        <div class="product-title">
-                            Hyundai Corola
-                        </div>
-
-                        <div class="product-price">
-                            <div class="price-new">
-                                <span>Rs</span>
-                                <span>35,00,000</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item product is-dark">
-                    <figure class="product-media">
-                        <img src="/home/img/f1.jpg" alt="">
-                    </figure>
-
-                    <div class="product-excerpt">
-                        <div class="product-title">
-                            Hyundai Corola
-                        </div>
-
-                        <div class="product-price">
-                            <div class="price-new">
-                                <span>Rs</span>
-                                <span>35,00,000</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>
+    @endif
 
     {{-- Video section --}}
     <section class="section-padding section-dark">
@@ -466,7 +415,7 @@
     </section>
 
     {{-- Similar cars --}}
-    @inject('similarcars', '\App\Modules\Cars\Repositories\CarRepository')
+    {{-- @inject('similarcars', '\App\Modules\Cars\Repositories\CarRepository')
     @php
         $brand_id = optional($car->BrandInfo)->id;
         $model_id = optional($car->ModelInfo)->id;
@@ -525,7 +474,7 @@
                 </div>
             </div>
         </section>
-    @endif
+    @endif --}}
 @endsection
 
 {{--<div class="compare-page">

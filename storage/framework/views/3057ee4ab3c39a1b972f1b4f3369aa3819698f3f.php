@@ -104,7 +104,9 @@
 
 <div class="footer-bottom">
     <div class="container">
-        <p class="m-0">©<?php echo e($footer->company_copyright); ?> <a href="/"><?php echo e($footer->company_name); ?></a>. Developed by <a href="https://www.bidhee.com/" target="__blank">Bidhee Pvt. Ltd.</a></p>
+        <p class="m-0 text-center">
+            <small>© <?php echo e($footer->company_copyright); ?> <a href="/"><?php echo e($footer->company_name); ?></a>. Developed by <a href="https://www.bidhee.com/" target="__blank">Bidhee Pvt. Ltd.</a></small>
+        </p>
     </div>
 </div>
 

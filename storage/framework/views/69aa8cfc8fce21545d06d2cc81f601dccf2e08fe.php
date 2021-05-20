@@ -95,7 +95,7 @@
             <div class="viewer">
                 <div class="viewer-display">
                     <figure>
-                        <img src="/home/img/2.png" alt="">
+                        <img src="http://127.0.0.1:8000/uploads/car/2021-03-25-10-30-50-hyundai-i30-n-front.jpeg" alt="">
                     </figure>
                 </div>
 
@@ -311,6 +311,16 @@
     <?php endif; ?>
 
     
+
+    <?php $similarcars = app('\App\Modules\Cars\Repositories\CarRepository'); ?>
+    <?php
+        $brand_id = optional($car->BrandInfo)->id;
+        $model_id = optional($car->ModelInfo)->id;
+        $variant_id = optional($car->VariantInfo)->id;
+        $similar_cars = $similarcars->findSimilarCar($limit=12,$brand_id,$model_id,$variant_id,$car->id);
+    ?>
+    <?php if($similar_cars->isNotEmpty()): ?>
+
     <section class="section-padding">
         <div class="container">
             <div class="block-title">
@@ -322,99 +332,38 @@
             </div>
 
             <div class="owl-carousel owl-theme carousel_product-variant nav-inside">
+                <?php $__currentLoopData = $similar_cars; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $similar_car): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <?php
+                    if($similar_car->car_image){
+                        $imagePath = asset($similar_car->file_full_path).'/'.$similar_car->car_image;
+                    }else{
+                        $imagePath = asset('admin/vehicle.jpeg');
+                    }
+                ?>
+
                 <div class="item product is-dark">
                     <figure class="product-media">
-                        <img src="/home/img/f1.jpg" alt="">
+                        <img src="<?php echo e($imagePath); ?>" alt="">
                     </figure>
 
                     <div class="product-excerpt">
                         <div class="product-title">
-                            Hyundai Corola
+                            <a href="<?php echo e(route('car.detail',$similar_car->id)); ?>" style="color: black;"><?php echo e(optional($similar_car->ModelInfo)->model_name); ?> <?php echo e(optional($similar_car->VariantInfo)->variant_name); ?></a>
                         </div>
 
                         <div class="product-price">
                             <div class="price-new">
                                 <span>Rs</span>
-                                <span>35,00,000</span>
+                                <span><?php echo e(number_to_words($similar_car->starting_price)); ?></span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="item product is-dark">
-                    <figure class="product-media">
-                        <img src="/home/img/f1.jpg" alt="">
-                    </figure>
-
-                    <div class="product-excerpt">
-                        <div class="product-title">
-                            Hyundai Corola
-                        </div>
-
-                        <div class="product-price">
-                            <div class="price-new">
-                                <span>Rs</span>
-                                <span>35,00,000</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item product is-dark">
-                    <figure class="product-media">
-                        <img src="/home/img/f1.jpg" alt="">
-                    </figure>
-
-                    <div class="product-excerpt">
-                        <div class="product-title">
-                            Hyundai Corola
-                        </div>
-
-                        <div class="product-price">
-                            <div class="price-new">
-                                <span>Rs</span>
-                                <span>35,00,000</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item product is-dark">
-                    <figure class="product-media">
-                        <img src="/home/img/f1.jpg" alt="">
-                    </figure>
-
-                    <div class="product-excerpt">
-                        <div class="product-title">
-                            Hyundai Corola
-                        </div>
-
-                        <div class="product-price">
-                            <div class="price-new">
-                                <span>Rs</span>
-                                <span>35,00,000</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item product is-dark">
-                    <figure class="product-media">
-                        <img src="/home/img/f1.jpg" alt="">
-                    </figure>
-
-                    <div class="product-excerpt">
-                        <div class="product-title">
-                            Hyundai Corola
-                        </div>
-
-                        <div class="product-price">
-                            <div class="price-new">
-                                <span>Rs</span>
-                                <span>35,00,000</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </div>
         </div>
     </section>
+    <?php endif; ?>
 
     
     <section class="section-padding section-dark">
@@ -426,55 +375,7 @@
     </section>
 
     
-    <?php $similarcars = app('\App\Modules\Cars\Repositories\CarRepository'); ?>
-    <?php
-        $brand_id = optional($car->BrandInfo)->id;
-        $model_id = optional($car->ModelInfo)->id;
-        $variant_id = optional($car->VariantInfo)->id;
-        $similar_cars = $similarcars->findSimilarCar($limit=12,$brand_id,$model_id,$variant_id,$car->id);
-    ?>
-    <?php if($similar_cars->isNotEmpty()): ?>
-        <section class="section-padding section-light">
-            <div class="container">
-                <div class="ecm-features__title d-flex align-items-center justify-content-between">
-                    <h1><span>Similar</span> Cars</h1>
-                    <a href="product-list.php" class="see-all text-right">View all <i class="fa fa-angle-right"></i></a>
-                </div>
-
-                <div class="owl-carousel owl-theme new-arrival">
-                    <?php $__currentLoopData = $similar_cars; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $similar_car): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <?php
-                            if($similar_car->car_image){
-                                $imagePath = asset($similar_car->file_full_path).'/'.$similar_car->car_image;
-                            }else{
-                                $imagePath = asset('admin/vehicle.jpeg');
-                            }
-                        ?>
-
-                        <div class="item">
-                            <a href="<?php echo e(route('car.detail',$similar_car->id)); ?>" class="product" style="color: black;">
-                                <div class="product-media">
-                                    <img src="<?php echo e($imagePath); ?>" alt="">
-                                </div>
-
-                                <div class="product-excerpt">
-                                    <div class="product-brand">
-                                        <?php echo e(optional($similar_car->BrandInfo)->brand_name); ?>
-
-                                    </div>
-
-                                    <h6 class="product-title"><?php echo e(optional($similar_car->ModelInfo)->model_name); ?> <?php echo e(optional($similar_car->VariantInfo)->variant_name); ?> </h6>
-
-                                    <h5 class="product-price">Rs. <?php echo e(number_to_words($similar_car->starting_price)); ?></h5>
-                                </div>
-                            </a>
-                        </div>
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-
-                </div>
-            </div>
-        </section>
-    <?php endif; ?>
+    
 <?php $__env->stopSection(); ?>
 
 

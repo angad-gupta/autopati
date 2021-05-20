@@ -1,11 +1,9 @@
 <?php $__env->startSection('title'); ?>Home | Autopati <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
 
-
     <?php if(count($header_banners) > 0): ?>
         <section class="ecm-banner">
-            <div class="owl-carousel owl-theme banner-slider">
-
+            <div class="owl-carousel owl-theme banner-slider nav-inside pagination-inside">
                 <?php $__currentLoopData = $header_banners; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $header_banner): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <div class="item">
                         <div class="banner-block" style="background-image: url('<?php echo e(($header_banner->banner_image) ? asset($header_banner->file_full_path).'/'.$header_banner->banner_image : asset('admin/vehicle.jpeg' )); ?>');">
@@ -81,7 +79,7 @@
     <?php endif; ?>
 
     <?php if(count($deal_of_the_months) > 0): ?>
-        <section class="ecm-features ecm-new pb-0">
+        <section class="ecm-features ecm-new">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-sm-12">
@@ -107,9 +105,9 @@
     <?php endif; ?>
 
     <?php if(count($car_brands) > 0): ?>
-        <section class="ecm-features ecm-new pb-0">
+        <section class="ecm-features ecm-new">
             <div class="container">
-                <div class="row justify-content-center">
+                <div class="row justify-content-center mb-5">
                     <div class="col-sm-12">
                         <div class="ecm-features__title d-flex align-items-center justify-content-between">
                             <h1><span>Car</span> brands</h1>
@@ -117,7 +115,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="owl-carousel owl-theme brand discount-slider mt-4">
+
+                <div class="owl-carousel owl-theme brand discount-slider">
                     <?php $__currentLoopData = $car_brands; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $car_brand): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <div class="item">
                             <a href="<?php echo e(route('list.brand.vehicles',$car_brand->id)); ?>" class="brand-item">
@@ -132,9 +131,9 @@
     <?php endif; ?>
 
     <?php if(count($bike_brands) > 0): ?>
-        <section class="ecm-features ecm-new pt-3 pb-0">
+        <section class="ecm-features ecm-new">
             <div class="container">
-                <div class="row justify-content-center">
+                <div class="row justify-content-center mb-5">
                     <div class="col-sm-12">
                         <div class="ecm-features__title d-flex align-items-center justify-content-between">
                             <h1><span>Bike</span> brands</h1>
@@ -142,7 +141,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="owl-carousel owl-theme brand discount-slider mt-4">
+
+                <div class="owl-carousel owl-theme brand discount-slider">
                     <?php $__currentLoopData = $bike_brands; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $bike_brand): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <div class="item">
                             <a href="<?php echo e(route('list.brand.vehicles',$bike_brand->id)); ?>" class="brand-item">
@@ -156,11 +156,10 @@
         </section>
     <?php endif; ?>
 
-
     <?php if(count($service_categories) > 0): ?>
-        <section class="ecm-features home-tabs ecm-new pt-3 pb-3">
+        <section class="ecm-features home-tabs ecm-new">
             <div class="container">
-                <div class="row justify-content-center">
+                <div class="row justify-content-center mb-5">
                     <div class="col-sm-12">
                         <div class="ecm-features__title d-flex align-items-center justify-content-between">
                             <h1><span>Available</span> Services</h1>
@@ -170,19 +169,18 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-
-                        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                        <ul class="nav nav-pills mb-3 nav-horizontal" id="pills-tab" role="tablist">
                             <?php $__currentLoopData = $service_categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $service_category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <li class="nav-item">
                                     <a class="nav-link <?php if($loop->first): ?>active <?php endif; ?>" id="pills-one-tab" data-toggle="pill" href="#service-<?php echo e($service_category->id); ?>" role="tab" aria-controls="pills-one" aria-selected="true"><?php echo e($service_category->title); ?></a>
                                 </li>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-
                         </ul>
+
                         <div class="tab-content" id="pills-tabContent">
                             <?php $__currentLoopData = $service_categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $service_category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <div class="tab-pane fade show <?php if($loop->first): ?>active <?php endif; ?>" id="service-<?php echo e($service_category->id); ?>" role="tabpanel" aria-labelledby="pills-one-tab">
-                                    <div class="owl-carousel owl-theme new-featured">
+                                    <div class="owl-carousel owl-theme new-featured nav-inside">
                                         <?php $services = app('\App\Modules\ServiceManagement\Repositories\ServiceManagementRepository'); ?>
                                         <?php
                                             $services = $services->findAllActiveServiceCategory($limit=12,$service_category->id);
@@ -193,8 +191,7 @@
                                                     <a href="<?php echo e(route('service',$service->id)); ?>"><img src="<?php echo e(($service->cover_image) ? asset($service->file_full_path).'/'.$service->cover_image : asset('admin/vehicle.jpeg' )); ?>" alt=""></a>
                                                     <div class="services_item_desc">
                                                         <h6><a href="<?php echo e(route('service',$service->id)); ?>"><?php echo e($service->title); ?></a></h6>
-                                                        <span><i class="fa fa-map-marker"></i> &nbsp; <?php echo e($service->location); ?></span>
-
+                                                        <span><i class="fa fa-map-marker text-info"></i> &nbsp; <?php echo e($service->location); ?></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -212,9 +209,9 @@
     <?php endif; ?>
 
     <?php if(count($most_searched) > 0): ?>
-        <section class="ecm-features home-tabs ecm-new pt-0 pb-4">
+        <section class="ecm-features home-tabs ecm-new">
             <div class="container">
-                <div class="row justify-content-center">
+                <div class="row justify-content-center mb-5">
                     <div class="col-sm-12">
                         <div class="ecm-features__title d-flex align-items-center justify-content-between">
                             <h1><span>Most Searched</span> Cars and Bikes</h1>
@@ -222,33 +219,107 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-12">
 
-                        <div class="owl-carousel owl-theme new-featured mt-3">
-                            <?php $__currentLoopData = $most_searched; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $most_search): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <div class="item">
-                                    <div class="services_item">
-                                        <a href="<?php echo e(route('car.detail',$most_search->id)); ?>"><img src="<?php echo e(($most_search->car_image) ? asset($most_search->file_full_path).'/'.$most_search->car_image : asset('admin/vehicle.jpeg')); ?>" alt=""></a>
-                                        <div class="services_item_desc">
-                                            <h6><a href="<?php echo e(route('car.detail',$most_search->id)); ?>"><?php echo e(optional($most_search->BrandInfo)->brand_name); ?> <?php echo e(optional($most_search->ModelInfo)->model_name); ?></a></h6>
-                                            <p class="mb-0">Starting Rs. <?php echo e(number_to_words($most_search->starting_price)); ?></p>
-                                            <div class="d-flex justify-content-end">
-                                                <a href="<?php echo e(route('car.detail',$most_search->id)); ?>" class="btn btn-outline-warning">View Detail</a>
-                                            </div>
-                                        </div>
+                <div class="owl-carousel owl-theme new-featured nav-inside">
+                    <?php $__currentLoopData = $most_searched; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $most_search): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <div class="item">
+                            <div class="services_item">
+                                <a href="<?php echo e(route('car.detail',$most_search->id)); ?>"><img src="<?php echo e(($most_search->car_image) ? asset($most_search->file_full_path).'/'.$most_search->car_image : asset('admin/vehicle.jpeg')); ?>" alt=""></a>
+                                <div class="services_item_desc">
+                                    <h6><a href="<?php echo e(route('car.detail',$most_search->id)); ?>"><?php echo e(optional($most_search->BrandInfo)->brand_name); ?> <?php echo e(optional($most_search->ModelInfo)->model_name); ?></a></h6>
+                                    <p class="mb-0">Starting Rs. <?php echo e(number_to_words($most_search->starting_price)); ?></p>
+                                    <div class="d-flex justify-content-end">
+                                        <a href="<?php echo e(route('car.detail',$most_search->id)); ?>" class="btn btn-outline-warning">View Detail</a>
                                     </div>
                                 </div>
-                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-
+                            </div>
                         </div>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
-                    </div>
                 </div>
             </div>
         </section>
     <?php endif; ?>
 
+    <?php if(count($luxuary_cars) > 0): ?>
+        <section>
+            
+            
+
+            <div class="owl-carousel owl-theme luxury-block nav-inside stock-clearance">
+                <?php $__currentLoopData = $luxury_banners; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $luxury_banners): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <div class="slider" style="background-image: url('<?php echo e(($luxury_banners->banner_image) ? asset($luxury_banners->file_full_path).'/'.$luxury_banners->banner_image : asset('admin/vehicle.jpeg' )); ?>">
+                        <div class="slider-content">
+                            <h4>Checkout Luxury car</h4>
+
+                            <p><?php echo e($luxury_banners->short_content); ?></p>
+
+                            <div class="action-bar">
+                                <a href="<?php echo e(route('list.luxury-car')); ?>" class="btn btn-light">
+                                    View All
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            </div>
+        </section>
+    <?php endif; ?>
+
+    <section class="ecm-features">
+        <div class="container">
+            <div class="row">
+                <?php $__currentLoopData = $luxuary_cars; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $luxury): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <div class="col-md-3 mb-4">
+                        <a href="<?php echo e(route('car.detail',$luxury->id)); ?>" class="ecm-luxury__item">
+                    <span class="ecm-luxury__img">
+                        <img src="<?php echo e(($luxury->car_image) ? asset($luxury->file_full_path).'/'.$luxury->car_image : asset('admin/vehicle.jpeg' )); ?>" alt="<?php echo e($luxury->ModelInfo->model_name); ?> <?php echo e($luxury->VariantInfo->variant_name); ?>">
+                    </span>
+                            <h5><?php echo e($luxury->BrandInfo->brand_name); ?></h5>
+                        </a>
+                    </div>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            </div>
+        </div>
+    </section>
+
+    
+    <section class="ecm-features">
+        <div class="container">
+            <div class="row justify-content-center mb-5">
+                <div class="col-sm-12">
+                    <div class="ecm-features__title d-flex align-items-center justify-content-between">
+                        <h1><span>Upcoming</span> New Cars</h1>
+                        <a href="<?php echo e(route('list.upcoming-car')); ?>" class="see-all text-right">View all <i class="fa fa-angle-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="owl-carousel owl-theme trending-products">
+                        <?php $upcoming_car = app('\App\Modules\Cars\Repositories\CarRepository'); ?>
+                        <?php
+                            $current_date = Carbon\Carbon::now()->format('Y-m-d');
+                            $upcoming_cars = $upcoming_car->findUpcomingCar($limit=12, $current_date);
+                        ?>
+
+                        <?php $__currentLoopData = $upcoming_cars; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $up_car): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <div class="item">
+                                <a href="<?php echo e(route('car.detail',$up_car->id)); ?>" class="ecm-luxury__item">
+                            <span class="ecm-luxury__img">
+                                <img src="<?php echo e(($up_car->car_image) ? asset($up_car->file_full_path).'/'.$up_car->car_image : asset('admin/vehicle.jpeg' )); ?>" alt="">
+                            </span>
+                                    <h5><?php echo e(optional($up_car->BrandInfo)->brand_name); ?> <?php echo e(optional($up_car->ModelInfo)->model_name); ?> </h5>
+                                </a>
+                            </div>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
     <section class="ap-features">
         <div class="container">
             <div class="row">
@@ -292,91 +363,11 @@
         </div>
     </section>
 
-    <?php if(count($luxuary_cars) > 0): ?>
-        <section class="ecm-features">
-            
-            
-
-            <div class="owl-carousel owl-theme luxury-block stock-clearance">
-                <?php $__currentLoopData = $luxury_banners; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $luxury_banners): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                    <div class="slider" style="background-image: url('<?php echo e(($luxury_banners->banner_image) ? asset($luxury_banners->file_full_path).'/'.$luxury_banners->banner_image : asset('admin/vehicle.jpeg' )); ?>">
-                        <div class="slider-content">
-                            <h4>Checkout Luxury car</h4>
-
-                            <p><?php echo e($luxury_banners->short_content); ?></p>
-
-                            <div class="action-bar">
-                                <a href="<?php echo e(route('list.luxury-car')); ?>" class="btn btn-light">
-                                    View All
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-            </div>
-
-            <div class="container">
-                <div class="row">
-
-                    <?php $__currentLoopData = $luxuary_cars; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $luxury): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <div class="col-md-3">
-                            <a href="<?php echo e(route('car.detail',$luxury->id)); ?>" class="ecm-luxury__item">
-                    <span class="ecm-luxury__img">
-                        <img src="<?php echo e(($luxury->car_image) ? asset($luxury->file_full_path).'/'.$luxury->car_image : asset('admin/vehicle.jpeg' )); ?>" alt="<?php echo e($luxury->ModelInfo->model_name); ?> <?php echo e($luxury->VariantInfo->variant_name); ?>">
-                    </span>
-                                <h5><?php echo e($luxury->BrandInfo->brand_name); ?></h5>
-                            </a>
-                        </div>
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-
-                </div>
-            </div>
-        </section>
-    <?php endif; ?>
-
-
-
-    <section class="ecm-features pt-0 pb-3">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-sm-12">
-                    <div class="ecm-features__title d-flex align-items-center justify-content-between">
-                        <h1><span>Upcoming</span> New Cars</h1>
-                        <a href="<?php echo e(route('list.upcoming-car')); ?>" class="see-all text-right">View all <i class="fa fa-angle-right"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <div class="owl-carousel owl-theme trending-products">
-                        <?php $upcoming_car = app('\App\Modules\Cars\Repositories\CarRepository'); ?>
-                        <?php
-                            $current_date = Carbon\Carbon::now()->format('Y-m-d');
-                            $upcoming_cars = $upcoming_car->findUpcomingCar($limit=12, $current_date);
-                        ?>
-
-                        <?php $__currentLoopData = $upcoming_cars; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $up_car): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            <div class="item">
-                                <a href="<?php echo e(route('car.detail',$up_car->id)); ?>" class="ecm-luxury__item">
-                            <span class="ecm-luxury__img">
-                                <img src="<?php echo e(($up_car->car_image) ? asset($up_car->file_full_path).'/'.$up_car->car_image : asset('admin/vehicle.jpeg' )); ?>" alt="">
-                            </span>
-                                    <h5><?php echo e(optional($up_car->BrandInfo)->brand_name); ?> <?php echo e(optional($up_car->ModelInfo)->model_name); ?> </h5>
-                                </a>
-                            </div>
-                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-
+    
     <?php if(count($news) > 0): ?>
-        <section class="ecm-features pt-0">
+        <section class="ecm-features">
             <div class="container">
-                <div class="row justify-content-center">
+                <div class="row justify-content-center mb-5">
                     <div class="col-sm-12">
                         <div class="ecm-features__title d-flex align-items-center justify-content-between">
                             <h1><span>Latest</span> News/Blogs</h1>
@@ -384,6 +375,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="row">
                     <?php $__currentLoopData = $news; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $new): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <div class="col-md-3">
@@ -410,8 +402,6 @@
             </div>
         </section>
     <?php endif; ?>
-
-
 
 <?php $__env->stopSection(); ?>
 
