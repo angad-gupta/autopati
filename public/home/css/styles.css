@@ -2812,6 +2812,7 @@ header .bg-light .nav-item {
     color: #fff;
     font-size: 1.25rem;
     font-weight: 600;
+    line-height: 1;
     margin-top: 1.5rem;
     padding-left: 1.25rem; }
   .product-full .product-quote {
@@ -2891,6 +2892,11 @@ header .bg-light .nav-item {
   .product-full {
     grid-gap: 0;
     grid-template-columns: 1fr; }
+    .product-full .product-price {
+      border-left: 4px solid #e53012;
+      font-size: 1.15rem;
+      margin-top: 1.5rem;
+      padding-left: 1rem; }
     .product-full .product-title {
       font-size: 1.5rem; }
     .product-full .product-excerpt {
@@ -2917,8 +2923,10 @@ header .bg-light .nav-item {
     .product-view .nav-tabs .nav-item {
       display: table-cell; } }
 @media screen and (max-width: 576px) {
-  .product-full {
-    grid-gap: 40px; }
+  .product-full .product-title {
+    font-size: 1.5rem; }
+  .product-full .product-excerpt {
+    padding: 25px 20px; }
 
   .product-description {
     grid-gap: 40px; } }
@@ -2940,5 +2948,74 @@ header .bg-light .nav-item {
   height: 440px;
   margin: 0 auto;
   width: 780px; }
+
+/*--========= Color selector --*/
+.menu-palette {
+  align-items: center;
+  display: flex;
+  list-style: none;
+  margin: 0 -3px;
+  padding: 0; }
+  .menu-palette .menu-link {
+    align-items: center;
+    display: flex;
+    height: 48px;
+    justify-content: center;
+    width: 48px;
+    position: relative; }
+  .menu-palette .menu-link.active {
+    color: #55e175;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: .75rem;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased; }
+    .menu-palette .menu-link.active:after {
+      align-items: center;
+      display: flex;
+      height: 20px;
+      justify-content: center;
+      width: 20px;
+      background: #fff;
+      border-radius: 50%;
+      content: "\f00c";
+      left: 50%;
+      position: absolute;
+      transform: translate(-50%, -50%);
+      top: 50%; }
+  .menu-palette .menu-item {
+    padding: 0 3px; }
+
+.tab-color-selector {
+  position: relative; }
+  .tab-color-selector .menu-palette {
+    bottom: 0;
+    justify-content: flex-end;
+    position: absolute;
+    right: 0; }
+  .tab-color-selector .tab-pane img {
+    height: auto;
+    width: 100%; }
+
+@media screen and (max-width: 576px) {
+  /*--========= Color selector --*/
+  .menu-palette .menu-link {
+    align-items: center;
+    display: flex;
+    height: 36px;
+    justify-content: center;
+    width: 36px; }
+  .menu-palette .menu-link.active {
+    font-size: .6rem; }
+    .menu-palette .menu-link.active:after {
+      align-items: center;
+      display: flex;
+      height: 18px;
+      justify-content: center;
+      width: 18px; }
+
+  .tab-color-selector .menu-palette {
+    bottom: 0;
+    position: initial;
+    right: 0; } }
 
 /*# sourceMappingURL=styles.css.map */

@@ -375,9 +375,8 @@ $('#pills-tab a').click(function (e) {
 
 });
 
-
 //Step Form
-;(function($) {
+(function($) {
   "use strict";
 
   //* Form js
@@ -513,4 +512,16 @@ $('.carousel_product-view').owlCarousel({
             items:1
         }
     }
+});
+
+$(function () {
+    if (('#accordion .column').length > 8) {
+        $('.action-bar--show-more').addClass('visible');
+    }
+
+    $('#accordion .column:gt(7)').hide();
+
+    $('.action-bar--show-more').click(function () {
+        $('#accordion .column:gt(7)').show();
+    });
 });
