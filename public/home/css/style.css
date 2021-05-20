@@ -254,12 +254,9 @@ header .top-header .search-box {
   overflow: hidden;
   width: 100%; }
 
-header .top-header form {
-  width: 60%;
-  margin-right: 30px; }
-
 header .top-header .search-box input {
   background: #fff;
+  min-width: 220px;
   width: 100%;
   padding: 5px 15px;
   border: 1px solid #ccc; }
@@ -1696,24 +1693,6 @@ a {
 
 .categories li {
   margin-bottom: 0; }
-
-.nav-pills .nav-link {
-  border-left: 4px solid transparent;
-  color: #464646;
-  margin-bottom: .35rem; }
-
-.nav-pills .nav-link.active,
-.nav-pills .show > .nav-link {
-  background-color: #eee;
-  border-radius: 0;
-  border-left: 4px solid #e53012;
-  color: #464646; }
-
-.nav-pills .nav-link:hover {
-  background-color: #eee;
-  border-radius: 0;
-  border-left: 4px solid #e53012;
-  color: #464646; }
 
 #minicart .cart-box img {
   width: 90px;

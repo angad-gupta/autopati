@@ -3,11 +3,9 @@
 @section('title')Home | Autopati @stop
 @section('content')
 
-
     @if(count($header_banners) > 0)
         <section class="ecm-banner">
-            <div class="owl-carousel owl-theme banner-slider">
-
+            <div class="owl-carousel owl-theme banner-slider nav-inside pagination-inside">
                 @foreach($header_banners as $header_banner)
                     <div class="item">
                         <div class="banner-block" style="background-image: url('{{ ($header_banner->banner_image) ? asset($header_banner->file_full_path).'/'.$header_banner->banner_image : asset('admin/vehicle.jpeg' )}}');">
@@ -83,7 +81,7 @@
     @endif
 
     @if(count($deal_of_the_months) > 0)
-        <section class="ecm-features ecm-new pb-0">
+        <section class="ecm-features ecm-new">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-sm-12">
@@ -109,9 +107,9 @@
     @endif
 
     @if(count($car_brands) > 0)
-        <section class="ecm-features ecm-new pb-0">
+        <section class="ecm-features ecm-new">
             <div class="container">
-                <div class="row justify-content-center">
+                <div class="row justify-content-center mb-5">
                     <div class="col-sm-12">
                         <div class="ecm-features__title d-flex align-items-center justify-content-between">
                             <h1><span>Car</span> brands</h1>
@@ -119,7 +117,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="owl-carousel owl-theme brand discount-slider mt-4">
+
+                <div class="owl-carousel owl-theme brand discount-slider">
                     @foreach($car_brands as $car_brand)
                         <div class="item">
                             <a href="{{route('list.brand.vehicles',$car_brand->id)}}" class="brand-item">
@@ -134,9 +133,9 @@
     @endif
 
     @if(count($bike_brands) > 0)
-        <section class="ecm-features ecm-new pt-3 pb-0">
+        <section class="ecm-features ecm-new">
             <div class="container">
-                <div class="row justify-content-center">
+                <div class="row justify-content-center mb-5">
                     <div class="col-sm-12">
                         <div class="ecm-features__title d-flex align-items-center justify-content-between">
                             <h1><span>Bike</span> brands</h1>
@@ -144,7 +143,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="owl-carousel owl-theme brand discount-slider mt-4">
+
+                <div class="owl-carousel owl-theme brand discount-slider">
                     @foreach($bike_brands as $bike_brand)
                         <div class="item">
                             <a href="{{route('list.brand.vehicles',$bike_brand->id)}}" class="brand-item">
@@ -158,11 +158,10 @@
         </section>
     @endif
 
-
     @if(count($service_categories) > 0)
-        <section class="ecm-features home-tabs ecm-new pt-3 pb-3">
+        <section class="ecm-features home-tabs ecm-new">
             <div class="container">
-                <div class="row justify-content-center">
+                <div class="row justify-content-center mb-5">
                     <div class="col-sm-12">
                         <div class="ecm-features__title d-flex align-items-center justify-content-between">
                             <h1><span>Available</span> Services</h1>
@@ -172,19 +171,18 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-
-                        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                        <ul class="nav nav-pills mb-3 nav-horizontal" id="pills-tab" role="tablist">
                             @foreach($service_categories as $service_category)
                                 <li class="nav-item">
                                     <a class="nav-link @if($loop->first)active @endif" id="pills-one-tab" data-toggle="pill" href="#service-{{$service_category->id}}" role="tab" aria-controls="pills-one" aria-selected="true">{{$service_category->title}}</a>
                                 </li>
                             @endforeach
-
                         </ul>
+
                         <div class="tab-content" id="pills-tabContent">
                             @foreach($service_categories as $service_category)
                                 <div class="tab-pane fade show @if($loop->first)active @endif" id="service-{{$service_category->id}}" role="tabpanel" aria-labelledby="pills-one-tab">
-                                    <div class="owl-carousel owl-theme new-featured">
+                                    <div class="owl-carousel owl-theme new-featured nav-inside">
                                         @inject('services', '\App\Modules\ServiceManagement\Repositories\ServiceManagementRepository')
                                         @php
                                             $services = $services->findAllActiveServiceCategory($limit=12,$service_category->id);
@@ -195,8 +193,7 @@
                                                     <a href="{{route('service',$service->id)}}"><img src="{{($service->cover_image) ? asset($service->file_full_path).'/'.$service->cover_image : asset('admin/vehicle.jpeg' )}}" alt=""></a>
                                                     <div class="services_item_desc">
                                                         <h6><a href="{{route('service',$service->id)}}">{{$service->title}}</a></h6>
-                                                        <span><i class="fa fa-map-marker"></i> &nbsp; {{$service->location}}</span>
-
+                                                        <span><i class="fa fa-map-marker text-info"></i> &nbsp; {{$service->location}}</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -214,9 +211,9 @@
     @endif
 
     @if(count($most_searched) > 0)
-        <section class="ecm-features home-tabs ecm-new pt-0 pb-4">
+        <section class="ecm-features home-tabs ecm-new">
             <div class="container">
-                <div class="row justify-content-center">
+                <div class="row justify-content-center mb-5">
                     <div class="col-sm-12">
                         <div class="ecm-features__title d-flex align-items-center justify-content-between">
                             <h1><span>Most Searched</span> Cars and Bikes</h1>
@@ -224,33 +221,121 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-12">
 
-                        <div class="owl-carousel owl-theme new-featured mt-3">
-                            @foreach($most_searched as $most_search)
-                                <div class="item">
-                                    <div class="services_item">
-                                        <a href="{{route('car.detail',$most_search->id)}}"><img src="{{($most_search->car_image) ? asset($most_search->file_full_path).'/'.$most_search->car_image : asset('admin/vehicle.jpeg')}}" alt=""></a>
-                                        <div class="services_item_desc">
-                                            <h6><a href="{{route('car.detail',$most_search->id)}}">{{optional($most_search->BrandInfo)->brand_name }} {{ optional($most_search->ModelInfo)->model_name }}</a></h6>
-                                            <p class="mb-0">Starting Rs. {{number_to_words($most_search->starting_price)}}</p>
-                                            <div class="d-flex justify-content-end">
-                                                <a href="{{route('car.detail',$most_search->id)}}" class="btn btn-outline-warning">View Detail</a>
-                                            </div>
-                                        </div>
+                <div class="owl-carousel owl-theme new-featured nav-inside">
+                    @foreach($most_searched as $most_search)
+                        <div class="item">
+                            <div class="services_item">
+                                <a href="{{route('car.detail',$most_search->id)}}"><img src="{{($most_search->car_image) ? asset($most_search->file_full_path).'/'.$most_search->car_image : asset('admin/vehicle.jpeg')}}" alt=""></a>
+                                <div class="services_item_desc">
+                                    <h6><a href="{{route('car.detail',$most_search->id)}}">{{optional($most_search->BrandInfo)->brand_name }} {{ optional($most_search->ModelInfo)->model_name }}</a></h6>
+                                    <p class="mb-0">Starting Rs. {{number_to_words($most_search->starting_price)}}</p>
+                                    <div class="d-flex justify-content-end">
+                                        <a href="{{route('car.detail',$most_search->id)}}" class="btn btn-outline-warning">View Detail</a>
                                     </div>
                                 </div>
-                            @endforeach
-
+                            </div>
                         </div>
+                    @endforeach
 
-                    </div>
                 </div>
             </div>
         </section>
     @endif
 
+    @if(count($luxuary_cars) > 0)
+        <section>
+            {{-- Section title not required for banners --}}
+            {{--<div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-sm-12">
+                        <div class="ecm-features__title d-flex align-items-center justify-content-between">
+                            <h1>
+                                <span>Explore Luxury</span> Vehicles
+                            </h1>
+
+                            <a href="{{route('list.luxury-car')}}" class="see-all text-right">
+                                View all <i class="fa fa-angle-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>--}}
+
+            <div class="owl-carousel owl-theme luxury-block nav-inside stock-clearance">
+                @foreach($luxury_banners as $luxury_banners)
+                    <div class="slider" style="background-image: url('{{ ($luxury_banners->banner_image) ? asset($luxury_banners->file_full_path).'/'.$luxury_banners->banner_image : asset('admin/vehicle.jpeg' )}}">
+                        <div class="slider-content">
+                            <h4>Checkout Luxury car</h4>
+
+                            <p>{{$luxury_banners->short_content}}</p>
+
+                            <div class="action-bar">
+                                <a href="{{route('list.luxury-car')}}" class="btn btn-light">
+                                    View All
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </section>
+    @endif
+
+    <section class="ecm-features">
+        <div class="container">
+            <div class="row">
+                @foreach($luxuary_cars as $luxury)
+                    <div class="col-md-3 mb-4">
+                        <a href="{{route('car.detail',$luxury->id)}}" class="ecm-luxury__item">
+                    <span class="ecm-luxury__img">
+                        <img src="{{ ($luxury->car_image) ? asset($luxury->file_full_path).'/'.$luxury->car_image : asset('admin/vehicle.jpeg' )}}" alt="{{$luxury->ModelInfo->model_name}} {{$luxury->VariantInfo->variant_name}}">
+                    </span>
+                            <h5>{{$luxury->BrandInfo->brand_name}}</h5>
+                        </a>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+
+    {{-- Upcoming cars --}}
+    <section class="ecm-features">
+        <div class="container">
+            <div class="row justify-content-center mb-5">
+                <div class="col-sm-12">
+                    <div class="ecm-features__title d-flex align-items-center justify-content-between">
+                        <h1><span>Upcoming</span> New Cars</h1>
+                        <a href="{{route('list.upcoming-car')}}" class="see-all text-right">View all <i class="fa fa-angle-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="owl-carousel owl-theme trending-products">
+                        @inject('upcoming_car', '\App\Modules\Cars\Repositories\CarRepository')
+                        @php
+                            $current_date = Carbon\Carbon::now()->format('Y-m-d');
+                            $upcoming_cars = $upcoming_car->findUpcomingCar($limit=12, $current_date);
+                        @endphp
+
+                        @foreach($upcoming_cars as $up_car)
+                            <div class="item">
+                                <a href="{{route('car.detail',$up_car->id)}}" class="ecm-luxury__item">
+                            <span class="ecm-luxury__img">
+                                <img src="{{($up_car->car_image) ? asset($up_car->file_full_path).'/'.$up_car->car_image : asset('admin/vehicle.jpeg' )}}" alt="">
+                            </span>
+                                    <h5>{{optional($up_car->BrandInfo)->brand_name }} {{ optional($up_car->ModelInfo)->model_name }} </h5>
+                                </a>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {{-- Company statistics --}}
     <section class="ap-features">
         <div class="container">
             <div class="row">
@@ -294,105 +379,11 @@
         </div>
     </section>
 
-    @if(count($luxuary_cars) > 0)
-        <section class="ecm-features">
-            {{-- Section title not required for banners --}}
-            {{--<div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-sm-12">
-                        <div class="ecm-features__title d-flex align-items-center justify-content-between">
-                            <h1>
-                                <span>Explore Luxury</span> Vehicles
-                            </h1>
-
-                            <a href="{{route('list.luxury-car')}}" class="see-all text-right">
-                                View all <i class="fa fa-angle-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>--}}
-
-            <div class="owl-carousel owl-theme luxury-block stock-clearance">
-                @foreach($luxury_banners as $luxury_banners)
-                    <div class="slider" style="background-image: url('{{ ($luxury_banners->banner_image) ? asset($luxury_banners->file_full_path).'/'.$luxury_banners->banner_image : asset('admin/vehicle.jpeg' )}}">
-                        <div class="slider-content">
-                            <h4>Checkout Luxury car</h4>
-
-                            <p>{{$luxury_banners->short_content}}</p>
-
-                            <div class="action-bar">
-                                <a href="{{route('list.luxury-car')}}" class="btn btn-light">
-                                    View All
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-
-            <div class="container">
-                <div class="row">
-
-                    @foreach($luxuary_cars as $luxury)
-                        <div class="col-md-3">
-                            <a href="{{route('car.detail',$luxury->id)}}" class="ecm-luxury__item">
-                    <span class="ecm-luxury__img">
-                        <img src="{{ ($luxury->car_image) ? asset($luxury->file_full_path).'/'.$luxury->car_image : asset('admin/vehicle.jpeg' )}}" alt="{{$luxury->ModelInfo->model_name}} {{$luxury->VariantInfo->variant_name}}">
-                    </span>
-                                <h5>{{$luxury->BrandInfo->brand_name}}</h5>
-                            </a>
-                        </div>
-                    @endforeach
-
-                </div>
-            </div>
-        </section>
-    @endif
-
-
-
-    <section class="ecm-features pt-0 pb-3">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-sm-12">
-                    <div class="ecm-features__title d-flex align-items-center justify-content-between">
-                        <h1><span>Upcoming</span> New Cars</h1>
-                        <a href="{{route('list.upcoming-car')}}" class="see-all text-right">View all <i class="fa fa-angle-right"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <div class="owl-carousel owl-theme trending-products">
-                        @inject('upcoming_car', '\App\Modules\Cars\Repositories\CarRepository')
-                        @php
-                            $current_date = Carbon\Carbon::now()->format('Y-m-d');
-                            $upcoming_cars = $upcoming_car->findUpcomingCar($limit=12, $current_date);
-                        @endphp
-
-                        @foreach($upcoming_cars as $up_car)
-                            <div class="item">
-                                <a href="{{route('car.detail',$up_car->id)}}" class="ecm-luxury__item">
-                            <span class="ecm-luxury__img">
-                                <img src="{{($up_car->car_image) ? asset($up_car->file_full_path).'/'.$up_car->car_image : asset('admin/vehicle.jpeg' )}}" alt="">
-                            </span>
-                                    <h5>{{optional($up_car->BrandInfo)->brand_name }} {{ optional($up_car->ModelInfo)->model_name }} </h5>
-                                </a>
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-
+    {{-- Blog--}}
     @if(count($news) > 0)
-        <section class="ecm-features pt-0">
+        <section class="ecm-features">
             <div class="container">
-                <div class="row justify-content-center">
+                <div class="row justify-content-center mb-5">
                     <div class="col-sm-12">
                         <div class="ecm-features__title d-flex align-items-center justify-content-between">
                             <h1><span>Latest</span> News/Blogs</h1>
@@ -400,6 +391,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="row">
                     @foreach($news as $new)
                         <div class="col-md-3">
@@ -426,8 +418,6 @@
             </div>
         </section>
     @endif
-
-
 
 @endsection
 

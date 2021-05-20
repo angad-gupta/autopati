@@ -548,7 +548,7 @@
 
     <section class="ecm-features pt-0 pb-3">
         <div class="container">
-            <div class="row justify-content-center">
+            <div class="row justify-content-center mb-3">
                 <div class="col-sm-12">
                     <div class="ecm-features__title d-flex align-items-center justify-content-between">
                         <h1><span>Upcoming</span> New Cars</h1>
@@ -556,9 +556,10 @@
                     </div>
                 </div>
             </div>
+
             <div class="row">
                 <div class="col-12">
-                    <div class="owl-carousel owl-theme trending-products">
+                    <div class="owl-carousel owl-theme nav-inside trending-products">
                         <div class="item">
                             <a href="category.php" class="ecm-luxury__item">
                             <span class="ecm-luxury__img">
