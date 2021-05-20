@@ -2,20 +2,19 @@
 @section('title')Services | Autopati @stop 
 @section('content')
 
-<section class="ecm-features home-tabs ecm-new pt-3 pb-3">
+<section class="ecm-features home-tabs ecm-new">
     <div class="container">
-        <div class="row justify-content-center">
+        <div class="row justify-content-center mb-5">
             <div class="col-sm-12">
                 <div class="ecm-features__title d-flex align-items-center justify-content-between">
                     <h1><span>Available</span> Services</h1>
-                    
                 </div>
             </div>
         </div>
+
         <div class="row">
             <div class="col-12">
-            
-                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                <ul class="nav nav-pills nav-horizontal mb-3" id="pills-tab" role="tablist">
                     @foreach($service_categories as $service_category)
                     <li class="nav-item">
                         <a class="nav-link @if($loop->first)active @endif" id="pills-one-tab" data-toggle="pill" href="#service-{{$service_category->id}}" role="tab" aria-controls="pills-one" aria-selected="true">{{$service_category->title}}</a>
@@ -23,6 +22,7 @@
                     @endforeach
                 
                 </ul>
+
                 <div class="tab-content" id="pills-tabContent">
                     @foreach($service_categories as $service_category)
                     <div class="tab-pane fade show @if($loop->first)active @endif" id="service-{{$service_category->id}}" role="tabpanel" aria-labelledby="pills-one-tab">

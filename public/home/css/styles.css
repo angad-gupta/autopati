@@ -39,15 +39,15 @@
     object-fit: cover;
     width: 100%; }
 
-.ratio_8-5, .ecm-luxury__img, .product .product-media {
+.ratio_8-5, .services_item .product-media, .ecm-luxury__img, .product .product-media {
   display: block;
   position: relative; }
-  .ratio_8-5:before, .ecm-luxury__img:before, .product .product-media:before {
+  .ratio_8-5:before, .services_item .product-media:before, .ecm-luxury__img:before, .product .product-media:before {
     content: "";
     display: block;
     padding-top: 62.5%;
     width: 100%; }
-  .ratio_8-5 img, .ecm-luxury__img img, .product .product-media img {
+  .ratio_8-5 img, .services_item .product-media img, .ecm-luxury__img img, .product .product-media img {
     bottom: 0;
     left: 0;
     position: absolute;
@@ -66,6 +66,24 @@
     padding-top: 56.25%;
     width: 100%; }
   .ratio_16-9 img {
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    object-fit: cover;
+    width: 100%; }
+
+.ratio_18-4, .page-banner {
+  display: block;
+  position: relative; }
+  .ratio_18-4:before, .page-banner:before {
+    content: "";
+    display: block;
+    padding-top: 22.2222222222%;
+    width: 100%; }
+  .ratio_18-4 img, .page-banner img {
     bottom: 0;
     left: 0;
     position: absolute;
@@ -122,6 +140,7 @@
   border-radius: 0;
   color: #646161;
   font-weight: 600;
+  margin: 0;
   padding-left: 50px;
   padding-right: 50px;
   text-transform: capitalize;
@@ -1716,14 +1735,11 @@ section.ecm-features.ecm-new .row .col {
 .services_item {
   border: 1px solid #dddddd;
   width: 100%; }
-
-.services_item img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover; }
+  .services_item .product-media {
+    margin: 0; }
 
 .services_item_desc {
-  padding: 20px; }
+  padding: 16px; }
 
 .services_item_desc h6 a {
   font-size: 16px;
@@ -2119,11 +2135,6 @@ header .bg-light .nav-item {
 .single-list_img img {
   width: 300px;
   height: 200px;
-  object-fit: cover; }
-
-.page-banner img {
-  width: 100%;
-  height: 300px;
   object-fit: cover; }
 
 .single-list_desc h6 {
@@ -2533,23 +2544,34 @@ header .bg-light .nav-item {
     padding-top: 20px; }
   .section-title {
     align-items: center;
+    color: #343a40;
     display: flex;
-    grid-gap: 20px;
-    margin-bottom: 36px; }
+    font-weight: 700;
+    grid-gap: 40px;
+    justify-content: space-between;
+    margin-bottom: 30px; }
     .section-title h1, .section-title h2, .section-title h3 {
-      color: #343a40;
-      font-weight: 700;
+      color: inherit;
+      font-size: 24px;
+      font-weight: inherit;
       line-height: 1.5;
       margin: 0;
       text-transform: uppercase; }
       .section-title h1 span, .section-title h2 span, .section-title h3 span {
         color: #e53012; }
+    .section-title--content:after {
+      content: url(../img/border.png);
+      display: block;
+      width: 100%; }
   .section-dark {
     background: #000; }
   .section-gray {
     background: #e9ecef; }
   .section-light {
     background: #f8f9fa; }
+
+.page-title {
+  background: #343a40; }
 
 .list-info {
   list-style: none;
