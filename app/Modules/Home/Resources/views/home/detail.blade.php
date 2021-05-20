@@ -380,11 +380,11 @@
     {{-- Product variant --}}
     <section class="section-padding">
         <div class="container">
-            <div class="block-title">
+            <div class="section-title">
                 <div class="section-title--content">
-                    <h4>
+                    <h2>
                         Car <span>variant</span>
-                    </h4>
+                    </h2>
                 </div>
             </div>
 
@@ -511,13 +511,8 @@
                     </div>
 
                     <div class="section-title--support">
-
+                        <a href="product-list.php" class="link-theme">View all <i class="fa fa-angle-right"></i></a>
                     </div>
-                </div>
-
-                <div class="ecm-features__title d-flex align-items-center justify-content-between">
-                    <h1><span>Similar</span> Cars</h1>
-                    <a href="product-list.php" class="see-all text-right">View all <i class="fa fa-angle-right"></i></a>
                 </div>
 
                 <div class="owl-carousel owl-theme new-arrival">
