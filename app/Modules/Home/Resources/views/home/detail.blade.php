@@ -79,8 +79,6 @@
 
                     </p>
                 </div>
-
-                <div></div>
             </div>
         </div>
     </div>
@@ -94,7 +92,44 @@
                 </h3>
             </div>
 
-            <div class="viewer">
+            <div class="tab-color-selector">
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        {{-- Required min size 1270/480px --}}
+                        {{-- "Required media size" should be visible in backend help text--}}
+                        <figure>
+                            <img src="/home/img/c1.png" alt="">
+                        </figure>
+                    </div>
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <figure>
+                            <img src="/home/img/c2.png" alt="">
+                        </figure>
+                    </div>
+                    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                        <figure>
+                            <img src="/home/img/c3.png" alt="">
+                        </figure>
+                    </div>
+                </div>
+
+                <ul class="nav nav-tabs menu menu-palette" id="myTab" role="tablist">
+                    <li class="menu-item">
+                        <a class="menu-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true" style="background: #2598ff">
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a class="menu-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false" style="background: red">
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a class="menu-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false" style="background: rgba(234, 124, 287, 1)">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            {{--<div class="viewer">
                 <div class="viewer-display">
                     <figure>
                         <img src="/home/img/2.png" alt="">
@@ -141,50 +176,51 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>--}}
         </div>
     </div>
 
     {{-- Product technical specification --}}
-   {{-- <div class="section-padding section-light">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="block-title">
-                        <h3>
-                            <span>Technical Specification :</span>
-                        </h3>
-                    </div>
+    {{-- <div class="section-padding section-light">
+         <div class="container">
+             <div class="row">
+                 <div class="col-md-6">
+                     <div class="block-title">
+                         <h3>
+                             <span>Technical Specification :</span>
+                         </h3>
+                     </div>
 
-                    <div class="page-accordion">
-                        <div class="panel-group">
-                            <div class="column">
-                                Dummy item
-                                 Panel item goes here
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                     <div class="page-accordion">
+                         <div class="panel-group">
+                             <div class="column">
+                                 Dummy item
+                                  Panel item goes here
+                             </div>
+                         </div>
+                     </div>
+                 </div>
 
-                <div class="col-md-6">
-                    <div class="block-title">
-                        <h3>
-                            <span>Advanced Specification :</span>
-                        </h3>
-                    </div>
+                 <div class="col-md-6">
+                     <div class="block-title">
+                         <h3>
+                             <span>Advanced Specification :</span>
+                         </h3>
+                     </div>
 
-                    <div class="page-accordion">
-                        <div class="panel-group">
-                            <div class="column">
-                                Dummy item
-                                 Panel item goes here
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>--}}
+                     <div class="page-accordion">
+                         <div class="panel-group">
+                             <div class="column">
+                                 Dummy item
+                                  Panel item goes here
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>--}}
+
     <div class="section-padding section-light">
         <div class="container">
             <div class="block-product-specification">
@@ -207,6 +243,7 @@
                         ?>
 
                         <?php if($config_count): ?>
+
                         <div class="column">
                             <div class="panel panel-default">
                                 <div class="panel-heading" role="tab" id="headingTwo">
@@ -219,7 +256,7 @@
                                         <?php endif; ?>
                                     </h3>
                                 </div>
-                                <div id="spec-<?php echo e($spec_val->id); ?>" class="panel-collapse collapse <?php if($loop->first): ?>collapse show <?php endif; ?> role="tabpanel" aria-labelledby="headingTwo">
+                                <div id="spec-<?php echo e($spec_val->id); ?>" class="panel-collapse collapse <?php if($loop->first): ?>collapse <?php endif; ?> role="tabpanel" aria-labelledby="headingTwo">
                                 <div class="panel-body">
                                     <table class="table">
                                         <tbody>
@@ -250,25 +287,15 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="row">
-                            <div class="col-md-6">
-
-                            </div>
-
-                            <div class="col-md-6">
-
-                            </div>
-                        </div>
                     </div>
                     <?php endif; ?>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                </div>
 
-                    <div class="action-bar text-center mt-5">
-                        <a href="" class="btn btn-info">
-                            Show more
-                        </a>
-                    </div>
+                <div class="action-bar action-bar--show-more text-center mt-5">
+                    <button type="button" class="btn btn-info">
+                        Show more
+                    </button>
                 </div>
             </div>
         </div>
