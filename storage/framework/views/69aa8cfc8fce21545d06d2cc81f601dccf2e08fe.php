@@ -73,9 +73,11 @@
                         </h3>
                     </div>
 
-                    <p><?php echo $car->description; ?>
-
-                    </p>
+                    <div class="contents">
+                        <p>
+                            <?php echo $car->description; ?>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -197,8 +199,8 @@
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </div>
 
-                <div class="action-bar action-bar--show-more text-center mt-5">
-                    <button type="button" class="btn btn-info">
+                <div class="action-bar text-center mt-5">
+                    <button type="button" class="btn btn-info btn-show-more">
                         Show more
                     </button>
                 </div>
