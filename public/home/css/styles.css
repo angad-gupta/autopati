@@ -2359,9 +2359,6 @@ header .bg-light .nav-item {
   padding-bottom: 0;
   margin-bottom: 6px; }
 
-.panel-group {
-  border: 1px solid #eee; }
-
 .panel-group:last-child {
   border: 1px solid transparent; }
 
@@ -2845,9 +2842,9 @@ header .bg-light .nav-item {
     position: relative; }
 
 .product-description {
-  display: grid;
+  /*display: grid;
   grid-gap: 80px;
-  grid-template-columns: 1fr 1fr; }
+  grid-template-columns: 1fr 1fr;*/ }
 
 /*--====== Color viewer --*/
 .viewer {
@@ -2995,6 +2992,10 @@ header .bg-light .nav-item {
   .tab-color-selector .tab-pane img {
     height: auto;
     width: 100%; }
+
+.btn-show-more {
+  cursor: pointer;
+  display: none; }
 
 @media screen and (max-width: 576px) {
   /*--========= Color selector --*/
