@@ -83,7 +83,10 @@
         </div>
     </div>
 
+
     {{-- Product color varient --}}
+
+    @if(sizeof($car_color)>0)
     <div class="section-padding">
         <div class="container">
             <div class="block-title">
@@ -94,91 +97,33 @@
 
             <div class="tab-color-selector">
                 <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                        {{-- Required min size 1270/480px --}}
-                        {{-- "Required media size" should be visible in backend help text--}}
+                    @foreach($car_color as $key => $color_val)
+                    @php
+                       $colorimage = ($color_val->car_image) ? asset($color_val->file_full_path).'/'.$color_val->car_image : asset('admin/image.png');
+                    @endphp
+
+                    <div class="tab-pane fade show @if($loop->first) active @endif" id="{{$color_val->color_title}}" role="tabpanel" aria-labelledby="home-tab">
                         <figure>
-                            <img src="/home/img/c1.png" alt="">
+                            <img src=" {{$colorimage}}" alt="">
                         </figure>
                     </div>
-                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                        <figure>
-                            <img src="/home/img/c2.png" alt="">
-                        </figure>
-                    </div>
-                    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                        <figure>
-                            <img src="/home/img/c3.png" alt="">
-                        </figure>
-                    </div>
+                    @endforeach
                 </div>
 
                 <ul class="nav nav-tabs menu menu-palette" id="myTab" role="tablist">
+                    @foreach($car_color as $key => $color_val)
                     <li class="menu-item">
-                        <a class="menu-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true" style="background: #2598ff">
+                        <a class="menu-link @if($loop->first) active @endif" id="home-tab" data-toggle="tab" href="#{{$color_val->color_title}}" role="tab" aria-controls="home" aria-selected="true" style="background: {{$color_val->color_code}}">
                         </a>
                     </li>
-                    <li class="menu-item">
-                        <a class="menu-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false" style="background: red">
-                        </a>
-                    </li>
-                    <li class="menu-item">
-                        <a class="menu-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false" style="background: rgba(234, 124, 287, 1)">
-                        </a>
-                    </li>
+                    @endforeach
+  
                 </ul>
             </div>
-
-            {{--<div class="viewer">
-                <div class="viewer-display">
-                    <figure>
-                        <img src="http://127.0.0.1:8000/uploads/car/2021-03-25-10-30-50-hyundai-i30-n-front.jpeg" alt="">
-                    </figure>
-                </div>
-
-                <div class="viewer-control">
-                    <div class="swatch swatch_color-picker">
-                        <div class="swatch-option color">
-                            <input type="radio" id="colorName1" name="Address" checked>
-
-                            <label for="colorName1" data-toggle="tooltip" data-placement="top" title="Red" style="background: red">
-                            </label>
-                        </div>
-                        <div class="swatch-option color">
-                            <input type="radio" id="colorName2" name="Address">
-
-                            <label for="colorName2" data-toggle="tooltip" data-placement="top" title="Yellow" style="background: yellow">
-                            </label>
-                        </div>
-                        <div class="swatch-option color">
-                            <input type="radio" id="colorName3" name="Address">
-
-                            <label for="colorName3" data-toggle="tooltip" data-placement="top" title="White" style="background: white">
-                            </label>
-                        </div>
-                        <div class="swatch-option color">
-                            <input type="radio" id="colorName4" name="Address">
-
-                            <label for="colorName4" data-toggle="tooltip" data-placement="top" title="Pink" style="background: pink">
-                            </label>
-                        </div>
-                        <div class="swatch-option color">
-                            <input type="radio" id="colorName5" name="Address">
-
-                            <label for="colorName5" data-toggle="tooltip" data-placement="top" title="Black" style="background: black">
-                            </label>
-                        </div>
-                        <div class="swatch-option color">
-                            <input type="radio" id="colorName6" name="Address">
-
-                            <label for="colorName6" data-toggle="tooltip" data-placement="top" title="Purple" style="background: purple">
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </div>--}}
         </div>
     </div>
+
+    @endif
 
     {{-- Product technical specification --}}
     {{-- <div class="section-padding section-light">

@@ -77,13 +77,14 @@
 
                     </p>
                 </div>
-
-                <div></div>
             </div>
         </div>
     </div>
 
+
     
+
+    <?php if(sizeof($car_color)>0): ?>
     <div class="section-padding">
         <div class="container">
             <div class="block-title">
@@ -92,59 +93,39 @@
                 </h3>
             </div>
 
-            <div class="viewer">
-                <div class="viewer-display">
-                    <figure>
-                        <img src="http://127.0.0.1:8000/uploads/car/2021-03-25-10-30-50-hyundai-i30-n-front.jpeg" alt="">
-                    </figure>
-                </div>
+            <div class="tab-color-selector">
+                <div class="tab-content" id="myTabContent">
+                    <?php $__currentLoopData = $car_color; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $color_val): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <?php
+                       $colorimage = ($color_val->car_image) ? asset($color_val->file_full_path).'/'.$color_val->car_image : asset('admin/image.png');
+                    ?>
 
-                <div class="viewer-control">
-                    <div class="swatch swatch_color-picker">
-                        <div class="swatch-option color">
-                            <input type="radio" id="colorName1" name="Address" checked>
-
-                            <label for="colorName1" data-toggle="tooltip" data-placement="top" title="Red" style="background: red">
-                            </label>
-                        </div>
-                        <div class="swatch-option color">
-                            <input type="radio" id="colorName2" name="Address">
-
-                            <label for="colorName2" data-toggle="tooltip" data-placement="top" title="Yellow" style="background: yellow">
-                            </label>
-                        </div>
-                        <div class="swatch-option color">
-                            <input type="radio" id="colorName3" name="Address">
-
-                            <label for="colorName3" data-toggle="tooltip" data-placement="top" title="White" style="background: white">
-                            </label>
-                        </div>
-                        <div class="swatch-option color">
-                            <input type="radio" id="colorName4" name="Address">
-
-                            <label for="colorName4" data-toggle="tooltip" data-placement="top" title="Pink" style="background: pink">
-                            </label>
-                        </div>
-                        <div class="swatch-option color">
-                            <input type="radio" id="colorName5" name="Address">
-
-                            <label for="colorName5" data-toggle="tooltip" data-placement="top" title="Black" style="background: black">
-                            </label>
-                        </div>
-                        <div class="swatch-option color">
-                            <input type="radio" id="colorName6" name="Address">
-
-                            <label for="colorName6" data-toggle="tooltip" data-placement="top" title="Purple" style="background: purple">
-                            </label>
-                        </div>
+                    <div class="tab-pane fade show <?php if($loop->first): ?> active <?php endif; ?>" id="<?php echo e($color_val->color_title); ?>" role="tabpanel" aria-labelledby="home-tab">
+                        <figure>
+                            <img src=" <?php echo e($colorimage); ?>" alt="">
+                        </figure>
                     </div>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </div>
+
+                <ul class="nav nav-tabs menu menu-palette" id="myTab" role="tablist">
+                    <?php $__currentLoopData = $car_color; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $color_val): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <li class="menu-item">
+                        <a class="menu-link <?php if($loop->first): ?> active <?php endif; ?>" id="home-tab" data-toggle="tab" href="#<?php echo e($color_val->color_title); ?>" role="tab" aria-controls="home" aria-selected="true" style="background: <?php echo e($color_val->color_code); ?>">
+                        </a>
+                    </li>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+  
+                </ul>
             </div>
         </div>
     </div>
 
+    <?php endif; ?>
+
     
-   
+    
+
     <div class="section-padding section-light">
         <div class="container">
             <div class="block-product-specification">
@@ -167,6 +148,7 @@
                         ?>
 
                         <?php if($config_count): ?>
+
                         <div class="column">
                             <div class="panel panel-default">
                                 <div class="panel-heading" role="tab" id="headingTwo">
@@ -179,7 +161,7 @@
                                         <?php endif; ?>
                                     </h3>
                                 </div>
-                                <div id="spec-<?php echo e($spec_val->id); ?>" class="panel-collapse collapse <?php if($loop->first): ?>collapse show <?php endif; ?> role="tabpanel" aria-labelledby="headingTwo">
+                                <div id="spec-<?php echo e($spec_val->id); ?>" class="panel-collapse collapse <?php if($loop->first): ?>collapse <?php endif; ?> role="tabpanel" aria-labelledby="headingTwo">
                                 <div class="panel-body">
                                     <table class="table">
                                         <tbody>
@@ -210,25 +192,15 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="row">
-                            <div class="col-md-6">
-
-                            </div>
-
-                            <div class="col-md-6">
-
-                            </div>
-                        </div>
                     </div>
                     <?php endif; ?>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                </div>
 
-                    <div class="action-bar text-center mt-5">
-                        <a href="" class="btn btn-info">
-                            Show more
-                        </a>
-                    </div>
+                <div class="action-bar action-bar--show-more text-center mt-5">
+                    <button type="button" class="btn btn-info">
+                        Show more
+                    </button>
                 </div>
             </div>
         </div>
@@ -323,11 +295,11 @@
 
     <section class="section-padding">
         <div class="container">
-            <div class="block-title">
+            <div class="section-title">
                 <div class="section-title--content">
-                    <h4>
+                    <h2>
                         Car <span>variant</span>
-                    </h4>
+                    </h2>
                 </div>
             </div>
 

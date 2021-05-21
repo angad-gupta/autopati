@@ -79,6 +79,7 @@ class HomeController extends Controller
         $data['car_spec'] = $this->spec->getAllCarSpec();
         $data['car_color'] = $this->cars->getColorByCarId($car_id);
         $data['views'] = $this->cars->countViews($car_id);
+        $data['car_color'] = $this->cars->getColorByCarId($car_id);
 
         return view('home::home.detail',$data);
     }
