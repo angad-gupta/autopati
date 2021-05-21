@@ -516,12 +516,12 @@ $('.carousel_product-view').owlCarousel({
 
 $(function () {
     if (('#accordion .column').length > 8) {
-        $('.action-bar--show-more').addClass('visible');
+        $('#accordion .column:gt(7)').hide();
+        $('.btn-show-more').show();
     }
 
-    $('#accordion .column:gt(7)').hide();
-
-    $('.action-bar--show-more').click(function () {
-        $('#accordion .column:gt(7)').show();
+    $('.btn-show-more').click(function () {
+        $('#accordion .column:gt(7)').toggle();
+        $(this).text() === 'Show less' ? $(this).text('Show more') : $(this).text('Show less');
     });
 });
