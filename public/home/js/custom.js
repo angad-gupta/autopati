@@ -525,3 +525,7 @@ $(function () {
         $(this).text() === 'Show less' ? $(this).text('Show more') : $(this).text('Show less');
     });
 });
+
+$(window).load(function() {
+    $(".page-loader").fadeOut("slow");
+});
