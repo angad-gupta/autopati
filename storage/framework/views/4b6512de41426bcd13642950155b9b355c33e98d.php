@@ -26,7 +26,7 @@
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="">New Cars</a>
+                                    <a class="nav-link" href="">Cars</a>
                                     <div class="dropdown">
                                         <div class="row">
                                             <div class="col-sm-12 col-md-12 col-lg-3">
@@ -44,9 +44,9 @@
                                             </div>
                                             <div class="col-sm-12 col-md-12 col-lg-3">
                                                 <ul class="list-unstyled">
-                                                    <li><a href="/">Search New Cars</a></li>
+                                                    <li><a href="/">Search Cars</a></li>
                                                     <li><a href="<?php echo e(route('list.latest-car')); ?>">Latest Cars</a></li>
-                                                    <li><a href="<?php echo e(route('list.most-searched-car')); ?>">Most Popular Cars</a></li>
+                                                    <li><a href="<?php echo e(route('list.most-searched-car')); ?>">Most Searched Cars</a></li>
                                                     <li><a href="<?php echo e(route('list.electric-car')); ?>">Electric Cars</a></li>
                                                 </ul>
                                             </div>
@@ -120,9 +120,13 @@
                         </div>
                     </form>
 
-                    <ul class="list-unstyled mb-0 ap-header-login">
-                        <li><a href="#" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-user"></i></a></li>
-                    </ul>
+                  <div class="services_item_desc">
+                      <h6> <a href="#" data-toggle="modal" data-target="#exampleModal">Login</a></h6>
+                  </div>
+                  <div class="services_item_desc">
+                    <h6> <a href="#" data-toggle="modal" data-target="#exampleModal">Register</a></h6>
+                </div>
+                   
 
                     <i class="fa fa-bars btn-nav-toggler" id="mobile-trigger"></i>
                 </div>

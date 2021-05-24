@@ -48,7 +48,7 @@
 
                 @if($menuRoles->assignedRoles('setting.create'))
                     <li class="nav-item">
-                        <a href="{{route('setting.create')}}" class="nav-link @if($Route[0]=='setting') active @endif" data-popup="tooltip" data-original-title="Setting Management" data-placement="right"><i class="icon-question7"></i><span>Setting Management</span>
+                        <a href="{{route('setting.create')}}" class="nav-link @if($Route[0]=='setting') active @endif" data-popup="tooltip" data-original-title="Setting Management" data-placement="right"><i class="icon-cogs"></i><span>Setting Management</span>
                         </a>
                     </li>
                 @endif
@@ -117,7 +117,7 @@
                 @endif
 
                 <li class="nav-item nav-item-submenu">
-                    <a href="#" class="nav-link"><i class="icon-cog3"></i> <span>Services</span></a>
+                    <a href="#" class="nav-link"><i class="icon-flip-horizontal2"></i> <span>Services</span></a>
 
                     <ul class="nav nav-group-sub" data-submenu-title="Services" style="display: none;">
                         <li class="nav-item"><a href="{{route('servicecategory.index')}}" class="nav-link">Service Category</a></li>

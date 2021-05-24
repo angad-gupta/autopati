@@ -127,7 +127,7 @@ class HomeController extends Controller
     }
 
     public function listMostSearchedVehicle(){
-        $data['title'] = 'Most Searched Car & Bikes';
+        $data['title'] = 'Most Searched Cars';
         $data['vehicles'] = $this->cars->findMostSearched($limit=50);
         return view('home::home.list',$data);
     }
@@ -165,7 +165,7 @@ class HomeController extends Controller
     }
 
     public function listPopularCar(){
-        $data['title'] = 'Popular Car';
+        $data['title'] = "People's Choice Brands";
         $data['vehicles'] = $this->cars->findPopularCar($limit=50);
         return view('home::home.list',$data);
     }

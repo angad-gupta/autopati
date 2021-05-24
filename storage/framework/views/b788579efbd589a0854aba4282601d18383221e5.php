@@ -12,17 +12,17 @@
                                     <div class="col-md-4">
                                         <div class="card banner-search">
                                             <div class="card-body banner-search-title">
-                                                <h6>Find your Car</h6>
+                                                <h6 style="color: #e53012">Find your Perfect Car</h6>
                                             </div>
                                             <div class="card-body">
                                                 <div class="mb-3">
                                                     <div class="form-check form-check-inline">
                                                         <input class="form-check-input" type="radio" name="inlineRadioOptions" id="budget" checked>
-                                                        <label class="form-check-label" for="budget">By Budget</label>
+                                                        <label class="form-check-label" for="budget" style="font-weight:600;">By Budget</label>
                                                     </div>
                                                     <div class="form-check form-check-inline">
                                                         <input class="form-check-input" type="radio" name="inlineRadioOptions" id="model">
-                                                        <label class="form-check-label" for="model" >By Model</label>
+                                                        <label class="form-check-label" for="model" style="font-weight:600;">By Model</label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group budget-class">
@@ -130,31 +130,7 @@
         </section>
     <?php endif; ?>
 
-    <?php if(count($bike_brands) > 0): ?>
-        <section class="ecm-features ecm-new">
-            <div class="container">
-                <div class="row justify-content-center mb-5">
-                    <div class="col-sm-12">
-                        <div class="ecm-features__title d-flex align-items-center justify-content-between">
-                            <h1><span>Bike</span> brands</h1>
-                            <a href="<?php echo e(route('list.bike-brand')); ?>" class="see-all text-right">View all <i class="fa fa-angle-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="owl-carousel owl-theme brand discount-slider">
-                    <?php $__currentLoopData = $bike_brands; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $bike_brand): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <div class="item">
-                            <a href="<?php echo e(route('list.brand.vehicles',$bike_brand->id)); ?>" class="brand-item">
-                                <img src="<?php echo e(($bike_brand->brand_logo) ? asset($bike_brand->file_full_path).'/'.$bike_brand->brand_logo : asset('admin/vehicle.jpeg')); ?>" alt="<?php echo e($bike_brand->brand_name); ?>">
-                                <h5><?php echo e($bike_brand->brand_name); ?></h5>
-                            </a>
-                        </div>
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                </div>
-            </div>
-        </section>
-    <?php endif; ?>
+    
 
     <?php if(count($service_categories) > 0): ?>
         <section class="ecm-features home-tabs ecm-new">
@@ -162,7 +138,7 @@
                 <div class="row justify-content-center mb-5">
                     <div class="col-sm-12">
                         <div class="ecm-features__title d-flex align-items-center justify-content-between">
-                            <h1><span>Available</span> Services</h1>
+                            <h1><span>Services</span> </h1>
                             <a href="<?php echo e(route('service.all')); ?>" class="see-all text-right">View all <i class="fa fa-angle-right"></i></a>
                         </div>
                     </div>
@@ -214,7 +190,7 @@
                 <div class="row justify-content-center mb-5">
                     <div class="col-sm-12">
                         <div class="ecm-features__title d-flex align-items-center justify-content-between">
-                            <h1><span>Most Searched</span> Cars and Bikes</h1>
+                            <h1><span>Most Searched</span> Cars </h1>
                             <a href="<?php echo e(route('list.most-searched-car')); ?>" class="see-all text-right">View all <i class="fa fa-angle-right"></i></a>
                         </div>
                     </div>

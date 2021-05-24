@@ -4,9 +4,9 @@
         <div class="row align-items-center">
             <div class="col-md-6">
                 <div class="text-white">
-                    <h3>Keep updated & Get Unlimited Offers</h3>
+                    <h3>Want to Know More, </h3>
                     <p class="mb-0">
-                        Subscribe to Autopati
+                        Share your email address
                     </p>
                 </div>
             </div>
@@ -51,6 +51,7 @@
                     <a class="fb" href="<?php echo e($footer->facebook_link); ?>" target="__blank"><i class="fa fa-facebook"></i></a>
                     <a class="twit" href="<?php echo e($footer->twitter_link); ?>" target="__blank"><i class="fa fa-twitter"></i></a>
                     <a class="youtube" href="<?php echo e($footer->youtube_link); ?>" target="__blank"><i class="fa fa-youtube"></i></a>
+                    <a style="background: #f16ad4" href="<?php echo e($footer->instagram_link); ?>" target="__blank"><i class="fa fa-instagram"></i></a>
                 </div>
             </div>
 
@@ -75,9 +76,12 @@
             <div class="col-sm-6 col-md-3 mt-3 mt-sm- 3 mt-md-0">
                 <h5>Customer Links</h5>
                 <ul class="list-unstyled f-links">
-                    <li><a href="<?php echo e(route('list.latest-car')); ?>">Latest Cars</a></li>
-                    <li><a href="<?php echo e(route('list.popular-car')); ?>">Popular Cars</a></li>
-                    
+                    <li><a href="<?php echo e(route('list.latest-car')); ?>">Cars</a></li>
+                    <li><a href="<?php echo e(route('list.car-brand')); ?>">Brand</a></li>
+                    <li><a href="<?php echo e(route('compare')); ?>">Compare</a></li>
+                    <li> <a href="#" data-toggle="modal" data-target="#exampleModal">Register</a></li>
+                    <li><a href="<?php echo e(route('list.popular-car')); ?>">People's Choice Brand</a></li>
+                 
                 </ul>
             </div>
 
