@@ -100,11 +100,12 @@
             <div class="tab-color-selector">
                 <div class="tab-content" id="myTabContent">
                     @foreach($car_color as $key => $color_val)
+                    
                     @php
                        $colorimage = ($color_val->car_image) ? asset($color_val->file_full_path).'/'.$color_val->car_image : asset('admin/image.png');
                     @endphp
 
-                    <div class="tab-pane fade show @if($loop->first) active @endif" id="{{$color_val->color_title}}" role="tabpanel" aria-labelledby="home-tab">
+                    <div class="tab-pane fade show @if($loop->first) active @endif" id="color-{{$color_val->id}}" role="tabpanel" aria-labelledby="home-tab">
                         <figure>
                             <img src=" {{$colorimage}}" alt="">
                         </figure>
@@ -115,7 +116,7 @@
                 <ul class="nav nav-tabs menu menu-palette" id="myTab" role="tablist">
                     @foreach($car_color as $key => $color_val)
                     <li class="menu-item">
-                        <a class="menu-link @if($loop->first) active @endif" id="home-tab" data-toggle="tab" href="#{{$color_val->color_title}}" role="tab" aria-controls="home" aria-selected="true" style="background: {{$color_val->color_code}}">
+                        <a class="menu-link @if($loop->first) active @endif" id="home-tab" data-toggle="tab" href="#color-{{$color_val->id}}" role="tab" aria-controls="home" aria-selected="true" style="background: {{$color_val->color_code}}">
                         </a>
                     </li>
                     @endforeach
