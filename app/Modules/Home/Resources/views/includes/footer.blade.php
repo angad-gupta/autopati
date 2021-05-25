@@ -77,7 +77,7 @@
                     <li><a href="{{route('list.car-brand')}}">Brand</a></li>
                     <li><a href="{{route('compare')}}">Compare</a></li>
                     <li> <a href="#" data-toggle="modal" data-target="#exampleModal">Register</a></li>
-                    {{-- <li><a href="{{route('list.popular-car')}}">People's Choice Brand</a></li> --}}
+                    <li><a href="{{route('page','faq')}}">FAQ</a></li>
                  
                 </ul>
             </div>

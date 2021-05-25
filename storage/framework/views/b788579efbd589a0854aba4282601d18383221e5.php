@@ -110,7 +110,7 @@
                 <div class="row justify-content-center mb-5">
                     <div class="col-sm-12">
                         <div class="ecm-features__title d-flex align-items-center justify-content-between">
-                            <h1><span>Car</span> brands</h1>
+                            <h1><span>Four Wheeler</span> brands</h1>
                             <a href="<?php echo e(route('list.car-brand')); ?>" class="see-all text-right">View all <i class="fa fa-angle-right"></i></a>
                         </div>
                     </div>
