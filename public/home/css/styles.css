@@ -2687,9 +2687,79 @@ header .bg-light .nav-item {
       height: auto;
       width: 100%; }
 
-.compare_block__wrap {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr); }
+.compare {
+  border: 1px solid #cccccc;
+  line-height: 1; }
+  .compare_brand {
+    color: #343a40;
+    font-size: .75rem;
+    margin-bottom: .35rem;
+    text-transform: capitalize; }
+  .compare_media {
+    display: block;
+    position: relative;
+    margin: 0 0 .9rem; }
+    .compare_media:before {
+      content: "";
+      display: block;
+      padding-top: 100%;
+      width: 100%; }
+    .compare_media img {
+      bottom: 0;
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+      height: 100%;
+      object-fit: cover;
+      width: 100%; }
+  .compare_price {
+    color: #646161;
+    font-size: .95rem;
+    font-weight: 600; }
+  .compare_title {
+    color: #464646;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.25;
+    margin-bottom: 1.25rem; }
+  .compare_action_bar {
+    border-top: 1px solid #cccccc; }
+    .compare_action_bar a {
+      color: royalblue;
+      display: block;
+      font-weight: 500;
+      padding: .85rem .75rem;
+      text-align: center;
+      transition: all .36s; }
+      .compare_action_bar a:hover {
+        background: rgba(229, 48, 18, 0.75);
+        color: #fff;
+        text-decoration: none; }
+  .compare_block {
+    padding: .85rem;
+    border-right: 1px solid #cccccc; }
+    .compare_block:last-child {
+      border-right: 0; }
+  .compare_block__wrap {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    position: relative; }
+    .compare_block__wrap .tertiary {
+      align-items: center;
+      display: flex;
+      height: 24px;
+      justify-content: center;
+      width: 24px;
+      background: #fff;
+      border: 1px solid #cccccc;
+      border-radius: 50%;
+      color: #e53012;
+      font-size: .65rem;
+      left: 50%;
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%); }
 
 @-webkit-keyframes spin {
   0% {

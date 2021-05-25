@@ -531,6 +531,7 @@ $(window).load(function() {
 });
 
 $('.carousel-compare-product').owlCarousel({
+    autoPlay: 1,
     loop: 0,
     margin: 30,
     nav: 1,
