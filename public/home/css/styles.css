@@ -2687,6 +2687,10 @@ header .bg-light .nav-item {
       height: auto;
       width: 100%; }
 
+.compare_block__wrap {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); }
+
 @-webkit-keyframes spin {
   0% {
     -webkit-transform: rotate(0deg); }

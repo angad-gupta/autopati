@@ -81,7 +81,7 @@
     @endif
 
     @if(count($deal_of_the_months) > 0)
-        <section class="ecm-features ecm-new">
+        {{--<section class="ecm-features ecm-new">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-sm-12">
@@ -103,8 +103,62 @@
 
                 </div>
             </div>
-        </section>
+        </section>--}}
     @endif
+
+    <section class="section-compare section-padding">
+        <div class="container">
+            <div class="owl-carousel owl-theme carousel-compare-product">
+                <div class="compare">
+                    <div class="compare_block__wrap">
+                        <div class="compare_block">
+                            <figure class="compare_media">
+                                <img src="home/img/10.jpg" alt="">
+                            </figure>
+
+                            <div class="compare-excerpt">
+                                <div class="compare_brand">
+                                    Mercedes-Benz
+                                </div>
+                                <div class="compare_title">
+                                    AMG A35 Limousine
+                                </div>
+
+                                <div class="compare_price">
+                                    $ 50,000
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="compare_block">
+                            <figure class="compare_media">
+                                <img src="" alt="">
+                            </figure>
+
+                            <div class="compare-excerpt">
+                                <div class="compare_brand">
+                                    Mercedes-Benz
+                                </div>
+                                <div class="compare_title">
+                                    AMG A35 Limousine
+                                </div>
+
+                                <div class="compare_price">
+                                    $ 50,000
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="compare_action_bar">
+                        <a href="">
+                            Compare
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     @if(count($car_brands) > 0)
         <section class="ecm-features ecm-new">
