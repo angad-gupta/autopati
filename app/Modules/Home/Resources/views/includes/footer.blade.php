@@ -73,11 +73,11 @@
             <div class="col-sm-6 col-md-3 mt-3 mt-sm- 3 mt-md-0">
                 <h5>Customer Links</h5>
                 <ul class="list-unstyled f-links">
-                    <li><a href="{{route('list.latest-car')}}">Cars</a></li>
+                    {{-- <li><a href="{{route('list.latest-car')}}">Cars</a></li> --}}
                     <li><a href="{{route('list.car-brand')}}">Brand</a></li>
                     <li><a href="{{route('compare')}}">Compare</a></li>
                     <li> <a href="#" data-toggle="modal" data-target="#exampleModal">Register</a></li>
-                    <li><a href="{{route('list.popular-car')}}">People's Choice Brand</a></li>
+                    {{-- <li><a href="{{route('list.popular-car')}}">People's Choice Brand</a></li> --}}
                  
                 </ul>
             </div>
