@@ -79,30 +79,374 @@
     <?php endif; ?>
 
     <?php if(count($deal_of_the_months) > 0): ?>
-        <section class="ecm-features ecm-new">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-sm-12">
-                        <div class="ecm-features__title d-flex align-items-center justify-content-between">
-                            <h1><span>Deals</span> of the Month</h1>
-                            <a href="<?php echo e(route('list.deal-of-the-month')); ?>" class="see-all text-right">View all <i class="fa fa-angle-right"></i></a>
+        
+    <?php endif; ?>
+
+    <section class="section-compare section-padding">
+        <div class="container">
+            <div class="owl-carousel owl-theme carousel-compare-product">
+                <form action="<?php echo e(route('compare.vehicles')); ?>" method="POST">
+                    <?php echo csrf_field(); ?>
+                    <div class="compare">
+                        <div class="compare_block__wrap">
+                            <?php $__currentLoopData = $cars_info; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    
+                            <?php if($key == 0): ?>
+                            <div class="compare_block">
+                                <?php 
+                                if($value){
+                                    $imagePath = asset($value->file_full_path).'/'.$value->car_image;
+                                }else{
+                                    $imagePath = asset('admin/vehicle.jpeg');
+                                }
+                                ?>
+
+                                <figure class="compare_media">
+                                    <img src="<?php echo e($imagePath); ?>" alt="">
+                                </figure>
+
+                                <div class="compare-excerpt">
+                                    <div class="compare_brand">
+                                        <?php echo e(optional($value->BrandInfo)->brand_name); ?> 
+                                    </div>
+
+                                    <div class="compare_title">
+                                        <?php echo e(optional($value->ModelInfo)->model_name); ?> <?php echo e(optional($value->VariantInfo)->variant_name); ?>
+
+                                    </div>
+
+                                    <div class="compare_price">
+                                        Rs. <?php echo e($value->starting_price); ?>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <input name="first_brand_id" value="<?php echo e($value->brand_id); ?>" hidden />
+                            <input name="first_model_id" value="<?php echo e($value->model_id); ?>" hidden />
+                            <input name="first_variant_id" value="<?php echo e($value->variant_id); ?>" hidden />
+                            <?php endif; ?>
+                        
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        
+                            <span class="tertiary">vs</span>
+                            <?php $__currentLoopData = $cars_info; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        
+                            <?php if($key == 1): ?>
+                            <div class="compare_block">
+                                <?php
+                                if($value){
+                                    $imagePath = asset($value->file_full_path).'/'.$value->car_image;
+                                }else{
+                                    $imagePath = asset('admin/vehicle.jpeg');
+                                }
+                                ?>
+                                <figure class="compare_media">
+                                    <img src="<?php echo e($imagePath); ?>" alt="">
+                                </figure>
+
+                                <div class="compare-excerpt">
+                                    <div class="compare_brand">
+                                        <?php echo e(optional($value->BrandInfo)->brand_name); ?> 
+                                    </div>
+                                    <div class="compare_title">
+                                        <?php echo e(optional($value->ModelInfo)->model_name); ?> <?php echo e(optional($value->VariantInfo)->variant_name); ?>
+
+                                    </div>
+
+                                    <div class="compare_price">
+                                        Rs. <?php echo e($value->starting_price); ?>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <input name="second_brand_id" value="<?php echo e($value->brand_id); ?>" hidden />
+                            <input name="second_model_id" value="<?php echo e($value->model_id); ?>" hidden />
+                            <input name="second_variant_id" value="<?php echo e($value->variant_id); ?>" hidden />
+                            <?php endif; ?>
+                        
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        </div>
+
+                        <div class="compare_action_bar">
+                            <button type="submit" class="btn btn-primary btn-block">Compare Cars</button>
                         </div>
                     </div>
-                </div>
-                <div class="owl-carousel owl-theme new-arrival">
-                    <?php $__currentLoopData = $deal_of_the_months; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $deal_of_the_month): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <div class="item">
-                            <a href="<?php echo e(route('car.detail',$deal_of_the_month->id)); ?>" class="ecm-new__item">
-                                <img src="<?php echo e(($deal_of_the_month->car_image) ? asset($deal_of_the_month->file_full_path).'/'.$deal_of_the_month->car_image : asset('admin/vehicle.jpeg' )); ?>" alt="<?php echo e($deal_of_the_month->ModelInfo->model_name); ?> <?php echo e($deal_of_the_month->VariantInfo->variant_name); ?>">
-                                <h5><?php echo e(optional($deal_of_the_month->BrandInfo)->brand_name); ?> <?php echo e(optional($deal_of_the_month->ModelInfo)->model_name); ?> </h5>
-                            </a>
-                        </div>
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                </form>
 
-                </div>
+                <form action="<?php echo e(route('compare.vehicles')); ?>" method="POST">
+                    <?php echo csrf_field(); ?>
+                    <div class="compare">
+                        <div class="compare_block__wrap">
+                            <?php $__currentLoopData = $cars_info; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    
+                            <?php if($key == 2): ?>
+                            <div class="compare_block">
+                                <?php 
+                                if($value){
+                                    $imagePath = asset($value->file_full_path).'/'.$value->car_image;
+                                }else{
+                                    $imagePath = asset('admin/vehicle.jpeg');
+                                }
+                                ?>
+
+                                <figure class="compare_media">
+                                    <img src="<?php echo e($imagePath); ?>" alt="">
+                                </figure>
+
+                                <div class="compare-excerpt">
+                                    <div class="compare_brand">
+                                        <?php echo e(optional($value->BrandInfo)->brand_name); ?> 
+                                    </div>
+
+                                    <div class="compare_title">
+                                        <?php echo e(optional($value->ModelInfo)->model_name); ?> <?php echo e(optional($value->VariantInfo)->variant_name); ?>
+
+                                    </div>
+
+                                    <div class="compare_price">
+                                        Rs. <?php echo e($value->starting_price); ?>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <input name="first_brand_id" value="<?php echo e($value->brand_id); ?>" hidden />
+                            <input name="first_model_id" value="<?php echo e($value->model_id); ?>" hidden />
+                            <input name="first_variant_id" value="<?php echo e($value->variant_id); ?>" hidden />
+                            <?php endif; ?>
+                        
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        
+                            <span class="tertiary">vs</span>
+                            <?php $__currentLoopData = $cars_info; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        
+                            <?php if($key == 3): ?>
+                            <div class="compare_block">
+                                <?php
+                                if($value){
+                                    $imagePath = asset($value->file_full_path).'/'.$value->car_image;
+                                }else{
+                                    $imagePath = asset('admin/vehicle.jpeg');
+                                }
+                                ?>
+                                <figure class="compare_media">
+                                    <img src="<?php echo e($imagePath); ?>" alt="">
+                                </figure>
+
+                                <div class="compare-excerpt">
+                                    <div class="compare_brand">
+                                        <?php echo e(optional($value->BrandInfo)->brand_name); ?> 
+                                    </div>
+                                    <div class="compare_title">
+                                        <?php echo e(optional($value->ModelInfo)->model_name); ?> <?php echo e(optional($value->VariantInfo)->variant_name); ?>
+
+                                    </div>
+
+                                    <div class="compare_price">
+                                        Rs. <?php echo e($value->starting_price); ?>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <input name="second_brand_id" value="<?php echo e($value->brand_id); ?>" hidden />
+                            <input name="second_model_id" value="<?php echo e($value->model_id); ?>" hidden />
+                            <input name="second_variant_id" value="<?php echo e($value->variant_id); ?>" hidden />
+                            <?php endif; ?>
+                        
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        </div>
+
+                        <div class="compare_action_bar">
+                            <button type="submit" class="btn btn-primary btn-block">Compare Cars</button>
+                        </div>
+                    </div>
+                </form>
+
+                <form action="<?php echo e(route('compare.vehicles')); ?>" method="POST">
+                    <?php echo csrf_field(); ?>
+                    <div class="compare">
+                        <div class="compare_block__wrap">
+                            <?php $__currentLoopData = $cars_info; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    
+                            <?php if($key == 4): ?>
+                            <div class="compare_block">
+                                <?php 
+                                if($value){
+                                    $imagePath = asset($value->file_full_path).'/'.$value->car_image;
+                                }else{
+                                    $imagePath = asset('admin/vehicle.jpeg');
+                                }
+                                ?>
+
+                                <figure class="compare_media">
+                                    <img src="<?php echo e($imagePath); ?>" alt="">
+                                </figure>
+
+                                <div class="compare-excerpt">
+                                    <div class="compare_brand">
+                                        <?php echo e(optional($value->BrandInfo)->brand_name); ?> 
+                                    </div>
+
+                                    <div class="compare_title">
+                                        <?php echo e(optional($value->ModelInfo)->model_name); ?> <?php echo e(optional($value->VariantInfo)->variant_name); ?>
+
+                                    </div>
+
+                                    <div class="compare_price">
+                                        Rs. <?php echo e($value->starting_price); ?>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <input name="first_brand_id" value="<?php echo e($value->brand_id); ?>" hidden />
+                            <input name="first_model_id" value="<?php echo e($value->model_id); ?>" hidden />
+                            <input name="first_variant_id" value="<?php echo e($value->variant_id); ?>" hidden />
+                            <?php endif; ?>
+                        
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        
+                            <span class="tertiary">vs</span>
+                            <?php $__currentLoopData = $cars_info; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        
+                            <?php if($key == 5): ?>
+                            <div class="compare_block">
+                                <?php
+                                if($value){
+                                    $imagePath = asset($value->file_full_path).'/'.$value->car_image;
+                                }else{
+                                    $imagePath = asset('admin/vehicle.jpeg');
+                                }
+                                ?>
+                                <figure class="compare_media">
+                                    <img src="<?php echo e($imagePath); ?>" alt="">
+                                </figure>
+
+                                <div class="compare-excerpt">
+                                    <div class="compare_brand">
+                                        <?php echo e(optional($value->BrandInfo)->brand_name); ?> 
+                                    </div>
+                                    <div class="compare_title">
+                                        <?php echo e(optional($value->ModelInfo)->model_name); ?> <?php echo e(optional($value->VariantInfo)->variant_name); ?>
+
+                                    </div>
+
+                                    <div class="compare_price">
+                                        Rs. <?php echo e($value->starting_price); ?>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <input name="second_brand_id" value="<?php echo e($value->brand_id); ?>" hidden />
+                            <input name="second_model_id" value="<?php echo e($value->model_id); ?>" hidden />
+                            <input name="second_variant_id" value="<?php echo e($value->variant_id); ?>" hidden />
+                            <?php endif; ?>
+                        
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        </div>
+
+                        <div class="compare_action_bar">
+                            <button type="submit" class="btn btn-primary btn-block">Compare Cars</button>
+                        </div>
+                    </div>
+                </form>
+
+                <form action="<?php echo e(route('compare.vehicles')); ?>" method="POST">
+                    <?php echo csrf_field(); ?>
+                    <div class="compare">
+                        <div class="compare_block__wrap">
+                            <?php $__currentLoopData = $cars_info; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    
+                            <?php if($key == 0): ?>
+                            <div class="compare_block">
+                                <?php 
+                                if($value){
+                                    $imagePath = asset($value->file_full_path).'/'.$value->car_image;
+                                }else{
+                                    $imagePath = asset('admin/vehicle.jpeg');
+                                }
+                                ?>
+
+                                <figure class="compare_media">
+                                    <img src="<?php echo e($imagePath); ?>" alt="">
+                                </figure>
+
+                                <div class="compare-excerpt">
+                                    <div class="compare_brand">
+                                        <?php echo e(optional($value->BrandInfo)->brand_name); ?> 
+                                    </div>
+
+                                    <div class="compare_title">
+                                        <?php echo e(optional($value->ModelInfo)->model_name); ?> <?php echo e(optional($value->VariantInfo)->variant_name); ?>
+
+                                    </div>
+
+                                    <div class="compare_price">
+                                        Rs. <?php echo e($value->starting_price); ?>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <input name="first_brand_id" value="<?php echo e($value->brand_id); ?>" hidden />
+                            <input name="first_model_id" value="<?php echo e($value->model_id); ?>" hidden />
+                            <input name="first_variant_id" value="<?php echo e($value->variant_id); ?>" hidden />
+                            <?php endif; ?>
+                        
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        
+                            <span class="tertiary">vs</span>
+                            <?php $__currentLoopData = $cars_info; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        
+                            <?php if($key == 1): ?>
+                            <div class="compare_block">
+                                <?php
+                                if($value){
+                                    $imagePath = asset($value->file_full_path).'/'.$value->car_image;
+                                }else{
+                                    $imagePath = asset('admin/vehicle.jpeg');
+                                }
+                                ?>
+                                <figure class="compare_media">
+                                    <img src="<?php echo e($imagePath); ?>" alt="">
+                                </figure>
+
+                                <div class="compare-excerpt">
+                                    <div class="compare_brand">
+                                        <?php echo e(optional($value->BrandInfo)->brand_name); ?> 
+                                    </div>
+                                    <div class="compare_title">
+                                        <?php echo e(optional($value->ModelInfo)->model_name); ?> <?php echo e(optional($value->VariantInfo)->variant_name); ?>
+
+                                    </div>
+
+                                    <div class="compare_price">
+                                        Rs. <?php echo e($value->starting_price); ?>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <input name="second_brand_id" value="<?php echo e($value->brand_id); ?>" hidden />
+                            <input name="second_model_id" value="<?php echo e($value->model_id); ?>" hidden />
+                            <input name="second_variant_id" value="<?php echo e($value->variant_id); ?>" hidden />
+                            <?php endif; ?>
+                        
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        </div>
+
+                        <div class="compare_action_bar">
+                            <button type="submit" class="btn btn-primary btn-block">Compare Cars</button>
+                        </div>
+                    </div>
+                </form>
+                
+
+ 
+                
             </div>
-        </section>
-    <?php endif; ?>
+        </div>
+    </section>
 
     <?php if(count($car_brands) > 0): ?>
         <section class="ecm-features ecm-new">

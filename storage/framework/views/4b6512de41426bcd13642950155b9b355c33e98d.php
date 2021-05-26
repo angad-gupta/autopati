@@ -135,6 +135,10 @@
     </div>
 </header>
 
+<div class="page-loader">
+    <div class="loader"></div>
+</div>
+
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">

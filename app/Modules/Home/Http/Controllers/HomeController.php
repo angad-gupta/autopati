@@ -68,6 +68,11 @@ class HomeController extends Controller
         $data['luxury_banners'] = $this->banner->findAllActiveLuxuryBanner($limit=50);
         $data['luxuary_cars'] = $this->cars->findLuxury();
         $data['news'] = $this->news->findAllActiveNews();
+        $data['brand_name'] = $this->brand->getList(); 
+        $data['model_name'] = $this->vehicle_model->getList(); 
+        $data['variant_name'] = $this->vehicle_model->getListVariant();  
+
+        $data['cars_info'] = $this->cars->findAll($limit= 50);  
         return view('home::home.index',$data);
     }
 
@@ -244,7 +249,7 @@ class HomeController extends Controller
 
     public function compareVehicles(Request $request){
 
- 
+
         if($request->first_brand_id && $request->first_model_id && $request->first_variant_id){
 
             $data['first_vehicle'] = $this->cars->findCar($request->first_brand_id,$request->first_model_id,$request->first_variant_id);

@@ -109,306 +109,346 @@
     <section class="section-compare section-padding">
         <div class="container">
             <div class="owl-carousel owl-theme carousel-compare-product">
-                <div class="compare">
-                    <div class="compare_block__wrap">
-                        <div class="compare_block">
-                            <figure class="compare_media">
-                                <img src="home/img/10.jpg" alt="">
-                            </figure>
+                <form action="{{route('compare.vehicles')}}" method="POST">
+                    @csrf
+                    <div class="compare">
+                        <div class="compare_block__wrap">
+                            @foreach($cars_info as $key => $value)
+                    
+                            @if($key == 0)
+                            <div class="compare_block">
+                                @php 
+                                if($value){
+                                    $imagePath = asset($value->file_full_path).'/'.$value->car_image;
+                                }else{
+                                    $imagePath = asset('admin/vehicle.jpeg');
+                                }
+                                @endphp
 
-                            <div class="compare-excerpt">
-                                <div class="compare_brand">
-                                    Mercedes-Benz
-                                </div>
+                                <figure class="compare_media">
+                                    <img src="{{$imagePath}}" alt="">
+                                </figure>
 
-                                <div class="compare_title">
-                                    AMG A35 Limousine
-                                </div>
+                                <div class="compare-excerpt">
+                                    <div class="compare_brand">
+                                        {{ optional($value->BrandInfo)->brand_name }} 
+                                    </div>
 
-                                <div class="compare_price">
-                                    $ 50,000
-                                </div>
-                            </div>
-                        </div>
+                                    <div class="compare_title">
+                                        {{ optional($value->ModelInfo)->model_name }} {{ optional($value->VariantInfo)->variant_name }}
+                                    </div>
 
-                        <span class="tertiary">vs</span>
-
-                        <div class="compare_block">
-                            <figure class="compare_media">
-                                <img src="home/img/2.jpg" alt="">
-                            </figure>
-
-                            <div class="compare-excerpt">
-                                <div class="compare_brand">
-                                    Mercedes-Benz
-                                </div>
-                                <div class="compare_title">
-                                    AMG A35 Limousine
-                                </div>
-
-                                <div class="compare_price">
-                                    $ 50,000
+                                    <div class="compare_price">
+                                        Rs. {{$value->starting_price}}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
+                            <input name="first_brand_id" value="{{$value->brand_id}}" hidden />
+                            <input name="first_model_id" value="{{$value->model_id}}" hidden />
+                            <input name="first_variant_id" value="{{$value->variant_id}}" hidden />
+                            @endif
+                        
+                            @endforeach
+                        
+                            <span class="tertiary">vs</span>
+                            @foreach($cars_info as $key => $value)
+                        
+                            @if($key == 1)
+                            <div class="compare_block">
+                                @php
+                                if($value){
+                                    $imagePath = asset($value->file_full_path).'/'.$value->car_image;
+                                }else{
+                                    $imagePath = asset('admin/vehicle.jpeg');
+                                }
+                                @endphp
+                                <figure class="compare_media">
+                                    <img src="{{$imagePath }}" alt="">
+                                </figure>
 
-                    <div class="compare_action_bar">
-                        <a href="">
-                            Compare
-                        </a>
-                    </div>
-                </div>
-                <div class="compare">
-                    <div class="compare_block__wrap">
-                        <div class="compare_block">
-                            <figure class="compare_media">
-                                <img src="home/img/10.jpg" alt="">
-                            </figure>
+                                <div class="compare-excerpt">
+                                    <div class="compare_brand">
+                                        {{ optional($value->BrandInfo)->brand_name }} 
+                                    </div>
+                                    <div class="compare_title">
+                                        {{ optional($value->ModelInfo)->model_name }} {{ optional($value->VariantInfo)->variant_name }}
+                                    </div>
 
-                            <div class="compare-excerpt">
-                                <div class="compare_brand">
-                                    Mercedes-Benz
-                                </div>
-
-                                <div class="compare_title">
-                                    AMG A35 Limousine
-                                </div>
-
-                                <div class="compare_price">
-                                    $ 50,000
-                                </div>
-                            </div>
-                        </div>
-
-                        <span class="tertiary">vs</span>
-
-                        <div class="compare_block">
-                            <figure class="compare_media">
-                                <img src="home/img/2.jpg" alt="">
-                            </figure>
-
-                            <div class="compare-excerpt">
-                                <div class="compare_brand">
-                                    Mercedes-Benz
-                                </div>
-                                <div class="compare_title">
-                                    AMG A35 Limousine
-                                </div>
-
-                                <div class="compare_price">
-                                    $ 50,000
+                                    <div class="compare_price">
+                                        Rs. {{$value->starting_price}}
+                                    </div>
                                 </div>
                             </div>
+
+                            <input name="second_brand_id" value="{{$value->brand_id}}" hidden />
+                            <input name="second_model_id" value="{{$value->model_id}}" hidden />
+                            <input name="second_variant_id" value="{{$value->variant_id}}" hidden />
+                            @endif
+                        
+                            @endforeach
+                        </div>
+
+                        <div class="compare_action_bar">
+                            <button type="submit" class="btn btn-primary btn-block">Compare Cars</button>
                         </div>
                     </div>
+                </form>
 
-                    <div class="compare_action_bar">
-                        <a href="">
-                            Compare
-                        </a>
-                    </div>
-                </div>
-                <div class="compare">
-                    <div class="compare_block__wrap">
-                        <div class="compare_block">
-                            <figure class="compare_media">
-                                <img src="home/img/10.jpg" alt="">
-                            </figure>
+                <form action="{{route('compare.vehicles')}}" method="POST">
+                    @csrf
+                    <div class="compare">
+                        <div class="compare_block__wrap">
+                            @foreach($cars_info as $key => $value)
+                    
+                            @if($key == 2)
+                            <div class="compare_block">
+                                @php 
+                                if($value){
+                                    $imagePath = asset($value->file_full_path).'/'.$value->car_image;
+                                }else{
+                                    $imagePath = asset('admin/vehicle.jpeg');
+                                }
+                                @endphp
 
-                            <div class="compare-excerpt">
-                                <div class="compare_brand">
-                                    Mercedes-Benz
-                                </div>
+                                <figure class="compare_media">
+                                    <img src="{{$imagePath}}" alt="">
+                                </figure>
 
-                                <div class="compare_title">
-                                    AMG A35 Limousine
-                                </div>
+                                <div class="compare-excerpt">
+                                    <div class="compare_brand">
+                                        {{ optional($value->BrandInfo)->brand_name }} 
+                                    </div>
 
-                                <div class="compare_price">
-                                    $ 50,000
+                                    <div class="compare_title">
+                                        {{ optional($value->ModelInfo)->model_name }} {{ optional($value->VariantInfo)->variant_name }}
+                                    </div>
+
+                                    <div class="compare_price">
+                                        Rs. {{$value->starting_price}}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                            <input name="first_brand_id" value="{{$value->brand_id}}" hidden />
+                            <input name="first_model_id" value="{{$value->model_id}}" hidden />
+                            <input name="first_variant_id" value="{{$value->variant_id}}" hidden />
+                            @endif
+                        
+                            @endforeach
+                        
+                            <span class="tertiary">vs</span>
+                            @foreach($cars_info as $key => $value)
+                        
+                            @if($key == 3)
+                            <div class="compare_block">
+                                @php
+                                if($value){
+                                    $imagePath = asset($value->file_full_path).'/'.$value->car_image;
+                                }else{
+                                    $imagePath = asset('admin/vehicle.jpeg');
+                                }
+                                @endphp
+                                <figure class="compare_media">
+                                    <img src="{{$imagePath }}" alt="">
+                                </figure>
 
-                        <span class="tertiary">vs</span>
+                                <div class="compare-excerpt">
+                                    <div class="compare_brand">
+                                        {{ optional($value->BrandInfo)->brand_name }} 
+                                    </div>
+                                    <div class="compare_title">
+                                        {{ optional($value->ModelInfo)->model_name }} {{ optional($value->VariantInfo)->variant_name }}
+                                    </div>
 
-                        <div class="compare_block">
-                            <figure class="compare_media">
-                                <img src="home/img/2.jpg" alt="">
-                            </figure>
-
-                            <div class="compare-excerpt">
-                                <div class="compare_brand">
-                                    Mercedes-Benz
-                                </div>
-                                <div class="compare_title">
-                                    AMG A35 Limousine
-                                </div>
-
-                                <div class="compare_price">
-                                    $ 50,000
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="compare_action_bar">
-                        <a href="">
-                            Compare
-                        </a>
-                    </div>
-                </div>
-                <div class="compare">
-                    <div class="compare_block__wrap">
-                        <div class="compare_block">
-                            <figure class="compare_media">
-                                <img src="home/img/10.jpg" alt="">
-                            </figure>
-
-                            <div class="compare-excerpt">
-                                <div class="compare_brand">
-                                    Mercedes-Benz
-                                </div>
-
-                                <div class="compare_title">
-                                    AMG A35 Limousine
-                                </div>
-
-                                <div class="compare_price">
-                                    $ 50,000
+                                    <div class="compare_price">
+                                        Rs. {{$value->starting_price}}
+                                    </div>
                                 </div>
                             </div>
+
+                            <input name="second_brand_id" value="{{$value->brand_id}}" hidden />
+                            <input name="second_model_id" value="{{$value->model_id}}" hidden />
+                            <input name="second_variant_id" value="{{$value->variant_id}}" hidden />
+                            @endif
+                        
+                            @endforeach
                         </div>
 
-                        <span class="tertiary">vs</span>
+                        <div class="compare_action_bar">
+                            <button type="submit" class="btn btn-primary btn-block">Compare Cars</button>
+                        </div>
+                    </div>
+                </form>
 
-                        <div class="compare_block">
-                            <figure class="compare_media">
-                                <img src="home/img/2.jpg" alt="">
-                            </figure>
+                <form action="{{route('compare.vehicles')}}" method="POST">
+                    @csrf
+                    <div class="compare">
+                        <div class="compare_block__wrap">
+                            @foreach($cars_info as $key => $value)
+                    
+                            @if($key == 4)
+                            <div class="compare_block">
+                                @php 
+                                if($value){
+                                    $imagePath = asset($value->file_full_path).'/'.$value->car_image;
+                                }else{
+                                    $imagePath = asset('admin/vehicle.jpeg');
+                                }
+                                @endphp
 
-                            <div class="compare-excerpt">
-                                <div class="compare_brand">
-                                    Mercedes-Benz
-                                </div>
-                                <div class="compare_title">
-                                    AMG A35 Limousine
-                                </div>
+                                <figure class="compare_media">
+                                    <img src="{{$imagePath}}" alt="">
+                                </figure>
 
-                                <div class="compare_price">
-                                    $ 50,000
+                                <div class="compare-excerpt">
+                                    <div class="compare_brand">
+                                        {{ optional($value->BrandInfo)->brand_name }} 
+                                    </div>
+
+                                    <div class="compare_title">
+                                        {{ optional($value->ModelInfo)->model_name }} {{ optional($value->VariantInfo)->variant_name }}
+                                    </div>
+
+                                    <div class="compare_price">
+                                        Rs. {{$value->starting_price}}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
+                            <input name="first_brand_id" value="{{$value->brand_id}}" hidden />
+                            <input name="first_model_id" value="{{$value->model_id}}" hidden />
+                            <input name="first_variant_id" value="{{$value->variant_id}}" hidden />
+                            @endif
+                        
+                            @endforeach
+                        
+                            <span class="tertiary">vs</span>
+                            @foreach($cars_info as $key => $value)
+                        
+                            @if($key == 5)
+                            <div class="compare_block">
+                                @php
+                                if($value){
+                                    $imagePath = asset($value->file_full_path).'/'.$value->car_image;
+                                }else{
+                                    $imagePath = asset('admin/vehicle.jpeg');
+                                }
+                                @endphp
+                                <figure class="compare_media">
+                                    <img src="{{$imagePath }}" alt="">
+                                </figure>
 
-                    <div class="compare_action_bar">
-                        <a href="">
-                            Compare
-                        </a>
-                    </div>
-                </div>
-                <div class="compare">
-                    <div class="compare_block__wrap">
-                        <div class="compare_block">
-                            <figure class="compare_media">
-                                <img src="home/img/10.jpg" alt="">
-                            </figure>
+                                <div class="compare-excerpt">
+                                    <div class="compare_brand">
+                                        {{ optional($value->BrandInfo)->brand_name }} 
+                                    </div>
+                                    <div class="compare_title">
+                                        {{ optional($value->ModelInfo)->model_name }} {{ optional($value->VariantInfo)->variant_name }}
+                                    </div>
 
-                            <div class="compare-excerpt">
-                                <div class="compare_brand">
-                                    Mercedes-Benz
-                                </div>
-
-                                <div class="compare_title">
-                                    AMG A35 Limousine
-                                </div>
-
-                                <div class="compare_price">
-                                    $ 50,000
-                                </div>
-                            </div>
-                        </div>
-
-                        <span class="tertiary">vs</span>
-
-                        <div class="compare_block">
-                            <figure class="compare_media">
-                                <img src="home/img/2.jpg" alt="">
-                            </figure>
-
-                            <div class="compare-excerpt">
-                                <div class="compare_brand">
-                                    Mercedes-Benz
-                                </div>
-                                <div class="compare_title">
-                                    AMG A35 Limousine
-                                </div>
-
-                                <div class="compare_price">
-                                    $ 50,000
+                                    <div class="compare_price">
+                                        Rs. {{$value->starting_price}}
+                                    </div>
                                 </div>
                             </div>
+
+                            <input name="second_brand_id" value="{{$value->brand_id}}" hidden />
+                            <input name="second_model_id" value="{{$value->model_id}}" hidden />
+                            <input name="second_variant_id" value="{{$value->variant_id}}" hidden />
+                            @endif
+                        
+                            @endforeach
+                        </div>
+
+                        <div class="compare_action_bar">
+                            <button type="submit" class="btn btn-primary btn-block">Compare Cars</button>
                         </div>
                     </div>
+                </form>
 
-                    <div class="compare_action_bar">
-                        <a href="">
-                            Compare
-                        </a>
-                    </div>
-                </div>
-                <div class="compare">
-                    <div class="compare_block__wrap">
-                        <div class="compare_block">
-                            <figure class="compare_media">
-                                <img src="home/img/10.jpg" alt="">
-                            </figure>
+                <form action="{{route('compare.vehicles')}}" method="POST">
+                    @csrf
+                    <div class="compare">
+                        <div class="compare_block__wrap">
+                            @foreach($cars_info as $key => $value)
+                    
+                            @if($key == 0)
+                            <div class="compare_block">
+                                @php 
+                                if($value){
+                                    $imagePath = asset($value->file_full_path).'/'.$value->car_image;
+                                }else{
+                                    $imagePath = asset('admin/vehicle.jpeg');
+                                }
+                                @endphp
 
-                            <div class="compare-excerpt">
-                                <div class="compare_brand">
-                                    Mercedes-Benz
-                                </div>
+                                <figure class="compare_media">
+                                    <img src="{{$imagePath}}" alt="">
+                                </figure>
 
-                                <div class="compare_title">
-                                    AMG A35 Limousine
-                                </div>
+                                <div class="compare-excerpt">
+                                    <div class="compare_brand">
+                                        {{ optional($value->BrandInfo)->brand_name }} 
+                                    </div>
 
-                                <div class="compare_price">
-                                    $ 50,000
+                                    <div class="compare_title">
+                                        {{ optional($value->ModelInfo)->model_name }} {{ optional($value->VariantInfo)->variant_name }}
+                                    </div>
+
+                                    <div class="compare_price">
+                                        Rs. {{$value->starting_price}}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                            <input name="first_brand_id" value="{{$value->brand_id}}" hidden />
+                            <input name="first_model_id" value="{{$value->model_id}}" hidden />
+                            <input name="first_variant_id" value="{{$value->variant_id}}" hidden />
+                            @endif
+                        
+                            @endforeach
+                        
+                            <span class="tertiary">vs</span>
+                            @foreach($cars_info as $key => $value)
+                        
+                            @if($key == 1)
+                            <div class="compare_block">
+                                @php
+                                if($value){
+                                    $imagePath = asset($value->file_full_path).'/'.$value->car_image;
+                                }else{
+                                    $imagePath = asset('admin/vehicle.jpeg');
+                                }
+                                @endphp
+                                <figure class="compare_media">
+                                    <img src="{{$imagePath }}" alt="">
+                                </figure>
 
-                        <span class="tertiary">vs</span>
+                                <div class="compare-excerpt">
+                                    <div class="compare_brand">
+                                        {{ optional($value->BrandInfo)->brand_name }} 
+                                    </div>
+                                    <div class="compare_title">
+                                        {{ optional($value->ModelInfo)->model_name }} {{ optional($value->VariantInfo)->variant_name }}
+                                    </div>
 
-                        <div class="compare_block">
-                            <figure class="compare_media">
-                                <img src="home/img/2.jpg" alt="">
-                            </figure>
-
-                            <div class="compare-excerpt">
-                                <div class="compare_brand">
-                                    Mercedes-Benz
-                                </div>
-                                <div class="compare_title">
-                                    AMG A35 Limousine
-                                </div>
-
-                                <div class="compare_price">
-                                    $ 50,000
+                                    <div class="compare_price">
+                                        Rs. {{$value->starting_price}}
+                                    </div>
                                 </div>
                             </div>
+
+                            <input name="second_brand_id" value="{{$value->brand_id}}" hidden />
+                            <input name="second_model_id" value="{{$value->model_id}}" hidden />
+                            <input name="second_variant_id" value="{{$value->variant_id}}" hidden />
+                            @endif
+                        
+                            @endforeach
+                        </div>
+
+                        <div class="compare_action_bar">
+                            <button type="submit" class="btn btn-primary btn-block">Compare Cars</button>
                         </div>
                     </div>
-
-                    <div class="compare_action_bar">
-                        <a href="">
-                            Compare
-                        </a>
-                    </div>
-                </div>
+                </form>
+                
             </div>
         </div>
     </section>
