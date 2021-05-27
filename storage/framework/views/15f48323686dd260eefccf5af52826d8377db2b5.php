@@ -118,7 +118,7 @@ vs
                 </h3>
                 <div class="col-md-6">
                     <p>
-                        <?php if(isset($second_vehicle)): ?>
+                        <?php if(isset($first_vehicle)): ?>
                         <?php echo $first_vehicle->description; ?>
 
                         <?php else: ?>

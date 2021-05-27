@@ -113,7 +113,7 @@ vs
                 </h3>
                 <div class="col-md-6">
                     <p>
-                        @if(isset($second_vehicle))
+                        @if(isset($first_vehicle))
                         {!! $first_vehicle->description !!}
                         @else
                         {{$empty_description}}
